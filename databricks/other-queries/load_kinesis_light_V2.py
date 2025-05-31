@@ -21,7 +21,7 @@ schema = StructType([
 # COMMAND ----------
 
 #Read data from kinesis Stream
-kinesisStreamName = "staging-embedded-dms-stream-ces-mscm"
+kinesisStreamName = "staging-embedded-dms-stream"
 kinesisRegion = "ap-southeast-2"
 
 kinesisDF = spark \

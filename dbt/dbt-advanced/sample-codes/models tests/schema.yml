@@ -1,32 +1,32 @@
 version: 2
 
 models:
-  - name: CRP_COLLECTION_HDR
-    description: This is the collections header
+  - name: ORDER_HEADER
+    description: Order header table
     columns:
-      - name: LINK_ID
-        description: This is the primary key for this table.
+      - name: RECORD_ID
+        description: Primary key for the table
         tests:
           - unique:
-                config:
-                  severity: warn
+              config:
+                severity: warn
           - not_null:
-                config:
-                  severity: warn
-      - name: MULTI_SCHEME_ID
+              config:
+                severity: warn
+      - name: PROGRAM_CODE
         tests:
           - accepted_values:
-              values: [10000,10001,100020001,100020002,100020003]
+              values: [20001, 20002, 20010001, 20010002, 20020001]
               severity: error
-  - name: CRP_COLLECTION_DTL
-    description: This is the collections details table.
+  - name: ORDER_DETAILS
+    description: Order details table
     columns:
-      - name: ID
-        description: This is the primary key for this table.
+      - name: DETAIL_ID
+        description: Primary key for the table
         tests:
           - unique
           - not_null
-      - name: MULTI_SCHEME_ID
+      - name: PROGRAM_CODE
         tests:
           - accepted_values:
-              values: [10000,10001,100020001,100020002,100020003]
+              values: [20001, 20002, 20010001, 20010002, 20020001]

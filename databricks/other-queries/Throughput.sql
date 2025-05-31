@@ -1,13 +1,13 @@
 
 
-select  * from  poc_raw.bronze_kinesis_data limit 1;
+select  * from  poc_bronze.bronze_kinesis_data limit 1;
 
 WITH records_per_minute AS (
     SELECT 
         DATE_TRUNC('minute', approximateArrivalTimestamp) AS arrival_minute,
         COUNT(*) AS records_per_minute
     FROM 
-        poc_raw.bronze_kinesis_data
+        poc_bronze.bronze_kinesis_data
     GROUP BY 
         DATE_TRUNC('minute', approximateArrivalTimestamp)
 )
