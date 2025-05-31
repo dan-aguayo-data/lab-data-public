@@ -1,7 +1,7 @@
 
-SELECT * INTO #PromaxTemp3 FROM (
+SELECT * INTO #TempTable3 FROM (
 
 SELECT
 ROW_NUMBER() OVER (ORDER BY SKU_KEY ASC, New_Start_Wed ASC) AS ROWNUMBER
 ,X.* 
-FROM #PromaxTemp2 X )Z;
+FROM #TempTable2 X )Z;

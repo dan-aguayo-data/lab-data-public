@@ -34,29 +34,22 @@ where pr.name<>'public'
 
 
  
--- 1.  Create a user in the DB and give them access to a certain schema... User is Always a AD group that has been set up.
-CREATE USER [PRW_NEBULA_DWH_FINANCE_READER_PROD] FROM EXTERNAL PROVIDER  -- PRW_NEBULA_ZZINT_ANAPLAN_READER_PROD    --PRW_NEBULA_REVUP_READER_PROD
+-- 1. Create a user in the DB from an AD group
+CREATE USER [DATAHUB_ANALYTICS_READER_PROD] FROM EXTERNAL PROVIDER;
 
+-- 2. Create a role in the DB
+CREATE ROLE [DATAHUB_ANALYTICS_READER_TEST_TEMP];
 
--- 2.  Create Role in the DB
-CREATE ROLE [PRW-NEBULA_DWH_FINANCE_READER_UAT_TEMP]
- 
--- 3.  Give the role permissiosn to access a certain schema
- 
-GRANT SELECT ON SCHEMA::[DWH_SALES] TO [PRW-NEBULA_DWH_FINANCE_READER_UAT_TEMP]
+-- 3. Grant the role permissions to access a specific schema
+GRANT SELECT ON SCHEMA::[DATA_REPORTS] TO [DATAHUB_ANALYTICS_READER_TEST_TEMP];
 
- 
--- 4.  Assign the User to the relevant roles
- 
-ALTER ROLE [PRW-NEBULA_DWH_FINANCE_READER_UAT_TEMP]
-       ADD MEMBER [PRW_NEBULA_DWH_FINANCE_READER_PROD]
+-- 4. Assign the user to the role
+ALTER ROLE [DATAHUB_ANALYTICS_READER_TEST_TEMP]
+    ADD MEMBER [DATAHUB_ANALYTICS_READER_PROD];
 GO
- 
--- Done get user to test the access
 
+-- Instruct user to test access
 
-DROP USER  [PRW_NEBULA_DWH_FINANCE_READER_PROD]
-
-DROP ROLE [PRW-NEBULA_DWH_FINANCE_READER_UAT_TEMP]
-
-GO
+-- Cleanup: Remove user and role
+DROP USER [DATAHUB_ANALYTICS_READER_PROD];
+DROP ROLE [DATAHUB_ANALYTICS_READER_TEST

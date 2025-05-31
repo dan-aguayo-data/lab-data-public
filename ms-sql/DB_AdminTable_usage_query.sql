@@ -15,4 +15,4 @@ FROM sys.indexes IX
     ON AO.object_id = IX.object_id
   LEFT JOIN sys.schemas SC
     ON AO.schema_id = SC.schema_id
-WHERE SC.name IN ('DM_E1')
+WHERE SC.name IN ('TABLE_NAME')
