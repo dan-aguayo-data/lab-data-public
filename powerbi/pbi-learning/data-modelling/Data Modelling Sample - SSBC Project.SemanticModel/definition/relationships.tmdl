@@ -1,0 +1,21 @@
+relationship 55a44e9b-d909-4d48-a12e-29fde743e65e
+	joinOnDateBehavior: datePartOnly
+	fromColumn: FX.Date
+	toColumn: LocalDateTable_e78483ef-3c51-4382-b1fb-c4e45c80c865.Date
+
+relationship 52ab5664-7d4c-48c5-84c6-f6b53ec9b52e
+	fromColumn: Sales.'Customer ID'
+	toColumn: Customer.CustomerID
+
+relationship 782ac7bf-a49b-4a8b-be60-b6c98b227e94
+	fromColumn: Sales.CurrencyID
+	toColumn: FX.CurrencyID
+
+relationship 08387146-edd7-4410-896a-19842cb2617f
+	fromColumn: Sales.'Transaction Date'
+	toColumn: Date.Date
+
+relationship 9039f780-cf35-4c7d-bb7f-e28cc62f67ad
+	fromColumn: Sales.'Product ID'
+	toColumn: Product.ProductID
+

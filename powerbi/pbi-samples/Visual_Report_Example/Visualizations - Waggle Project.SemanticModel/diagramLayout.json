@@ -1,0 +1,82 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 660,
+            "y": 0
+          },
+          "nodeIndex": "Date_Table",
+          "size": {
+            "height": 340,
+            "width": 234
+          },
+          "zIndex": 2
+        },
+        {
+          "location": {
+            "x": 1,
+            "y": 388.1
+          },
+          "nodeIndex": "Family_Data",
+          "size": {
+            "height": 364,
+            "width": 252
+          },
+          "zIndex": 4
+        },
+        {
+          "location": {
+            "x": 319,
+            "y": 424.8
+          },
+          "nodeIndex": "Pet_Data",
+          "size": {
+            "height": 317,
+            "width": 234
+          },
+          "zIndex": 3
+        },
+        {
+          "location": {
+            "x": 16.282644628099206,
+            "y": 0
+          },
+          "nodeIndex": "Tracker_Data",
+          "size": {
+            "height": 343.9917355371901,
+            "width": 302.32892561983471
+          },
+          "zIndex": 5
+        },
+        {
+          "location": {
+            "x": 647.5,
+            "y": 409
+          },
+          "nodeIndex": "Rating_Data",
+          "size": {
+            "height": 334.81322314049578,
+            "width": 404.31239669421495
+          },
+          "zIndex": 1
+        }
+      ],
+      "name": "All tables",
+      "zoomValue": 91.616082543023239,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "All tables",
+  "defaultDiagram": "All tables"
+}

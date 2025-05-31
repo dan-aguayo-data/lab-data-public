@@ -1,0 +1,91 @@
+table Sales
+	lineageTag: 1a2cb336-9fe6-48bb-b20a-e1d42480d585
+
+	column Date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: b140c6b3-ab59-4ffe-ae5b-325e7e14dd03
+		summarizeBy: none
+		sourceColumn: Date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Geo_ID
+		dataType: int64
+		formatString: 0
+		lineageTag: 5c785e5c-4569-49bc-a9b8-24d477883cd3
+		summarizeBy: none
+		sourceColumn: Geo_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Game_ID
+		dataType: int64
+		formatString: 0
+		lineageTag: f31c9c23-5edb-4a1c-b29e-d9ad83be68a8
+		summarizeBy: none
+		sourceColumn: Game_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Store_ID
+		dataType: int64
+		formatString: 0
+		lineageTag: de4761fe-3d9e-4364-b28f-3a5e4c83ba70
+		summarizeBy: none
+		sourceColumn: Store_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Units
+		dataType: int64
+		formatString: #,0
+		lineageTag: 0b373f18-73b9-4f3d-9595-0b4405e127f9
+		summarizeBy: sum
+		sourceColumn: Units
+
+		annotation SummarizationSetBy = Automatic
+
+	column Sales
+		dataType: double
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: 71a208c8-05ba-46f6-b63c-868ea86d6a26
+		summarizeBy: sum
+		sourceColumn: Sales
+
+		annotation SummarizationSetBy = Automatic
+
+	column Community_Score
+		dataType: double
+		lineageTag: fe107581-37dd-4235-b288-e40172446043
+		summarizeBy: sum
+		sourceColumn: Community_Score
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Community_Gameplay_Hours
+		dataType: int64
+		formatString: 0
+		lineageTag: c2a80e4b-f4d5-48c6-8321-73e299620d5c
+		summarizeBy: sum
+		sourceColumn: Community_Gameplay_Hours
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Sales-d3b0b439-bec3-4ca0-9142-86c28714e46a = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\seanc\OneDrive\Desktop\Udacity\Course\2020_12_09_Course_Datasets.xlsx"), null, true),
+				    Sales_Sheet = Source{[Item="Sales",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(Sales_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Date", type date}, {"Geo_ID", Int64.Type}, {"Game_ID", Int64.Type}, {"Store_ID", Int64.Type}, {"Units", Int64.Type}, {"Sales", type number}, {"Community_Score", type number}, {"Community_Gameplay_Hours", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

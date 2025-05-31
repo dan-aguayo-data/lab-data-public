@@ -1,0 +1,87 @@
+table 'Avg Income by State'
+	lineageTag: 42677e9d-74e6-49d5-ae40-a0b838438a6e
+
+	measure 'Count of State' = Count('Avg Income by State'[BUCKET])
+		formatString: 0
+		lineageTag: a9aeeb5c-02a5-49f4-884f-79a1091d8740
+
+	measure 'Standard Deviation Average Income per State' = STDEV.P('Avg Income by State'[Average Income])
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: 584a4088-3423-424d-b486-136eea933de5
+
+	column State
+		dataType: string
+		lineageTag: 905508d6-98f8-4c28-8f2d-668d498f5b2a
+		summarizeBy: none
+		sourceColumn: State
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column 'Average Income'
+		dataType: double
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: fe3971d7-6acf-48e3-8eec-79930657bebd
+		summarizeBy: sum
+		sourceColumn: Average Income
+
+		annotation SummarizationSetBy = Automatic
+
+	column BUCKET = ```
+			
+			IF('Avg Income by State'[Average Income]<70000,"< $70,000",
+			IF('Avg Income by State'[Average Income]>=70000 && 'Avg Income by State'[Average Income]<75000,"$70,000 - $75,000",
+			IF('Avg Income by State'[Average Income]>=75000 && 'Avg Income by State'[Average Income]<80000,"$75,000 - $80,000",
+			IF('Avg Income by State'[Average Income]>=80000 && 'Avg Income by State'[Average Income]<85000,"$80,000 - $85,000",
+			IF('Avg Income by State'[Average Income]>=85000 && 'Avg Income by State'[Average Income]<90000,"$85,000 - $90,000",
+			IF('Avg Income by State'[Average Income]>=90000 && 'Avg Income by State'[Average Income]<95000,"$90,000 - $95,000",
+			IF('Avg Income by State'[Average Income]>=95000 && 'Avg Income by State'[Average Income]<100000,"$95,000 - $100,000",
+			IF('Avg Income by State'[Average Income]>=100000 && 'Avg Income by State'[Average Income]<105000,"$100,000 - $105,000",
+			IF('Avg Income by State'[Average Income]>=105000 && 'Avg Income by State'[Average Income]<110000,"$105,000 - $110,000",
+			IF('Avg Income by State'[Average Income]>=110000 && 'Avg Income by State'[Average Income]<115000,"$110,000 - $115,000",
+			IF('Avg Income by State'[Average Income]>=115000,">$115,000","")))))))))))
+			
+			```
+		lineageTag: 86df7e06-dd55-4bb7-a768-7ced97483234
+		summarizeBy: none
+		sortByColumn: 'BUCKET ORDER'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column 'BUCKET ORDER' = ```
+			
+			IF('Avg Income by State'[Average Income]<70000,1,
+			IF('Avg Income by State'[Average Income]>=70000 && 'Avg Income by State'[Average Income]<75000,2,
+			IF('Avg Income by State'[Average Income]>=75000 && 'Avg Income by State'[Average Income]<80000,3,
+			IF('Avg Income by State'[Average Income]>=80000 && 'Avg Income by State'[Average Income]<85000,4,
+			IF('Avg Income by State'[Average Income]>=85000 && 'Avg Income by State'[Average Income]<90000,5,
+			IF('Avg Income by State'[Average Income]>=90000 && 'Avg Income by State'[Average Income]<95000,6,
+			IF('Avg Income by State'[Average Income]>=95000 && 'Avg Income by State'[Average Income]<100000,7,
+			IF('Avg Income by State'[Average Income]>=100000 && 'Avg Income by State'[Average Income]<105000,8,
+			IF('Avg Income by State'[Average Income]>=105000 && 'Avg Income by State'[Average Income]<110000,9,
+			IF('Avg Income by State'[Average Income]>=110000 && 'Avg Income by State'[Average Income]<115000,10,
+			IF('Avg Income by State'[Average Income]>=115000,11,12)))))))))))
+			
+			```
+		formatString: 0
+		lineageTag: dd7d0e31-f0d8-4f53-be0e-eb4214da4c7c
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Avg Income by State-d1399c2c-6576-40fa-b078-ae93256e614c' = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\danie\OneDrive\Desktop\PBI_Udacity\Advanced Data Analytics\Project\census-data.xlsx"), null, true),
+				    #"Avg Income by State_Sheet" = Source{[Item="Avg Income by State",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(#"Avg Income by State_Sheet", [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"State", type text}, {"Average Income", type number}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

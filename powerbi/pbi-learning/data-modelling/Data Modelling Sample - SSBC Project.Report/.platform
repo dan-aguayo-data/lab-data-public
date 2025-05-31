@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "Data Modelling Sample - SSBC Project"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "50d38d3d-a524-4c6f-b46d-546b2181a6d9"
+  }
+}

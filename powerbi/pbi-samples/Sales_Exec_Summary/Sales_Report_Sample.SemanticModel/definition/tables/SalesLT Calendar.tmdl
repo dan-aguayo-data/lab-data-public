@@ -1,0 +1,511 @@
+table 'SalesLT Calendar'
+	lineageTag: 13725d7f-b78b-45a1-baab-dc164226cce5
+
+	column CALENDAR_ID
+		dataType: int64
+		formatString: 0
+		lineageTag: 55f3ff95-e4e5-4dc8-8351-4330e2a0e166
+		summarizeBy: none
+		sourceColumn: CALENDAR_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column DATE
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 43b4f4b7-fdb7-4eb1-9dc2-a9cea471fe81
+		summarizeBy: none
+		sourceColumn: DATE
+
+		variation Variation
+			isDefault
+			relationship: 2df35506-dd96-4363-b956-4b6b67c96b6c
+			defaultHierarchy: LocalDateTable_522f891d-c2d7-4854-b367-3efb05d2cc7c.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column DAY
+		dataType: int64
+		formatString: 0
+		lineageTag: ec9e8f7c-2bd1-4990-90d1-1da2128c5692
+		summarizeBy: sum
+		sourceColumn: DAY
+
+		annotation SummarizationSetBy = Automatic
+
+	column DAYSUFFIX
+		dataType: string
+		lineageTag: 4693e9f9-48ba-4c9f-9008-eec7707a693b
+		summarizeBy: none
+		sourceColumn: DAYSUFFIX
+
+		annotation SummarizationSetBy = Automatic
+
+	column WEEKDAY
+		dataType: int64
+		formatString: 0
+		lineageTag: 0bfb8012-8ec5-425c-89d1-51820a7f91c4
+		summarizeBy: sum
+		sourceColumn: WEEKDAY
+
+		annotation SummarizationSetBy = Automatic
+
+	column WEEKDAYNAME
+		dataType: string
+		lineageTag: e08546d2-706d-482a-813c-0ef599c71ca3
+		summarizeBy: none
+		sourceColumn: WEEKDAYNAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column ISWEEKEND
+		dataType: string
+		lineageTag: 3e56a3b2-9665-4244-921e-4b69fb5e1518
+		summarizeBy: none
+		sourceColumn: ISWEEKEND
+
+		annotation SummarizationSetBy = Automatic
+
+	column HOLIDAYTEXT
+		dataType: string
+		lineageTag: a523f1fb-6d99-4bd0-8727-695d7f056828
+		summarizeBy: none
+		sourceColumn: HOLIDAYTEXT
+
+		annotation SummarizationSetBy = Automatic
+
+	column DOWINMONTH
+		dataType: int64
+		formatString: 0
+		lineageTag: 6745f16c-e46e-41e7-9755-4702ee99a34c
+		summarizeBy: sum
+		sourceColumn: DOWINMONTH
+
+		annotation SummarizationSetBy = Automatic
+
+	column DAYOFYEAR
+		dataType: int64
+		formatString: 0
+		lineageTag: 47af8dc8-570b-4d6f-bd3b-3fc20a547c4d
+		summarizeBy: sum
+		sourceColumn: DAYOFYEAR
+
+		annotation SummarizationSetBy = Automatic
+
+	column WEEKOFMONTH
+		dataType: int64
+		formatString: 0
+		lineageTag: ef03fb60-54da-4fc0-bcaf-dccbe3f04706
+		summarizeBy: sum
+		sourceColumn: WEEKOFMONTH
+
+		annotation SummarizationSetBy = Automatic
+
+	column WEEKOFYEAR
+		dataType: int64
+		formatString: 0
+		lineageTag: 162725a1-cb18-46e0-bf18-aa1eebf30d5f
+		summarizeBy: sum
+		sourceColumn: WEEKOFYEAR
+
+		annotation SummarizationSetBy = Automatic
+
+	column ISOWEEKOFYEAR
+		dataType: int64
+		formatString: 0
+		lineageTag: d2b2540a-b67a-4653-b641-5f493aae97fc
+		summarizeBy: sum
+		sourceColumn: ISOWEEKOFYEAR
+
+		annotation SummarizationSetBy = Automatic
+
+	column MONTH
+		dataType: int64
+		formatString: 0
+		lineageTag: 17f9c970-e58b-4676-8ab9-a09f7ad149ff
+		summarizeBy: sum
+		sourceColumn: MONTH
+
+		annotation SummarizationSetBy = Automatic
+
+	column MONTHNAME
+		dataType: string
+		lineageTag: 86ff1fdd-942a-4f1a-a98c-a956fb985777
+		summarizeBy: none
+		sourceColumn: MONTHNAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column QUARTER
+		dataType: int64
+		formatString: 0
+		lineageTag: 03dcfe86-77fc-4783-86fe-932f37d6ed0a
+		summarizeBy: sum
+		sourceColumn: QUARTER
+
+		annotation SummarizationSetBy = Automatic
+
+	column QUARTERNAME
+		dataType: string
+		lineageTag: 592e9991-555d-4c56-b91f-2416ae83f527
+		summarizeBy: none
+		sourceColumn: QUARTERNAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column YEAR
+		dataType: int64
+		formatString: 0
+		lineageTag: 988fb488-6338-44e2-8c69-8114b5f51e58
+		summarizeBy: sum
+		sourceColumn: YEAR
+
+		annotation SummarizationSetBy = Automatic
+
+	column MMYYYY
+		dataType: int64
+		formatString: 0
+		lineageTag: 5fc50cdb-bb84-4a54-af98-0e7dcb45e30d
+		summarizeBy: sum
+		sourceColumn: MMYYYY
+
+		annotation SummarizationSetBy = Automatic
+
+	column MONTHYEAR
+		dataType: int64
+		formatString: 0
+		lineageTag: 75b8853f-3e12-4c50-9e0b-0bcc42f17a83
+		summarizeBy: sum
+		sourceColumn: MONTHYEAR
+
+		annotation SummarizationSetBy = Automatic
+
+	column FIRSTDAYOFMONTH
+		dataType: int64
+		formatString: 0
+		lineageTag: 5b4041ba-e3f6-4502-b356-a29b1980ec01
+		summarizeBy: sum
+		sourceColumn: FIRSTDAYOFMONTH
+
+		annotation SummarizationSetBy = Automatic
+
+	column LASTDAYOFMONTH
+		dataType: int64
+		formatString: 0
+		lineageTag: 4a637e8e-c64c-4cbe-bf9c-78febb265de4
+		summarizeBy: sum
+		sourceColumn: LASTDAYOFMONTH
+
+		annotation SummarizationSetBy = Automatic
+
+	column FIRSTDAYOFQUARTER
+		dataType: int64
+		formatString: 0
+		lineageTag: 6b747532-b81a-42eb-8e64-8f4212b4158c
+		summarizeBy: sum
+		sourceColumn: FIRSTDAYOFQUARTER
+
+		annotation SummarizationSetBy = Automatic
+
+	column LASTDAYOFQUARTER
+		dataType: int64
+		formatString: 0
+		lineageTag: 6a1e920c-8287-4d80-9a34-588c97db87cf
+		summarizeBy: sum
+		sourceColumn: LASTDAYOFQUARTER
+
+		annotation SummarizationSetBy = Automatic
+
+	column FIRSTDAYOFYEAR
+		dataType: int64
+		formatString: 0
+		lineageTag: daeaf404-6a63-43e6-a8cc-44095df39b68
+		summarizeBy: sum
+		sourceColumn: FIRSTDAYOFYEAR
+
+		annotation SummarizationSetBy = Automatic
+
+	column LASTDAYOFYEAR
+		dataType: int64
+		formatString: 0
+		lineageTag: ab92c345-feb8-414b-a34b-6b5ec33bfea7
+		summarizeBy: sum
+		sourceColumn: LASTDAYOFYEAR
+
+		annotation SummarizationSetBy = Automatic
+
+	column FIRSTDAYOFNEXTMONTH
+		dataType: int64
+		formatString: 0
+		lineageTag: 4fed5f04-269d-494b-817a-97137d015f6b
+		summarizeBy: sum
+		sourceColumn: FIRSTDAYOFNEXTMONTH
+
+		annotation SummarizationSetBy = Automatic
+
+	column FIRSTDAYOFNEXTYEAR
+		dataType: int64
+		formatString: 0
+		lineageTag: 07498fb4-9fb4-4296-88ed-986171bdaaa4
+		summarizeBy: sum
+		sourceColumn: FIRSTDAYOFNEXTYEAR
+
+		annotation SummarizationSetBy = Automatic
+
+	column HasData
+		dataType: string
+		lineageTag: c2dc6916-1473-4da5-b425-1e908159f04d
+		summarizeBy: none
+		sourceColumn: HasData
+
+		annotation SummarizationSetBy = Automatic
+
+	column InFuture
+		dataType: string
+		lineageTag: 2fa10ea3-7745-438d-9e23-ca9fbd8800f0
+		summarizeBy: none
+		sourceColumn: InFuture
+
+		annotation SummarizationSetBy = Automatic
+
+	column QUARTERYEAR
+		dataType: string
+		lineageTag: 3d808e89-f36d-491e-a366-71280acfc067
+		summarizeBy: none
+		sourceColumn: QUARTERYEAR
+
+		annotation SummarizationSetBy = Automatic
+
+	column YYYYMM
+		dataType: int64
+		formatString: 0
+		lineageTag: baebba14-e211-43ca-a74a-041ace0bbaa6
+		summarizeBy: sum
+		sourceColumn: YYYYMM
+
+		annotation SummarizationSetBy = Automatic
+
+	column QUARTER_CODE
+		dataType: string
+		lineageTag: 38728d72-3261-4393-8e58-c6fea2173998
+		summarizeBy: none
+		sourceColumn: QUARTER_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column FY_QUARTER_CODE
+		dataType: string
+		lineageTag: 024a0098-d23f-4fbd-be05-ab096c71f99a
+		summarizeBy: none
+		sourceColumn: FY_QUARTER_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column FY_QUARTER
+		dataType: int64
+		formatString: 0
+		lineageTag: 94dcf342-5c20-4645-baff-d8dffb8a36bb
+		summarizeBy: sum
+		sourceColumn: FY_QUARTER
+
+		annotation SummarizationSetBy = Automatic
+
+	column FY_MONTH
+		dataType: int64
+		formatString: 0
+		lineageTag: 937c70b0-32e9-4750-a582-a72a9eb6df81
+		summarizeBy: sum
+		sourceColumn: FY_MONTH
+
+		annotation SummarizationSetBy = Automatic
+
+	column FY_MONTHNAME
+		dataType: string
+		lineageTag: 96e7e480-b2fc-44d1-a494-58906bfdeea6
+		summarizeBy: none
+		sourceColumn: FY_MONTHNAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column FY_YEAR
+		dataType: int64
+		formatString: 0
+		lineageTag: ce2ecd2d-c0ba-49b9-ae8d-3fc3620c85d2
+		summarizeBy: sum
+		sourceColumn: FY_YEAR
+
+		annotation SummarizationSetBy = Automatic
+
+	column FY_WEEKOFYEAR
+		dataType: int64
+		formatString: 0
+		lineageTag: 01dc1a9f-5a56-4ca1-a378-e24ab9f1ec02
+		summarizeBy: sum
+		sourceColumn: FY_WEEKOFYEAR
+
+		annotation SummarizationSetBy = Automatic
+
+	column FY_MMYYYY
+		dataType: int64
+		formatString: 0
+		lineageTag: 4e9d058f-f8c1-485a-834b-62580ccd86cb
+		summarizeBy: sum
+		sourceColumn: FY_MMYYYY
+
+		annotation SummarizationSetBy = Automatic
+
+	column FY_YYYYMM
+		dataType: int64
+		formatString: 0
+		lineageTag: e2d6af09-ab84-4986-ad5b-1e29ba3d7a54
+		summarizeBy: sum
+		sourceColumn: FY_YYYYMM
+
+		annotation SummarizationSetBy = Automatic
+
+	column FY_CODE
+		dataType: string
+		lineageTag: 36e03087-b153-43e9-a451-9d41f1395458
+		summarizeBy: none
+		sourceColumn: FY_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column ISHOLIDAY_AUS
+		dataType: string
+		lineageTag: dd05565b-3dfa-45c4-bbe8-827d1ce05515
+		summarizeBy: none
+		sourceColumn: ISHOLIDAY_AUS
+
+		annotation SummarizationSetBy = Automatic
+
+	column DAY_NUMBER
+		dataType: int64
+		formatString: 0
+		lineageTag: 52edfda5-6611-4ba9-b6fe-fbff8e0a9a34
+		summarizeBy: sum
+		sourceColumn: DAY_NUMBER
+
+		annotation SummarizationSetBy = Automatic
+
+	column DAYS_PER_MONTH
+		dataType: int64
+		formatString: 0
+		lineageTag: 51ffbe80-d7d0-463d-900b-cbb8acf5bfa3
+		summarizeBy: sum
+		sourceColumn: DAYS_PER_MONTH
+
+		annotation SummarizationSetBy = Automatic
+
+	column SALES_DATE_ID
+		dataType: int64
+		formatString: 0
+		lineageTag: 01dc3087-db56-4a14-8625-58b8039e7b24
+		summarizeBy: count
+		sourceColumn: SALES_DATE_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column FIRSTDAY_FLAG
+		dataType: string
+		lineageTag: ebb1598d-3f71-4114-9500-66c3b9523bbe
+		summarizeBy: none
+		sourceColumn: FIRSTDAY_FLAG
+
+		annotation SummarizationSetBy = Automatic
+
+	column LASTDAY_FLAG
+		dataType: string
+		lineageTag: ea6b5064-2333-4aa2-8a73-ca84fd0dc4ca
+		summarizeBy: none
+		sourceColumn: LASTDAY_FLAG
+
+		annotation SummarizationSetBy = Automatic
+
+	column DSR_DAYS_PER_MONTH_REPORTING
+		dataType: int64
+		formatString: 0
+		lineageTag: 5fc790f6-e0d4-42fe-acf5-9a06dd01a3b8
+		summarizeBy: sum
+		sourceColumn: DSR_DAYS_PER_MONTH_REPORTING
+
+		annotation SummarizationSetBy = Automatic
+
+	column TodaysDate = ```
+			
+			VAR TodayDate = DATEVALUE(UTCNOW() + TIME(11,0,00))
+			RETURN
+			    IF( 'SalesLT Calendar'[DATE]= TodayDate , "Yes", "No")
+			
+			```
+		lineageTag: bab25f07-98ef-4be2-9a61-8794ed334001
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column HasInvoiceData = ```
+			
+			VAR MaxOrderDate =
+			    CALCULATE(
+			        MAXX('SalesLT FactSalesTable', DATEVALUE('SalesLT FactSalesTable'[OrderDate])),
+			        REMOVEFILTERS('SalesLT FactSalesTable')
+			    )
+			RETURN
+			IF('SalesLT Calendar'[DATE] <= MaxOrderDate, "Yes", "No")
+			
+			
+			 
+			
+			```
+		lineageTag: 750ae1b7-5eaf-4393-a9ab-07b5f6463685
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column LatestDate = ```
+			
+			VAR TodayDate = DATEVALUE(UTCNOW() + TIME(11, 0, 0))
+			
+			-- Find the latest date with data and LASTDAY_FLAG = "Yes"
+			VAR MaxValidDate =
+			    CALCULATE(
+			        MAX('SalesLT Calendar'[DATE]),
+			        FILTER(
+			            ALL('SalesLT Calendar'),
+			            'SalesLT Calendar'[HasInvoiceData] = "Yes" &&
+			            'SalesLT Calendar'[LASTDAY_FLAG] = "Yes" &&
+			            'SalesLT Calendar'[DATE] <= TodayDate
+			        )
+			    )
+			
+			RETURN
+			IF('SalesLT Calendar'[DATE] = MaxValidDate, "Yes", "No")
+			
+			```
+		lineageTag: cc420186-4999-4ae9-babd-07b250c35e60
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Latest Month' = IF('SalesLT Calendar'[YYYYMM] = (CALCULATE(SELECTEDVALUE('SalesLT Calendar'[YYYYMM]), FILTER(ALL('SalesLT Calendar'), 'SalesLT Calendar'[LatestDate] = "Yes"))), "Yes", "No")
+		lineageTag: 92b43178-f0b6-4ded-8054-54a7a6bd3a12
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'SalesLT Calendar' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("demo-db-power-bi.database.windows.net", "adventure-works-sample"),
+				    SalesLT_Calendar = Source{[Schema="SalesLT",Item="Calendar"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(SalesLT_Calendar,{{"DATE", type date}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

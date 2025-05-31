@@ -1,0 +1,74 @@
+table Geography
+	lineageTag: bdc7cad9-6915-4051-add9-e8e3419b6c26
+
+	column Geo_ID
+		dataType: int64
+		formatString: 0
+		lineageTag: f01e7c42-4f8c-4ecd-b841-6e519fb05dd3
+		summarizeBy: none
+		sourceColumn: Geo_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column State
+		dataType: string
+		lineageTag: 0879c72c-d22b-4967-910e-080297fb258f
+		summarizeBy: none
+		sourceColumn: State
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column City
+		dataType: string
+		lineageTag: 70ee24a8-9442-4194-b7e3-6aff01ccdc67
+		summarizeBy: none
+		sourceColumn: City
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column Zip
+		dataType: int64
+		formatString: 0
+		lineageTag: 3609bd97-bda2-440a-ab10-c73fc7862a5d
+		summarizeBy: none
+		sourceColumn: Zip
+
+		annotation SummarizationSetBy = Automatic
+
+	column Latitude
+		dataType: double
+		lineageTag: b18fde6a-11bd-45cf-99d5-6c9b324225cb
+		summarizeBy: none
+		sourceColumn: Latitude
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Longitude
+		dataType: double
+		lineageTag: 8f08a624-7205-4ca5-abcf-947823f1b3da
+		summarizeBy: none
+		sourceColumn: Longitude
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition Geography-5c2ef268-856f-4057-aa53-ccdcd82e936b = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\seanc\OneDrive\Desktop\Udacity\Course\2020_12_09_Course_Datasets.xlsx"), null, true),
+				    Geography_Sheet = Source{[Item="Geography",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(Geography_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Geo_ID", Int64.Type}, {"State", type text}, {"City", type text}, {"Zip", Int64.Type}, {"Latitude", type number}, {"Longitude", type number}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

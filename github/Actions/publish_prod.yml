@@ -1,0 +1,245 @@
+
+name: Main Push - Deploy Code to ADF Prod
+
+on:
+  push:
+    branches:
+      - main      # trigger on main branch pushes
+  pull_request:
+    branches-ignore:
+      - main
+      - dev
+
+jobs:
+  deploy_prod:
+    runs-on: ubuntu-latest
+    concurrency:
+      group: adf-deployment
+      cancel-in-progress: false
+    permissions:
+      id-token: write            # needed for OIDC auth if using federated credentials
+      contents: read
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Copy and patch dev parameters as ephemeral prod
+        run: |
+          jq '.name = "dataplatforms-adf-prod"' factory/dataplatforms-adf-dev.json > factory/dataplatforms-adf-prod.json
+
+      - name: Replace _PARAM_DEV with _PARAM_PROD in pipelines (case-insensitive)
+        run: |
+          find pipeline -type f -name '*.json' -exec sed -i 's/_PARAM_DEV/_PARAM_PROD/gI' {} +
+          
+      - name: Install Python 3
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+          
+      - name: Setup Node (for ADF Utilities)
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x     # ensure Node 18+:contentReference[oaicite:7]{index=7}
+
+      - name: Install ADF Utilities
+        run: npm install
+        working-directory: ${{ github.workspace }}/build              
+
+
+      - name: Validate ADF JSON
+        run: |
+          npm run build -- validate \
+            ${{ github.workspace }}/ \
+            /subscriptions/${{ secrets.AZURE_SUBSCRIPTION_ID }}/resourceGroups/${{ secrets.AZURE_RESOURCE_GROUP_PROD }}/providers/Microsoft.DataFactory/factories/${{ secrets.AZURE_ADF_PROD_NAME }}
+        working-directory: ${{ github.workspace }}/build
+        #Validates all factory objects in the repo (equivalent to "Validate All" in ADF):contentReference[oaicite:8]{index=8}
+
+      - name: Export ARM Template
+        run: |
+          npm run build -- export \
+            ${{ github.workspace }}/ \
+            /subscriptions/${{ secrets.AZURE_SUBSCRIPTION_ID }}/resourceGroups/${{ secrets.AZURE_RESOURCE_GROUP_PROD }}/providers/Microsoft.DataFactory/factories/${{ secrets.AZURE_ADF_PROD_NAME }}
+        working-directory: ${{ github.workspace }}/build
+        # Generates ARMTemplateForFactory.json and ARMTemplateParametersForFactory.json in a folder "ProdFactoryArmTemplate":contentReference[oaicite:9]{index=9}
+
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Ensure Azure CLI Data Factory extension is installed
+        run: |
+          echo "Installing datafactory extension"
+          az extension remove --name datafactory || true
+          az extension add --name datafactory
+
+      - name: Disable all ADF triggers before ARM deployment
+        run: |
+          echo "Fetching list of all triggers..."
+          triggers=$(az datafactory trigger list \
+            --resource-group ${{ secrets.AZURE_RESOURCE_GROUP_PROD }} \
+            --factory-name ${{ secrets.AZURE_ADF_PROD_NAME }} \
+            --query "[?properties.runtimeState=='Started'].name" \
+            --output tsv)
+      
+          echo "Found triggers to disable:"
+          echo "$triggers"
+      
+          for trigger in $triggers; do
+            echo "Disabling trigger: $trigger"
+            az datafactory trigger stop \
+              --resource-group ${{ secrets.AZURE_RESOURCE_GROUP_PROD }} \
+              --factory-name ${{ secrets.AZURE_ADF_PROD_NAME }} \
+              --name "$trigger" || echo "Warning: failed to disable $trigger"
+          done
+
+    
+      - name: Deploy to PROD ADF (with fallback if failed)
+        run: |
+          echo "Starting deployment..."
+          if ! az deployment group create \
+            --resource-group ${{ secrets.AZURE_RESOURCE_GROUP_PROD }} \
+            --template-file build/ARMTemplateForFactory.json \
+            --parameters build/ARMTemplateParametersForFactory.json \
+            --parameters factoryName=${{ secrets.AZURE_ADF_PROD_NAME }}; then
+              echo "Deployment failed. Restoring trigger state..."
+              python sync_trigger_states.py prod
+              exit 1
+          fi
+        env:
+          AZURE_RESOURCE_GROUP: ${{ secrets.AZURE_RESOURCE_GROUP_PROD }}
+          AZURE_ADF_NAME: ${{ secrets.AZURE_ADF_PROD_NAME }}
+
+
+      - name: Generate obsolete_triggers.txt from live vs repo
+        run: |
+          python generate_obsolete_triggers.py
+        env:
+          AZURE_RESOURCE_GROUP: ${{ secrets.AZURE_RESOURCE_GROUP_PROD }}
+          AZURE_ADF_NAME: ${{ secrets.AZURE_ADF_PROD_NAME }}
+
+      - name: Delete obsolete ADF triggers from file
+        run: |
+          while read trigger; do
+            if [ -n "$trigger" ]; then
+              echo "Deleting trigger: $trigger"
+              az datafactory trigger delete \
+                --resource-group ${{ secrets.AZURE_RESOURCE_GROUP_PROD }} \
+                --factory-name ${{ secrets.AZURE_ADF_PROD_NAME }} \
+                --name "$trigger" \
+                --yes || echo "Warning: Failed to delete $trigger"
+            fi
+          done < obsolete_triggers.txt
+
+      - name: Sync trigger runtime state after Prod deploy
+        run: python sync_trigger_states.py prod
+        env:
+          AZURE_RESOURCE_GROUP: ${{ secrets.AZURE_RESOURCE_GROUP_PROD }}
+          AZURE_ADF_NAME: ${{ secrets.AZURE_ADF_PROD_NAME }}
+
+      - name: Generate obsolete_pipelines.txt from live vs repo
+        run: |
+          python generate_obsolete_pipelines.py
+        env:
+          AZURE_RESOURCE_GROUP: ${{ secrets.AZURE_RESOURCE_GROUP_PROD }}
+          AZURE_ADF_NAME: ${{ secrets.AZURE_ADF_PROD_NAME }}
+            
+      - name: Clean up obsolete ADF pipelines from file
+        run: |
+          while read pipeline; do
+            if [ -n "$pipeline" ]; then
+              echo "Deleting pipeline: $pipeline"
+              az datafactory pipeline delete \
+                --resource-group ${{ secrets.AZURE_RESOURCE_GROUP_PROD }} \
+                --factory-name ${{ secrets.AZURE_ADF_PROD_NAME }} \
+                --name "$pipeline" \
+                --yes || echo "Warning: Failed to delete $pipeline"
+            fi
+          done < obsolete_pipelines.txt
+
+      - name: Generate obsolete linked services
+        run: python generate_obsolete_linked_services.py
+        env:
+          AZURE_RESOURCE_GROUP: ${{ secrets.AZURE_RESOURCE_GROUP_PROD }}
+          AZURE_ADF_NAME: ${{ secrets.AZURE_ADF_PROD_NAME }}
+      
+      - name: Delete obsolete linked services
+        run: |
+          while read item; do
+            if [ -n "$item" ]; then
+              echo "Deleting linked service: $item"
+              az datafactory linked-service delete \
+                --resource-group ${{ secrets.AZURE_RESOURCE_GROUP_PROD }} \
+                --factory-name ${{ secrets.AZURE_ADF_PROD_NAME }} \
+                --name "$item" \
+                --yes || echo "Warning: Failed to delete $item"
+            fi
+          done < obsolete_linked_services.txt
+      
+      - name: Generate obsolete credentials
+        run: python generate_obsolete_credentials.py
+        env:
+          AZURE_RESOURCE_GROUP: ${{ secrets.AZURE_RESOURCE_GROUP_PROD }}
+          AZURE_ADF_NAME: ${{ secrets.AZURE_ADF_PROD_NAME }}
+      
+      - name: Delete obsolete credentials
+        run: |
+          while read item; do
+            if [ -n "$item" ]; then
+              echo "Deleting credential: $item"
+              az datafactory credential delete \
+                --resource-group ${{ secrets.AZURE_RESOURCE_GROUP_PROD }} \
+                --factory-name ${{ secrets.AZURE_ADF_PROD_NAME }} \
+                --name "$item" \
+                --yes || echo "Warning: Failed to delete $item"
+            fi
+          done < obsolete_credentials.txt
+
+      - name: Generate obsolete datasets
+        run: python generate_obsolete_datasets.py
+        env:
+          AZURE_RESOURCE_GROUP: ${{ secrets.AZURE_RESOURCE_GROUP_PROD }}
+          AZURE_ADF_NAME: ${{ secrets.AZURE_ADF_PROD_NAME }}
+      
+      - name: Delete obsolete datasets
+        run: |
+          while read item; do
+            if [ -n "$item" ]; then
+              echo "Deleting dataset: $item"
+              az datafactory dataset delete \
+                --resource-group ${{ secrets.AZURE_RESOURCE_GROUP_PROD }} \
+                --factory-name ${{ secrets.AZURE_ADF_PROD_NAME }} \
+                --name "$item" \
+                --yes || echo "Warning: Failed to delete $item"
+            fi
+          done < obsolete_datasets.txt
+
+  notify_result:
+    if: always()
+    runs-on: ubuntu-latest
+    needs: deploy_prod
+    steps:
+      - name: Send deployment result email
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.office365.com
+          server_port: 587
+          username: ${{ secrets.SMTP_USER }}
+          password: ${{ secrets.SMTP_PASS }}
+          subject: "ADF Prod Publish Notification  - ${{ needs.deploy_prod.result }}"
+          to: data-team@cesystems.com
+          from: GitHub Bot <data-team@cesystems.com>
+          body: |
+            This is an automated e-mail to inform tha the recent deployment & publish to ADF PROD completed with status: ${{ needs.deploy_prod.result }}
+
+            - Action: publish_prod.yaml 
+            - Action Description: Git Merge into main & ADF Prod Publish 
+            - Triggered by: ${{ github.actor }}
+            - Commit Id: ${{ github.sha }}
+            - Repo: ${{ github.repository }}
+
+

@@ -1,0 +1,58 @@
+table Metric
+	lineageTag: 01fc3fcc-46ca-42bf-9fae-4ae37033419d
+
+	column Metric
+		dataType: string
+		lineageTag: c4a7e271-04b0-4557-81c4-310bfb1e267a
+		summarizeBy: none
+		sourceColumn: Metric
+
+		annotation SummarizationSetBy = Automatic
+
+	column Calculation
+		dataType: string
+		lineageTag: 364816ec-b883-48a6-8c38-c9966f6c11eb
+		summarizeBy: none
+		sourceColumn: Calculation
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Metric Index'
+		dataType: int64
+		formatString: 0
+		lineageTag: a8076288-d077-4300-b255-2fc7fae4f88d
+		summarizeBy: sum
+		sourceColumn: Metric Index
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Metric = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRows({
+				        {"Sales Qty", "Daily Last Trading Day"},
+				        {"Sales Qty", "MTD"},
+				        {"Sales Qty", "MTD YoY Growth %"},
+				        {"Sales Qty", "YTD"},
+				        {"Sales Qty", "YTD YoY Growth %"},
+				        {"NSV", "Daily Last Trading Day"},
+				        {"NSV", "MTD"},
+				        {"NSV", "MTD YoY Growth %"},
+				        {"NSV", "YTD"},
+				        {"NSV", "YTD YoY Growth %"},
+				        {"NSV per Unit", "Daily Last Trading Day"},
+				        {"NSV per Unit", "MTD"},
+				        {"NSV per Unit", "MTD YoY Growth %"},
+				        {"NSV per Unit", "YTD"},
+				        {"NSV per Unit", "YTD YoY Growth %"}
+				    }, {"Metric", "Calculation"}),
+				
+				    #"Added Index" = Table.AddIndexColumn(Source, "Metric Index", 0, 1, Int64.Type)
+				in
+				    #"Added Index"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

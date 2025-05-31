@@ -1,0 +1,16 @@
+{
+    "account": "xxxxxx.australia-east.azure",
+    "username": "KADA_CATALOG_USER_TEST",
+    "password": "xxxx",
+    "information_database": "SNOWFLAKE",
+    "role": "CATALOG_READ_ONLY",
+    "warehouse": "ANALYTICS_CES",
+    "databases": ["RAW_DEV","RAW_PROD"],
+    "login_timeout": 5,
+    "output_path": "/tmp/output",
+    "mask": true,
+    "compress": true,
+    "use_private_key": false,
+    "private_key": "",
+    "host": "xxxx.australia-east.azure.snowflakecomputing.com"
+}

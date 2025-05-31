@@ -1,0 +1,38 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-AU
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_ProTooling = ["DevMode"]
+
+annotation PBIDesktopVersion = 2.143.878.0 (25.05)+b20aa3b866ec1b70879135a4e60e4b1301c75b21
+
+annotation PBI_QueryOrder = ["SalesLT Calendar","SalesLT Customer","SalesLT Product","SalesLT ProductCategory","SalesLT ProductDescription","SalesLT FactSalesTable","Metric"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+ref table 'SalesLT Calendar'
+ref table 'SalesLT Customer'
+ref table DateTableTemplate_a470a794-1a33-4ed6-a16f-6f46cd26793e
+ref table LocalDateTable_145b1f96-93cc-46da-88d1-d71f41bce106
+ref table 'SalesLT Product'
+ref table LocalDateTable_992b260c-b709-480f-8cbe-2880dd3ccb49
+ref table LocalDateTable_d534bcaf-f7a2-490e-95f8-3410e48e2f20
+ref table LocalDateTable_77474ae3-f919-45ac-a1d1-9812c543d26b
+ref table LocalDateTable_e0cf3858-12b4-49a1-83d0-e6f66da5b5c9
+ref table 'SalesLT ProductCategory'
+ref table LocalDateTable_e1789ca4-b2c1-4730-b7bf-b0b386954e85
+ref table 'SalesLT ProductDescription'
+ref table LocalDateTable_34211bb3-5318-49f8-b393-b335730bc0a0
+ref table '1. Measures'
+ref table LocalDateTable_522f891d-c2d7-4854-b367-3efb05d2cc7c
+ref table 'SalesLT FactSalesTable'
+ref table LocalDateTable_0d670898-a12a-4c30-8700-8fc02a7bb15d
+ref table LocalDateTable_cd4c5be2-477d-45e4-ad22-1d0553adad69
+ref table Metric
+
+ref cultureInfo en-US
+

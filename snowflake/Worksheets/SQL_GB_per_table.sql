@@ -1,0 +1,43 @@
+SELECT
+  MONTH(DATE_TRUNC('day', START_TIME)) AS usage_date,
+  SUM(CREDITS_USED) AS total_credits_used,
+  SUM(CREDITS_USED_COMPUTE) AS total_credits_compute,
+    SUM(CREDITS_USED_CLOUD_SERVICES) AS total_credits_cloud_services
+  
+FROM
+  SNOWFLAKE.ACCOUNT_USAGE.WAREHOUSE_METERING_HISTORY
+WHERE
+  WAREHOUSE_NAME = 'ETL_CES'
+  AND START_TIME >= DATEADD(DAY, -30, CURRENT_DATE())
+GROUP BY
+  usage_date
+ORDER BY
+  usage_date;
+
+  SELECT TOP 1 * FROM SNOWFLAKE.ACCOUNT_USAGE.WAREHOUSE_METERING_HISTORY
+
+
+
+  ;
+
+  SELECT TABLE_NAME, 
+       TABLE_SCHEMA, 
+       BYTES / (1024 * 1024 * 1024) AS SIZE_GB
+FROM   SNOWFLAKE.INFORMATION_SCHEMA.TABLES
+ WHERE BYTES IS NOT NULL
+  
+;
+  
+
+  SELECT TABLE_NAME, 
+       TABLE_SCHEMA, 
+       BYTES / (1024 * 1024 * 1024) AS SIZE_GB
+FROM   COEX_PROD.INFORMATION_SCHEMA.TABLES
+ WHERE BYTES IS NOT NULL
+ 
+-- TABLE_TYPE = 'BASE_TABLE'
+--TABLE_SCHEMA = 'your_schema_name' -- Replace 'your_schema_name' with the schema where your table resides
+ -- AND  TABLE_NAME = 'your_table_name';
+
+
+ ; select count(*) 

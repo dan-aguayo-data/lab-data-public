@@ -1,0 +1,71 @@
+table FX
+	lineageTag: ed74b691-2e6b-4a62-ba10-bbf15fe83cc7
+
+	column Date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 3f8a991a-d1f5-4c6e-b7c0-5db575ac9a96
+		summarizeBy: none
+		sourceColumn: Date
+
+		variation Variation
+			isDefault
+			relationship: 55a44e9b-d909-4d48-a12e-29fde743e65e
+			defaultHierarchy: LocalDateTable_e78483ef-3c51-4382-b1fb-c4e45c80c865.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Currency
+		dataType: string
+		lineageTag: 950d35be-8fb7-4867-86f5-01a840468a3b
+		summarizeBy: none
+		sourceColumn: Currency
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column FX
+		dataType: decimal
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: ead69333-f652-4e68-b6ad-2b92e4473576
+		summarizeBy: sum
+		sourceColumn: FX
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column CurrencyID
+		dataType: string
+		lineageTag: 1b021553-5670-4eff-8249-8bc0d534069e
+		summarizeBy: none
+		sourceColumn: CurrencyID
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	partition FX-e535e374-d2e6-466b-8514-f87fd7a0e9d9 = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\danie\OneDrive\Desktop\PBI_Udacity\Preparing and Modeling Data\Project\source-files\Source Files\USD-CAD Exchange Rates.csv"),[Delimiter=",", Columns=3, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Date", type date}, {"USD", Currency.Type}, {"CAD", Currency.Type}}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Changed Type",{{"CAD", "VAR"}, {"USD", "CAD"}}),
+				    #"Added Custom" = Table.AddColumn(#"Renamed Columns", "USD", each 1/[VAR]),
+				    #"Removed Columns" = Table.RemoveColumns(#"Added Custom",{"VAR"}),
+				    #"Changed Type1" = Table.TransformColumnTypes(#"Removed Columns",{{"USD", Currency.Type}}),
+				    #"Unpivoted Columns" = Table.UnpivotOtherColumns(#"Changed Type1", {"Date"}, "Attribute", "Value"),
+				    #"Renamed Columns1" = Table.RenameColumns(#"Unpivoted Columns",{{"Attribute", "Currency"}}),
+				    #"Added Custom1" = Table.AddColumn(#"Renamed Columns1", "CurrencyID", each Text.From([Date])&[Currency]),
+				    #"Changed Type2" = Table.TransformColumnTypes(#"Added Custom1",{{"CurrencyID", type text}}),
+				    #"Renamed Columns2" = Table.RenameColumns(#"Changed Type2",{{"Value", "FX"}})
+				in
+				    #"Renamed Columns2"
+
+	annotation PBI_ResultType = Table
+

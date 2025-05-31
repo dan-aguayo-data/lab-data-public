@@ -1,0 +1,40 @@
+#Validates that global parameters to be merged to dev have a prod pair. If PARAM_DEV exists there should be an equivalent PARAM_PROD
+name: Check - Validate Global Parameters Dev merge
+
+on:
+  pull_request:
+    branches:
+      - dev
+
+jobs:
+  validate-global-params:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Check global parameter parity
+        run: |
+          PARAM_FILE="factory/dataplatforms-adf-dev.json"
+          echo "Checking for matching _PARAM_DEV / _PARAM_PROD keys in $PARAM_FILE"
+
+          DEV_KEYS=$(jq -r '.properties.globalParameters | keys[]' "$PARAM_FILE" | grep '_PARAM_DEV$')
+          MISSING=""
+
+          for key in $DEV_KEYS; do
+            base=${key%_PARAM_DEV}
+            prod_key="${base}_PARAM_PROD"
+            if ! jq -e --arg k "$prod_key" '.properties.globalParameters[$k]' "$PARAM_FILE" > /dev/null; then
+              echo "Missing: $prod_key"
+              MISSING="$MISSING\n$prod_key"
+            fi
+          done
+
+          if [ -n "$MISSING" ]; then
+            echo -e "\nERROR: The following _PARAM_PROD parameters are missing:"
+            echo -e "$MISSING"
+            exit 1
+          else
+            echo "All PARAM_DEV keys have matching PARAM_PROD keys."
+          fi

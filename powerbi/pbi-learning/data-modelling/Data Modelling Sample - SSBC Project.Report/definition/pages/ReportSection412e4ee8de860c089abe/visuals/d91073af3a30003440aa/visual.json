@@ -1,0 +1,38 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.0.0/schema.json",
+  "name": "d91073af3a30003440aa",
+  "position": {
+    "x": 213.51965065502182,
+    "y": 281.71179039301308,
+    "z": 1000,
+    "height": 78.2532751091703,
+    "width": 520.943231441048
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "Executive Summary:",
+                    "textStyle": {
+                      "fontWeight": "bold"
+                    }
+                  },
+                  {
+                    "value": " There is a potential profit opportunity in the products Han Dynasty and Imperial Poet. Together they are not the main contributors to the share of sales by product (40%) but they are are accountable for most of the margin (~51%). "
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

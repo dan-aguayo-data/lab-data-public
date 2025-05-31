@@ -1,0 +1,55 @@
+table Stores
+	lineageTag: 2b823ad6-5d54-4108-872c-b6c43b87416b
+
+	column Store_ID
+		dataType: int64
+		formatString: 0
+		lineageTag: 805138a4-7f96-405c-84b3-e112fe7bfdc8
+		summarizeBy: none
+		sourceColumn: Store_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Store_Name
+		dataType: string
+		lineageTag: 0d87ba00-3504-4f5d-98dd-01705bb4947d
+		summarizeBy: none
+		sourceColumn: Store_Name
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column Store_Type
+		dataType: string
+		lineageTag: cd7d873b-3abb-4e18-a0d6-bc0cc2745ae3
+		summarizeBy: none
+		sourceColumn: Store_Type
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column Store_Description
+		dataType: string
+		lineageTag: 8a9b57dd-f9f9-44da-bf04-601852bfb403
+		summarizeBy: none
+		sourceColumn: Store_Description
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	partition Stores-1e253bde-b48e-4c92-a166-62f8d5d828e6 = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\seanc\OneDrive\Desktop\Udacity\Course\2020_12_09_Course_Datasets.xlsx"), null, true),
+				    Stores_Sheet = Source{[Item="Stores",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(Stores_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Store_ID", Int64.Type}, {"Store_Name", type text}, {"Store_Type", type text}, {"Store_Description", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

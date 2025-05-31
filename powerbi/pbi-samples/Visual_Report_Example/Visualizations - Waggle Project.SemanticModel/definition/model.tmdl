@@ -1,0 +1,27 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["Date_Table","Pet_Data","Rating_Data","Tracker_Data","Family_Data"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBIDesktopVersion = 2.143.878.0 (25.05)+b20aa3b866ec1b70879135a4e60e4b1301c75b21
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table DateTableTemplate_36c0e522-0306-4be4-8780-60c1c6b7512d
+ref table Date_Table
+ref table LocalDateTable_54ac25b0-e9cf-4d8a-9ffb-1ad68417786c
+ref table Pet_Data
+ref table Rating_Data
+ref table Tracker_Data
+ref table LocalDateTable_dc5fcfa7-ebd6-44aa-a75f-75fc53a2bded
+ref table Family_Data
+
+ref cultureInfo en-US
+

@@ -1,0 +1,132 @@
+table Product
+	lineageTag: 225bc624-ed93-443b-b132-8820a56dfe14
+
+	column ProductID
+		dataType: string
+		lineageTag: a09acdd2-d118-4ee2-a119-adf0584aa1f4
+		summarizeBy: none
+		sourceColumn: ProductID
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column ProductName
+		dataType: string
+		lineageTag: 9a4c3da3-3337-4f13-98ee-2abf915bcd51
+		summarizeBy: none
+		sourceColumn: ProductName
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column 'Product Type'
+		dataType: string
+		lineageTag: e46ec0f5-e8a4-4622-8062-437f7902af39
+		summarizeBy: none
+		sourceColumn: Product Type
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column 'Serving Amount'
+		dataType: int64
+		formatString: 0
+		lineageTag: 29fa5b44-7d40-4a03-87db-31ce0cd30b5f
+		summarizeBy: none
+		sourceColumn: Serving Amount
+
+		annotation SummarizationSetBy = Automatic
+
+	column ABV
+		dataType: double
+		lineageTag: 49171f52-487a-422b-a5f7-a7634f181112
+		summarizeBy: none
+		sourceColumn: ABV
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column IBU
+		dataType: int64
+		formatString: 0
+		lineageTag: 57e0fd21-cff2-4693-b9ef-b41e3cd21f35
+		summarizeBy: none
+		sourceColumn: IBU
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Cost per unit'
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: 42f0c388-85f5-4a3d-840a-c6a445a90b9c
+		summarizeBy: none
+		sourceColumn: Cost per unit
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column 'Sale Price'
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: 0c64bfcd-1d83-4da5-ac1f-dcfd29417c04
+		summarizeBy: none
+		sourceColumn: Sale Price
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column Beer_Score
+		dataType: int64
+		formatString: 0
+		lineageTag: 1ff539af-b584-4d8e-9f6b-1563232e2880
+		summarizeBy: none
+		sourceColumn: Beer_Score
+
+		annotation SummarizationSetBy = Automatic
+
+	column Cost_Rank
+		dataType: int64
+		formatString: 0
+		lineageTag: 96c4f5f0-d71a-436f-bd70-05a9b5ab547b
+		summarizeBy: none
+		sourceColumn: Cost_Rank
+
+		annotation SummarizationSetBy = Automatic
+
+	column Sales_Rank
+		dataType: int64
+		formatString: 0
+		lineageTag: b4db3973-f7c6-4cbc-9301-aa6beedf66be
+		summarizeBy: none
+		sourceColumn: Sales_Rank
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Product-40232ab3-7fd2-40a3-90be-7dd392da2dfd = m
+		mode: import
+		source =
+				let
+				    Source = Pdf.Tables(File.Contents("C:\Users\danie\OneDrive\Desktop\PBI_Udacity\Preparing and Modeling Data\Project\source-files\Source Files\SSBC Product Offerings.pdf"), [Implementation="1.3"]),
+				    Table001 = Source{[Id="Table001"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(Table001, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"PKProductID", type text}, {"ProductName", type text}, {"Product Type", type text}, {"Serving Amount", Int64.Type}, {"ABV", Percentage.Type}, {"IBU", Int64.Type}, {"Description", type text}}),
+				    #"Removed Blank Rows" = Table.SelectRows(#"Changed Type", each not List.IsEmpty(List.RemoveMatchingItems(Record.FieldValues(_), {"", null}))),
+				    #"Sorted Rows" = Table.Sort(#"Removed Blank Rows",{{"PKProductID", Order.Ascending}}),
+				    #"Removed Top Rows" = Table.Skip(#"Sorted Rows",2),
+				    #"Removed Columns" = Table.RemoveColumns(#"Removed Top Rows",{"Description"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"PKProductID", "ProductID"}}),
+				    #"Merged Queries" = Table.NestedJoin(#"Renamed Columns", {"ProductID"}, #"Metrics documentation", {"PKProductID"}, "Metrics documentation", JoinKind.LeftOuter),
+				    #"Expanded Metrics documentation" = Table.ExpandTableColumn(#"Merged Queries", "Metrics documentation", {"PKProductID", "Per Unit Cost to make", "Per Unit Sales price", "BeerAdvocate Score", "Cost Rank", "Sales Rank"}, {"Metrics documentation.PKProductID", "Metrics documentation.Per Unit Cost to make", "Metrics documentation.Per Unit Sales price", "Metrics documentation.BeerAdvocate Score", "Metrics documentation.Cost Rank", "Metrics documentation.Sales Rank"}),
+				    #"Removed Columns1" = Table.RemoveColumns(#"Expanded Metrics documentation",{"Metrics documentation.PKProductID"}),
+				    #"Renamed Columns1" = Table.RenameColumns(#"Removed Columns1",{{"Metrics documentation.Per Unit Cost to make", "Cost per unit"}, {"Metrics documentation.Per Unit Sales price", "Sale Price"}, {"Metrics documentation.BeerAdvocate Score", "Beer_Score"}, {"Metrics documentation.Cost Rank", "Cost_Rank"}, {"Metrics documentation.Sales Rank", "Sales_Rank"}})
+				in
+				    #"Renamed Columns1"
+
+	annotation PBI_ResultType = Table
+

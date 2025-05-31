@@ -1,0 +1,99 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/report/1.3.0/schema.json",
+  "themeCollection": {
+    "baseTheme": {
+      "name": "CY18SU07",
+      "reportVersionAtImport": "3.15",
+      "type": "SharedResources"
+    },
+    "customTheme": {
+      "name": "Waggle6066900444826226.json",
+      "reportVersionAtImport": "5.25",
+      "type": "RegisteredResources"
+    }
+  },
+  "layoutOptimization": "None",
+  "objects": {
+    "section": [
+      {
+        "properties": {
+          "verticalAlignment": {
+            "expr": {
+              "Literal": {
+                "Value": "'Top'"
+              }
+            }
+          }
+        }
+      }
+    ],
+    "outspacePane": [
+      {
+        "properties": {
+          "expanded": {
+            "expr": {
+              "Literal": {
+                "Value": "false"
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "resourcePackages": [
+    {
+      "name": "SharedResources",
+      "type": "SharedResources",
+      "items": [
+        {
+          "name": "CY18SU07",
+          "path": "BaseThemes/CY18SU07.json",
+          "type": "BaseTheme"
+        }
+      ]
+    },
+    {
+      "name": "RegisteredResources",
+      "type": "RegisteredResources",
+      "items": [
+        {
+          "name": "Waggle6066900444826226.json",
+          "path": "Waggle6066900444826226.json",
+          "type": "CustomTheme"
+        },
+        {
+          "name": "waggle_logo_white2676604449117277.png",
+          "path": "waggle_logo_white2676604449117277.png",
+          "type": "Image"
+        },
+        {
+          "name": "lapcat_logo_white_transparent_6384100663960799.png",
+          "path": "lapcat_logo_white_transparent_6384100663960799.png",
+          "type": "Image"
+        },
+        {
+          "name": "lapdog_logo_white_transparent_9853509797335398.png",
+          "path": "lapdog_logo_white_transparent_9853509797335398.png",
+          "type": "Image"
+        },
+        {
+          "name": "cat_face_icon_teal27513099131694396.png",
+          "path": "cat_face_icon_teal27513099131694396.png",
+          "type": "Image"
+        },
+        {
+          "name": "dog_face_icon_blue3516167390161571.png",
+          "path": "dog_face_icon_blue3516167390161571.png",
+          "type": "Image"
+        }
+      ]
+    }
+  ],
+  "settings": {
+    "useStylableVisualContainerHeader": true,
+    "defaultDrillFilterOtherVisuals": true,
+    "allowChangeFilterTypes": true,
+    "useEnhancedTooltips": true
+  }
+}

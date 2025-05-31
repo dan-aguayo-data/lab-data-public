@@ -1,0 +1,149 @@
+table Sales
+	lineageTag: 457f7251-e63c-49d5-b269-3125d2806cbc
+
+	measure 'Sales (USD)' = SUMX('Sales',RELATED('Product'[Sale Price])*Sales[QTY])
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: d6589bef-50fc-4ec6-81ac-ed305672b4b6
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Cost Sales USD' = SUMX('Sales',RELATED('Product'[Cost per unit])*Sales[QTY])
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: df5613ba-6d2e-4346-9fda-1f159de8f775
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'GPM (USD)' = [Sales (USD)] - [Cost Sales USD]
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: e828ff0b-53c2-40f8-ac92-15cd9e629382
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Gross Profit Margin %' = ([GPM (USD)]/[Sales (USD)])
+		formatString: 0%;-0%;0%
+		lineageTag: aaa60aa8-7984-43a1-b84c-df2300cc1a61
+
+	measure 'Sales CAD' = SUMX('Sales',[Sales (USD)]*RELATED('FX'[FX]))
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: 2d1c5ef8-7b7e-4737-a6fc-565eda1c74c0
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'QTY Total' = SUM('Sales'[QTY])
+		formatString: 0
+		lineageTag: d1d2b06b-d7d6-4415-b523-3b927403d568
+
+	measure 'Sales USD Total' = CALCULATE([Sales (USD)],ALL())
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: a23e2bdb-cce6-4322-86f5-52feb60ed9b5
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Sales by Product' = [Sales (USD)]/[Sales USD Total]
+		formatString: 0%;-0%;0%
+		lineageTag: d2920c7a-b040-434f-92b7-cdd45ceafbc5
+
+	measure 'Gross Profit Margin Total' = CALCULATE([GPM (USD)],ALL())
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: ddb98583-66a6-4b9e-83f0-c53f7378df13
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Gross Margin by Product' = [GPM (USD)]/[Gross Profit Margin Total]
+		formatString: 0%;-0%;0%
+		lineageTag: db0e6305-8a81-4b5d-9434-5140189cdfc6
+
+	column 'Customer ID'
+		dataType: string
+		lineageTag: b5b1a3e0-75de-4f8b-a28c-b3e17cd0d63a
+		summarizeBy: none
+		sourceColumn: Customer ID
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column 'Product ID'
+		dataType: string
+		lineageTag: 30fef72b-615c-4ae1-a0d3-c4d4df31fae3
+		summarizeBy: none
+		sourceColumn: Product ID
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column 'Transaction Date'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 8c00445e-8482-470f-af10-0d0704930be5
+		summarizeBy: none
+		sourceColumn: Transaction Date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Currency
+		dataType: string
+		lineageTag: c5aedc14-2d2b-4113-ab8f-4de8ac345b41
+		summarizeBy: none
+		sourceColumn: Currency
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column QTY
+		dataType: int64
+		formatString: 0
+		lineageTag: 0d715e91-6eb4-4dfa-8360-e416e50c8d22
+		summarizeBy: sum
+		sourceColumn: QTY
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Upload version'
+		dataType: string
+		lineageTag: 7d841ed0-b909-46c3-89d6-27baa46a04b7
+		summarizeBy: none
+		sourceColumn: Upload version
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column CurrencyID
+		dataType: string
+		lineageTag: fbf943e5-fd57-47a4-9024-8e2a35db0027
+		summarizeBy: none
+		sourceColumn: CurrencyID
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	partition Sales-c64e2b2c-7950-489e-a3d3-ae88a7e5ad32 = m
+		mode: import
+		source =
+				let
+				    Source = Folder.Files("C:\Users\danie\OneDrive\Desktop\PBI_Udacity\Preparing and Modeling Data\Project\source-files\Source Files\Monthly Sales Logs"),
+				    #"Added Custom" = Table.AddColumn(Source, "Workbook Objects", each Excel.Workbook(File.Contents([Folder Path]&"\"&[Name]), null, true)),
+				    #"Expanded Workbook Objects" = Table.ExpandTableColumn(#"Added Custom", "Workbook Objects", {"Name", "Data", "Item", "Kind", "Hidden"}, {"Workbook Objects.Name", "Workbook Objects.Data", "Workbook Objects.Item", "Workbook Objects.Kind", "Workbook Objects.Hidden"}),
+				    #"Filtered Rows" = Table.SelectRows(#"Expanded Workbook Objects", each ([Workbook Objects.Kind] = "Table")),
+				    #"Expanded Workbook Objects.Data" = Table.ExpandTableColumn(#"Filtered Rows", "Workbook Objects.Data", {"CustID", "ProdID", "Date", "Currency", "Qty"}, {"Workbook Objects.Data.CustID", "Workbook Objects.Data.ProdID", "Workbook Objects.Data.Date", "Workbook Objects.Data.Currency", "Workbook Objects.Data.Qty"}),
+				    #"Removed Other Columns" = Table.SelectColumns(#"Expanded Workbook Objects.Data",{"Workbook Objects.Data.CustID", "Workbook Objects.Data.ProdID", "Workbook Objects.Data.Date", "Workbook Objects.Data.Currency", "Workbook Objects.Data.Qty", "Name", "Folder Path"}),
+				    #"Removed Columns" = Table.RemoveColumns(#"Removed Other Columns",{"Folder Path"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"Workbook Objects.Data.CustID", "Customer ID"}, {"Workbook Objects.Data.ProdID", "Product ID"}, {"Workbook Objects.Data.Date", "Transaction date"}, {"Workbook Objects.Data.Currency", "Currency"}, {"Workbook Objects.Data.Qty", "QTY"}}),
+				    #"Extracted Text After Delimiter" = Table.TransformColumns(#"Renamed Columns", {{"Name", each Text.AfterDelimiter(_, "SSBC - "), type text}}),
+				    #"Extracted Text Before Delimiter" = Table.TransformColumns(#"Extracted Text After Delimiter", {{"Name", each Text.BeforeDelimiter(_, " Sales.xlsx"), type text}}),
+				    #"Renamed Columns1" = Table.RenameColumns(#"Extracted Text Before Delimiter",{{"Name", "Upload version"}}),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Renamed Columns1",{{"Transaction date", type date}, {"Product ID", type text}, {"Customer ID", type text}, {"Currency", type text}}),
+				    #"Renamed Columns2" = Table.RenameColumns(#"Changed Type",{{"Transaction date", "Transaction Date"}}),
+				    #"Added Custom1" = Table.AddColumn(#"Renamed Columns2", "CurrencyID", each Text.From([Transaction Date])&[Currency]),
+				    #"Changed Type1" = Table.TransformColumnTypes(#"Added Custom1",{{"CurrencyID", type text}, {"QTY", Int64.Type}})
+				in
+				    #"Changed Type1"
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,49 @@
+expression 'Metrics documentation' =
+		let
+		    Source = Excel.Workbook(File.Contents("C:\Users\danie\OneDrive\Desktop\PBI_Udacity\Preparing and Modeling Data\Project\source-files\Source Files\CFO Metrics Tracker.xlsx"), null, true),
+		    CFO_CostPrice_Table = Source{[Item="CFO_CostPrice",Kind="Table"]}[Data],
+		    #"Changed Type" = Table.TransformColumnTypes(CFO_CostPrice_Table,{{"PKProductID", type text}, {"Per Unit Cost to make", Currency.Type}, {"Per Unit Sales price", Currency.Type}, {"BeerAdvocate Score", Int64.Type}, {"Cost Rank", Int64.Type}, {"Sales Rank", Int64.Type}})
+		in
+		    #"Changed Type"
+	lineageTag: 7398d228-aa20-4ba6-9115-891f35a294c1
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression FYStart = 10 meta [IsParameterQuery=true, Type="Any", IsParameterQueryRequired=true]
+	lineageTag: dd6d919c-3382-48b5-8103-a3e21991f1d1
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Number
+
+expression FYEnd = 9 meta [IsParameterQuery=true, Type="Any", IsParameterQueryRequired=true]
+	lineageTag: bdef9b0d-c569-423f-baff-69dcf534821d
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Number
+
+expression DateStart =
+		let
+		    Source = Date.StartOfYear(List.Min(Sales[Transaction Date]))
+		in
+		    Source
+	lineageTag: e05dc3b8-a5b6-4c71-8dcd-68e47ac20e2c
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Date
+
+expression DateEnd =
+		let
+		    Source = Date.EndOfYear(List.Max(Sales[Transaction Date]))
+		in
+		    Source
+	lineageTag: 4828413e-c81a-48b7-a2b7-3e91d89e7244
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Date
+

@@ -1,0 +1,328 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "workflows_AUTOMATION_SEND_EMAIL_LINK": {
+            "defaultValue": "AUTOMATION-SEND-EMAIL-LINK",
+            "type": "String"
+        },
+        "connections_office365_7_externalid": {
+            "defaultValue": "/subscriptions/XXXXXXX/resourceGroups/XXX-XXXX/providers/Microsoft.Web/connections/office365-7",
+            "type": "String"
+        },
+        "connections_office365_8_externalid": {
+            "defaultValue": "/subscriptions/XXXXXXX/resourceGroups/XXXXX-XXXX/providers/Microsoft.Web/connections/office365-8",
+            "type": "String"
+        },
+        "connections_keyvault_1_externalid": {
+            "defaultValue": "/subscriptions/XXXXXX/resourceGroups/XXX-XX/providers/Microsoft.Web/connections/keyvault-1",
+            "type": "String"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "type": "Microsoft.Logic/workflows",
+            "apiVersion": "2017-07-01",
+            "name": "[parameters('workflows AUTOMATION_SEND_EMAIL_LINK')]",
+            "location": "australiaeast",
+            "properties": {
+                "state": "Enabled",
+                "definition": {
+                    "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+                    "contentVersion": "1.0.0.0",
+                    "parameters": {
+                        "$connections": {
+                            "defaultValue": {},
+                            "type": "Object"
+                        }
+                    },
+                    "triggers": {
+                        "When_a_HTTP_request_is_received": {
+                            "type": "Request",
+                            "kind": "Http",
+                            "inputs": {
+                                "schema": {
+                                    "properties": {
+                                        "dataFactoryName": {
+                                            "type": "string"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "pipelineName": {
+                                            "type": "string"
+                                        },
+                                        "receiver": {
+                                            "type": "string"
+                                        },
+                                        "name": {
+                                            "type": "string"
+                                        },
+                                        "context": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "actions": {
+                        "context": {
+                            "runAfter": {
+                                "Get_secret": [
+                                    "Succeeded"
+                                ]
+                            },
+                            "type": "InitializeVariable",
+                            "inputs": {
+                                "variables": [
+                                    {
+                                        "name": "Context",
+                                        "type": "string",
+                                        "value": "@triggerBody()?['context']"
+                                    }
+                                ]
+                            }
+                        },
+                        "Condition": {
+                            "actions": {},
+                            "runAfter": {
+                                "Switch": [
+                                    "Succeeded"
+                                ]
+                            },
+                            "else": {
+                                "actions": {}
+                            },
+                            "expression": {
+                                "and": [
+                                    {
+                                        "equals": [
+                                            "",
+                                            ""
+                                        ]
+                                    }
+                                ]
+                            },
+                            "type": "If"
+                        },
+                        "Switch": {
+                            "runAfter": {
+                                "Emailbodypost": [
+                                    "Succeeded"
+                                ]
+                            },
+                            "cases": {
+                                "CRP": {
+                                    "case": "CRP",
+                                    "actions": {
+                                        "Send_an_email_CRP_LINK": {
+                                            "type": "ApiConnection",
+                                            "inputs": {
+                                                "host": {
+                                                    "connection": {
+                                                        "name": "@parameters('$connections')['office365-1']['connectionId']"
+                                                    }
+                                                },
+                                                "method": "post",
+                                                "body": {
+                                                    "To": "@variables('receiver')",
+                                                    "Subject": "Report Link and Confirmation",
+                                                    "Body": "@variables('Emailbodypost')",
+                                                    "Importance": "Normal"
+                                                },
+                                                "path": "/v2/Mail"
+                                            }
+                                        }
+                                    }
+                                },
+                                "EXTERNAL": {
+                                    "case": "EXTERNAL",
+                                    "actions": {
+                                        "Send_an_email_External_LINK": {
+                                            "type": "ApiConnection",
+                                            "inputs": {
+                                                "host": {
+                                                    "connection": {
+                                                        "name": "@parameters('$connections')['office365-2']['connectionId']"
+                                                    }
+                                                },
+                                                "method": "post",
+                                                "body": {
+                                                    "To": "@variables('receiver')",
+                                                    "Subject": "-= EMAIL SUBJECT HERE --",
+                                                    "Body": "-- Message here --",
+                                                    "Importance": "Normal"
+                                                },
+                                                "path": "/v2/Mail"
+                                            }
+                                        }
+                                    }
+                                },
+                                "CRP_PRE_INVITE": {
+                                    "case": "CRP_PRE_INVITE",
+                                    "actions": {
+                                        "Send_an_email_CRP-PRE_INVITE": {
+                                            "type": "ApiConnection",
+                                            "inputs": {
+                                                "host": {
+                                                    "connection": {
+                                                        "name": "@parameters('$connections')['office365-2']['connectionId']"
+                                                    }
+                                                },
+                                                "method": "post",
+                                                "body": {
+                                                    "To": "@variables('receiver')",
+                                                    "Subject": "Access your real-time data dashboard",
+                                                    "Body": "@variables('Emailbodypre')",
+                                                    "Importance": "Normal"
+                                                },
+                                                "path": "/v2/Mail"
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "default": {
+                                "actions": {}
+                            },
+                            "expression": "@variables('Context')",
+                            "type": "Switch"
+                        },
+                        "user_name": {
+                            "runAfter": {
+                                "context": [
+                                    "Succeeded"
+                                ]
+                            },
+                            "type": "InitializeVariable",
+                            "inputs": {
+                                "variables": [
+                                    {
+                                        "name": "name",
+                                        "type": "string",
+                                        "value": "@triggerBody()?['name']"
+                                    }
+                                ]
+                            }
+                        },
+                        "user_email": {
+                            "runAfter": {
+                                "user_name": [
+                                    "Succeeded"
+                                ]
+                            },
+                            "type": "InitializeVariable",
+                            "inputs": {
+                                "variables": [
+                                    {
+                                        "name": "receiver",
+                                        "type": "string",
+                                        "value": "@triggerBody()?['receiver']"
+                                    }
+                                ]
+                            }
+                        },
+                        "Get_secret": {
+                            "runAfter": {},
+                            "type": "ApiConnection",
+                            "inputs": {
+                                "host": {
+                                    "connection": {
+                                        "name": "@parameters('$connections')['keyvault']['connectionId']"
+                                    }
+                                },
+                                "method": "get",
+                                "path": "/secrets/@{encodeURIComponent('sas-token-image-01')}/value"
+                            },
+                            "runtimeConfiguration": {
+                                "secureData": {
+                                    "properties": [
+                                        "inputs",
+                                        "outputs"
+                                    ]
+                                }
+                            }
+                        },
+                        "url_image_01": {
+                            "runAfter": {
+                                "user_email": [
+                                    "Succeeded"
+                                ]
+                            },
+                            "type": "InitializeVariable",
+                            "inputs": {
+                                "variables": [
+                                    {
+                                        "name": "url_image_01",
+                                        "type": "string",
+                                        "value": "@body('Get_secret')?['value']"
+                                    }
+                                ]
+                            }
+                        },
+                        "Emailbodypre": {
+                            "runAfter": {
+                                "url_image_01": [
+                                    "Succeeded"
+                                ]
+                            },
+                            "type": "InitializeVariable",
+                            "inputs": {
+                                "variables": [
+                                    {
+                                        "name": "Emailbodypre",
+                                        "type": "string",
+                                        "value": "-- MESSAGE HERE --"
+                                    }
+                                ]
+                            }
+                        },
+                        "Emailbodypost": {
+                            "runAfter": {
+                                "Emailbodypre": [
+                                    "Succeeded"
+                                ]
+                            },
+                            "type": "InitializeVariable",
+                            "inputs": {
+                                "variables": [
+                                    {
+                                        "name": "Emailbodypost",
+                                        "type": "string",
+                                        "value": "-- MESSAGE HERE --"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "outputs": {}
+                },
+                "parameters": {
+                    "$connections": {
+                        "type": "Object",
+                        "value": {
+                            "office365-1": {
+                                "id": "/subscriptions/37f0b729-bc5d-43f8-9c4a-670717e00b46/providers/Microsoft.Web/locations/australiaeast/managedApis/office365",
+                                "connectionId": "[parameters('connections_office365_7_externalid')]",
+                                "connectionName": "office365-7"
+                            },
+                            "office365-2": {
+                                "id": "/subscriptions/37f0b729-bc5d-43f8-9c4a-670717e00b46/providers/Microsoft.Web/locations/australiaeast/managedApis/office365",
+                                "connectionId": "[parameters('connections_office365_8_externalid')]",
+                                "connectionName": "office365-8"
+                            },
+                            "keyvault": {
+                                "id": "/subscriptions/37f0b729-bc5d-43f8-9c4a-670717e00b46/providers/Microsoft.Web/locations/australiaeast/managedApis/keyvault",
+                                "connectionId": "[parameters('connections_keyvault_1_externalid')]",
+                                "connectionName": "keyvault-1"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

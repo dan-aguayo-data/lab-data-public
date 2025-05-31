@@ -1,0 +1,118 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 1207.9129999999998,
+            "y": 262.85200000000009
+          },
+          "nodeIndex": "Avg Income by State",
+          "size": {
+            "height": 241.13499999999993,
+            "width": 234
+          },
+          "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 356.48,
+            "y": 0
+          },
+          "nodeIndex": "Customer List",
+          "size": {
+            "height": 434.298,
+            "width": 234
+          },
+          "zIndex": 2
+        },
+        {
+          "location": {
+            "x": 944.19499999999994,
+            "y": 539.05500000000006
+          },
+          "nodeIndex": "Incomes by State",
+          "size": {
+            "height": 314.42399999999986,
+            "width": 234
+          },
+          "zIndex": 3
+        },
+        {
+          "location": {
+            "x": 1006.2360000000002,
+            "y": 0
+          },
+          "nodeIndex": "Industries",
+          "size": {
+            "height": 238.466,
+            "width": 234
+          },
+          "zIndex": 4
+        },
+        {
+          "location": {
+            "x": 509.913,
+            "y": 759.088
+          },
+          "nodeIndex": "Product Inventory",
+          "size": {
+            "height": 245.08600000000007,
+            "width": 234
+          },
+          "zIndex": 5
+        },
+        {
+          "location": {
+            "x": 0,
+            "y": 91.839
+          },
+          "nodeIndex": "Purchase List",
+          "size": {
+            "height": 196.18199999999996,
+            "width": 234
+          },
+          "zIndex": 6
+        },
+        {
+          "location": {
+            "x": 692.7700000000001,
+            "y": 347.19100000000009
+          },
+          "nodeIndex": "State_List",
+          "size": {
+            "height": 153.247,
+            "width": 234
+          },
+          "zIndex": 7
+        },
+        {
+          "location": {
+            "x": 106.41619593811038,
+            "y": 570.999
+          },
+          "nodeIndex": "Regression Table",
+          "size": {
+            "height": 291.83900000000006,
+            "width": 234
+          },
+          "zIndex": 8
+        }
+      ],
+      "name": "All tables",
+      "zoomValue": 75.13148009015778,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "All tables",
+  "defaultDiagram": "All tables"
+}

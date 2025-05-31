@@ -1,0 +1,83 @@
+table Publisher
+	lineageTag: 4a2c3ed9-8fed-4de8-bf18-78166343b981
+
+	column Publisher_ID
+		dataType: int64
+		formatString: 0
+		lineageTag: 4fcad469-1f81-4f25-bd1c-d27d55e5d7ef
+		summarizeBy: none
+		sourceColumn: Publisher_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Name
+		dataType: string
+		lineageTag: 74f74f17-5195-4fed-9546-17d0161aa564
+		summarizeBy: none
+		sourceColumn: Name
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column CEO
+		dataType: string
+		lineageTag: 66a6aa78-baa0-4925-bf7d-f7d5fc9273f8
+		summarizeBy: none
+		sourceColumn: CEO
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column Headquarters
+		dataType: string
+		lineageTag: 6418d58c-21b7-4a7b-a7cf-3a87ea5dfcc8
+		summarizeBy: none
+		sourceColumn: Headquarters
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column Employees
+		dataType: int64
+		formatString: 0
+		lineageTag: 8148e8f6-039d-4f6c-859e-91db3728db96
+		summarizeBy: none
+		sourceColumn: Employees
+
+		annotation SummarizationSetBy = Automatic
+
+	column Year_Founded
+		dataType: int64
+		formatString: 0
+		lineageTag: 9e22e22e-8c5e-483b-a27d-10fb056b68e0
+		summarizeBy: none
+		sourceColumn: Year_Founded
+
+		annotation SummarizationSetBy = Automatic
+
+	column HQ_Cat
+		dataType: string
+		lineageTag: 3e7e67b6-1fd8-4125-ac96-bbd890509610
+		summarizeBy: none
+		sourceColumn: HQ_Cat
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	partition Publisher-8b6b3562-d0fa-4255-9bfd-67e67fb3f263 = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\seanc\OneDrive\Desktop\Udacity\Course\2020_12_09_Course_Datasets.xlsx"), null, true),
+				    Publisher_Sheet = Source{[Item="Publisher",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(Publisher_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Publisher_ID", Int64.Type}, {"Name", type text}, {"CEO", type text}, {"Headquarters", type text}, {"Employees", Int64.Type}, {"Year_Founded", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

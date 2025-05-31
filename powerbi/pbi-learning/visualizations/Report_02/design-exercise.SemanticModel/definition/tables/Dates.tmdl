@@ -1,0 +1,121 @@
+table Dates
+	lineageTag: c9a0fbd0-8c02-41fb-a63d-feaf04eecc82
+
+	column Date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: ee722861-81ff-477c-9cb4-b7683cedbf68
+		summarizeBy: none
+		sourceColumn: Date
+
+		variation Variation
+			isDefault
+			relationship: 9537902a-784b-400c-b19e-db541bd27b77
+			defaultHierarchy: LocalDateTable_07d2ecb9-ec85-4ddf-9b62-0c89a18884b8.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Year
+		dataType: int64
+		formatString: 0
+		lineageTag: 11c11eef-dffe-4db5-8ad6-9745b167a0df
+		summarizeBy: sum
+		sourceColumn: Year
+
+		annotation SummarizationSetBy = Automatic
+
+	column Month_Num
+		dataType: int64
+		formatString: 0
+		lineageTag: 86155cf4-64c9-49a2-92db-821a18b0dfef
+		summarizeBy: sum
+		sourceColumn: Month_Num
+
+		annotation SummarizationSetBy = Automatic
+
+	column Month
+		dataType: string
+		lineageTag: efd2e19a-9de1-4a2a-93f2-eb1397d1e2e7
+		summarizeBy: none
+		sourceColumn: Month
+		sortByColumn: Month_Num
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column Month_Short
+		dataType: string
+		lineageTag: facd77d6-26f9-4bf1-a06f-def78abe0156
+		summarizeBy: none
+		sourceColumn: Month_Short
+		sortByColumn: Month_Num
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column Day
+		dataType: int64
+		formatString: 0
+		lineageTag: 8508fa89-037e-414f-ac42-6d982848ba65
+		summarizeBy: sum
+		sourceColumn: Day
+
+		annotation SummarizationSetBy = Automatic
+
+	column Weekday
+		dataType: int64
+		formatString: 0
+		lineageTag: 5a3a94d3-f8f6-40d7-bd64-0aaf2bb8724c
+		summarizeBy: sum
+		sourceColumn: Weekday
+
+		annotation SummarizationSetBy = Automatic
+
+	column Day_of_Week
+		dataType: string
+		lineageTag: c7c1bcb9-d983-4b86-bf49-d770900209a4
+		summarizeBy: none
+		sourceColumn: Day_of_Week
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column Month_Year
+		dataType: string
+		lineageTag: 326f4f96-f16d-498a-b764-ce699b9f372b
+		summarizeBy: none
+		sourceColumn: Month_Year
+		sortByColumn: Year_Month
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column Year_Month
+		dataType: string
+		lineageTag: a9265af5-b969-40be-87a5-84ba2fe8fc04
+		summarizeBy: none
+		sourceColumn: Year_Month
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	partition Dates-61aceaac-44cc-419e-91d2-ebd50e8f1926 = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\seanc\OneDrive\Desktop\Udacity\Course\2020_12_09_Course_Datasets.xlsx"), null, true),
+				    Dates_Sheet = Source{[Item="Dates",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(Dates_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Date", type date}, {"Year", Int64.Type}, {"Month_Num", Int64.Type}, {"Month", type text}, {"Month_Short", type text}, {"Day", Int64.Type}, {"Weekday", Int64.Type}, {"Day_of_Week", type text}, {"Month_Year", type text}, {"Year_Month", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,196 @@
+# git action to crerate arm templates, validates them and publishes them
+name: Dev Push - Deploy Code to ADF Dev
+
+on:
+  push:
+    branches:
+      - dev      # trigger on dev branch pushes
+      #- feature/*  # (optional) trigger on any feature/* branch
+  pull_request:
+    branches-ignore:
+      - main
+      - dev
+      
+jobs:
+  deploy_dev:
+    runs-on: ubuntu-latest
+    concurrency:
+      group: adf-deployment
+      cancel-in-progress: false
+    permissions:
+      id-token: write            # needed for OIDC auth if using federated credentials
+      contents: read
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+        
+      - name: Setup Node (for ADF Utilities)
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x     # ensure Node 18+:contentReference[oaicite:7]{index=7}
+
+      - name: Install ADF Utilities
+        run: npm install
+        working-directory: ${{ github.workspace }}/build   
+
+      - name: Install Python 3
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'  
+
+      - name: Validate ADF JSON
+        run: |
+          npm run build -- validate \
+            ${{ github.workspace }}/ \
+            /subscriptions/${{ secrets.AZURE_SUBSCRIPTION_ID }}/resourceGroups/${{ secrets.AZURE_RESOURCE_GROUP_DEV }}/providers/Microsoft.DataFactory/factories/${{ secrets.AZURE_ADF_DEV_NAME }}
+        working-directory: ${{ github.workspace }}/build
+        #Validates all factory objects in the repo (equivalent to "Validate All" in ADF):contentReference[oaicite:8]{index=8}
+
+      - name: Export ARM Template
+        run: |
+          npm run build -- export \
+            ${{ github.workspace }}/ \
+            /subscriptions/${{ secrets.AZURE_SUBSCRIPTION_ID }}/resourceGroups/${{ secrets.AZURE_RESOURCE_GROUP_DEV }}/providers/Microsoft.DataFactory/factories/${{ secrets.AZURE_ADF_DEV_NAME }}
+        working-directory: ${{ github.workspace }}/build
+        # Generates ARMTemplateForFactory.json and ARMTemplateParametersForFactory.json in a folder "DevFactoryArmTemplate":contentReference[oaicite:9]{index=9}
+
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Disable all ADF triggers before ARM deployment
+        run: |
+          echo "Fetching list of all triggers..."
+          triggers=$(az datafactory trigger list \
+            --resource-group ${{ secrets.AZURE_RESOURCE_GROUP_DEV }} \
+            --factory-name ${{ secrets.AZURE_ADF_DEV_NAME }} \
+            --query "[?properties.runtimeState=='Started'].name" \
+            --output tsv)
+      
+          echo "Found triggers to disable:"
+          echo "$triggers"
+      
+          for trigger in $triggers; do
+            echo "Disabling trigger: $trigger"
+            az datafactory trigger stop \
+              --resource-group ${{ secrets.AZURE_RESOURCE_GROUP_DEV }} \
+              --factory-name ${{ secrets.AZURE_ADF_DEV_NAME }} \
+              --name "$trigger" || echo "Warning: failed to disable $trigger"
+          done
+
+      - name: Deploy to Dev ADF
+        run: |
+          az deployment group create \
+            --resource-group ${{ secrets.AZURE_RESOURCE_GROUP_DEV }} \
+            --template-file build/ARMTemplateForFactory.json \
+            --parameters build/ARMTemplateParametersForFactory.json \
+            --parameters factoryName=${{ secrets.AZURE_ADF_DEV_NAME }}
+
+
+      - name: Generate obsolete_triggers.txt from live vs repo
+        run: |
+          python generate_obsolete_triggers.py
+        env:
+          AZURE_RESOURCE_GROUP: ${{ secrets.AZURE_RESOURCE_GROUP_DEV }}
+          AZURE_ADF_NAME: ${{ secrets.AZURE_ADF_DEV_NAME }}
+
+      - name: Delete obsolete ADF triggers from file
+        run: |
+          while read trigger; do
+            if [ -n "$trigger" ]; then
+              echo "Deleting trigger: $trigger"
+              az datafactory trigger delete \
+                --resource-group ${{ secrets.AZURE_RESOURCE_GROUP_DEV }} \
+                --factory-name ${{ secrets.AZURE_ADF_DEV_NAME }} \
+                --name "$trigger" \
+                --yes || echo "Warning: Failed to delete $trigger"
+            fi
+          done < obsolete_triggers.txt
+
+      - name: Sync trigger runtime state after Dev deploy
+        run: python sync_trigger_states.py dev
+        env:
+          AZURE_RESOURCE_GROUP: ${{ secrets.AZURE_RESOURCE_GROUP_DEV }}
+          AZURE_ADF_NAME: ${{ secrets.AZURE_ADF_DEV_NAME }}
+
+      - name: Generate obsolete_pipelines.txt from live vs repo
+        run: |
+          python generate_obsolete_pipelines.py
+        env:
+          AZURE_RESOURCE_GROUP: ${{ secrets.AZURE_RESOURCE_GROUP_DEV }}
+          AZURE_ADF_NAME: ${{ secrets.AZURE_ADF_DEV_NAME }}
+            
+      - name: Clean up obsolete ADF pipelines from file
+        run: |
+          while read pipeline; do
+            if [ -n "$pipeline" ]; then
+              echo "Deleting pipeline: $pipeline"
+              az datafactory pipeline delete \
+                --resource-group ${{ secrets.AZURE_RESOURCE_GROUP_DEV }} \
+                --factory-name ${{ secrets.AZURE_ADF_DEV_NAME }} \
+                --name "$pipeline" \
+                --yes || echo "Warning: Failed to delete $pipeline"
+            fi
+          done < obsolete_pipelines.txt
+          
+      - name: Generate obsolete linked services
+        run: python generate_obsolete_linked_services.py
+        env:
+          AZURE_RESOURCE_GROUP: ${{ secrets.AZURE_RESOURCE_GROUP_DEV }}
+          AZURE_ADF_NAME: ${{ secrets.AZURE_ADF_DEV_NAME }}
+      
+      - name: Delete obsolete linked services
+        run: |
+          while read item; do
+            if [ -n "$item" ]; then
+              echo "Deleting linked service: $item"
+              az datafactory linked-service delete \
+                --resource-group ${{ secrets.AZURE_RESOURCE_GROUP_DEV }} \
+                --factory-name ${{ secrets.AZURE_ADF_DEV_NAME }} \
+                --name "$item" \
+                --yes || echo "Warning: Failed to delete $item"
+            fi
+          done < obsolete_linked_services.txt
+      
+      - name: Generate obsolete credentials
+        run: python generate_obsolete_credentials.py
+        env:
+          AZURE_RESOURCE_GROUP: ${{ secrets.AZURE_RESOURCE_GROUP_DEV }}
+          AZURE_ADF_NAME: ${{ secrets.AZURE_ADF_DEV_NAME }}
+      
+      - name: Delete obsolete credentials
+        run: |
+          while read item; do
+            if [ -n "$item" ]; then
+              echo "Deleting credential: $item"
+              az datafactory credential delete \
+                --resource-group ${{ secrets.AZURE_RESOURCE_GROUP_DEV }} \
+                --factory-name ${{ secrets.AZURE_ADF_DEV_NAME }} \
+                --name "$item" \
+                --yes || echo "Warning: Failed to delete $item"
+            fi
+          done < obsolete_credentials.txt
+
+      - name: Generate obsolete datasets
+        run: python generate_obsolete_datasets.py
+        env:
+          AZURE_RESOURCE_GROUP: ${{ secrets.AZURE_RESOURCE_GROUP_DEV }}
+          AZURE_ADF_NAME: ${{ secrets.AZURE_ADF_DEV_NAME }}
+      
+      - name: Delete obsolete datasets
+        run: |
+          while read item; do
+            if [ -n "$item" ]; then
+              echo "Deleting dataset: $item"
+              az datafactory dataset delete \
+                --resource-group ${{ secrets.AZURE_RESOURCE_GROUP_DEV }} \
+                --factory-name ${{ secrets.AZURE_ADF_DEV_NAME }} \
+                --name "$item" \
+                --yes || echo "Warning: Failed to delete $item"
+            fi
+          done < obsolete_datasets.txt
+

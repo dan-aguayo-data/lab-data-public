@@ -1,0 +1,16 @@
+[
+  {
+    "PropertyGroupId": "InputStream0",
+    "PropertyMap": {
+      "stream.name": "data-team-poc-kinesis",
+      "aws.region": "ap-southeast-2"
+    }
+  },
+  {
+    "PropertyGroupId": "OutputStream0",
+    "PropertyMap": {
+      "stream.name": "data-team-poc-kinesis-output",
+      "aws.region": "ap-southeast-2"
+    }
+  }
+]

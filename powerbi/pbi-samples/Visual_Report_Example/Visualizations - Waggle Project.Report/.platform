@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "Visualizations - Waggle Project"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "23e6ebd6-1049-4d97-9861-62b967f3b18b"
+  }
+}

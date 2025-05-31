@@ -1,0 +1,69 @@
+replicaCount: 1
+
+image:
+  tag: "0.14.2"
+
+env:
+  TZ: "Europe/Paris"
+  DEFAULT_COLOR_SCHEME: "dark"
+  AUTH_PROVIDER: "credentials"
+  DATABASE_URL: "file:/app/database/db.sqlite"
+
+ingress:
+  enabled: true
+  ingressClassName: "traefik"
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+    traefik.ingress.kubernetes.io/router.tls: "true"
+  hosts:
+    - host: homarr.homelab.dev
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls:
+    - hosts:
+        - "homarr.homelab.dev"
+        - "www.homarr.homelab.dev"
+      secretName: homelab-tls
+
+persistence:
+  - name: homarr-config
+    enabled: false
+  - name: homarr-database
+    enabled: true
+    storageClassName: "local-path"
+    accessMode: "ReadWriteOnce"
+    size: "500Mi"
+    mountPath: "/app/database"  # Explicitly define the mountPath for this volume.
+  - name: homarr-icons
+    enabled: false
+
+resources:
+  requests:
+    memory: "256Mi"
+    cpu: "250m"
+  limits:
+    memory: "512Mi"
+    cpu: "500m"
+
+readinessProbe:
+  httpGet:
+    path: /
+    port: 7575
+  initialDelaySeconds: 30  # Allow more time for initialization
+  timeoutSeconds: 5
+  periodSeconds: 10
+  failureThreshold: 5
+
+livenessProbe:
+  httpGet:
+    path: /
+    port: 7575
+  initialDelaySeconds: 30
+  timeoutSeconds: 5
+  periodSeconds: 10
+  failureThreshold: 5
+service:
+  type: LoadBalancer
+  port: 7575
+  targetPort: 7575

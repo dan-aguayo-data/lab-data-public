@@ -1,0 +1,26 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBIDesktopVersion = 2.143.878.0 (25.05)+b20aa3b866ec1b70879135a4e60e4b1301c75b21
+
+annotation PBI_QueryOrder = ["Metrics documentation","FX","Customer","Product","DateStart","Sales","DateEnd","Date","FYStart","FYEnd"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table DateTableTemplate_45bcb072-dd68-410b-88c7-dafd6db1fe8a
+ref table FX
+ref table LocalDateTable_e78483ef-3c51-4382-b1fb-c4e45c80c865
+ref table Customer
+ref table Product
+ref table Sales
+ref table Date
+
+ref cultureInfo en-US
+

@@ -1,0 +1,46 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.0.0/schema.json",
+  "name": "7e552966661be0bb6708",
+  "position": {
+    "x": 981.1231527093596,
+    "y": 199.25123152709361,
+    "z": 22000,
+    "height": 93.320197044334975,
+    "width": 132.41379310344828,
+    "tabOrder": 22000
+  },
+  "visual": {
+    "visualType": "card",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Rating_Data"
+                        }
+                      },
+                      "Property": "Would You Recommend this Product?"
+                    }
+                  },
+                  "Function": 5
+                }
+              },
+              "queryRef": "Min(Rating_Data.Would You Recommend this Product?)",
+              "displayName": "Reviews Count"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "isDefaultSort": true
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

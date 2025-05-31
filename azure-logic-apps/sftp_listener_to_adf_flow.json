@@ -1,0 +1,257 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "workflows_SFTP_Trigger_name": {
+            "defaultValue": "SFTP-Trigger",
+            "type": "String"
+        },
+        "connections_sftpwithssh_4_externalid": {
+            "defaultValue": "/subscriptions/xxx-xxx/resourceGroups/XXXX/providers/Microsoft.Web/connections/sftpwithssh-4",
+            "type": "String"
+        },
+        "connections_azuredatafactory_externalid": {
+            "defaultValue": "/subscriptions/xxx-xxx/resourceGroups/XXXXX/providers/Microsoft.Web/connections/azuredatafactory",
+            "type": "String"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "type": "Microsoft.Logic/workflows",
+            "apiVersion": "2017-07-01",
+            "name": "[parameters('workflows_SFTP_Trigger_name')]",
+            "location": "australiaeast",
+            "properties": {
+                "state": "Enabled",
+                "definition": {
+                    "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+                    "contentVersion": "1.0.0.0",
+                    "parameters": {
+                        "$connections": {
+                            "defaultValue": {},
+                            "type": "Object"
+                        }
+                    },
+                    "triggers": {
+                        "When_a_file_is_added_or_modified": {
+                            "recurrence": {
+                                "interval": 2,
+                                "frequency": "Hour"
+                            },
+                            "evaluatedRecurrence": {
+                                "interval": 2,
+                                "frequency": "Hour"
+                            },
+                            "metadata": {
+                                "6e202211-2856-4d17-9ded-5beb8b8626b0": "/",
+                                "L3BwcmVwb3J0cy9vdXRnb2luZw==": "PATH",
+                                "L3BwcmVwb3J0cw==": "PATH"
+                            },
+                            "type": "ApiConnection",
+                            "inputs": {
+                                "host": {
+                                    "connection": {
+                                        "name": "@parameters('$connections')['sftpwithssh']['connectionId']"
+                                    }
+                                },
+                                "method": "get",
+                                "path": "/datasets/default/triggers/onupdatedfile",
+                                "queries": {
+                                    "folderId": "L3BwcmVwb3J0cy9vdXRnb2luZw==",
+                                    "includeFileContent": true,
+                                    "inferContentType": true,
+                                    "queryParametersSingleEncoded": true
+                                }
+                            }
+                        }
+                    },
+                    "actions": {
+                        "STL_DailyFileName": {
+                            "runAfter": {
+                                "SchemeName": [
+                                    "Succeeded"
+                                ]
+                            },
+                            "type": "InitializeVariable",
+                            "inputs": {
+                                "variables": [
+                                    {
+                                        "name": "FILE_NAME",
+                                        "type": "string",
+                                        "value": "@ concat('FILE_PREFIX', formatDateTime(addDays(convertTimeZone(utcNow(), 'UTC', 'AUS Eastern Standard Time'), -1), 'yyyyMMdd'))\r\n"
+                                    }
+                                ]
+                            }
+                        },
+                        "SFTP_FileNameCheck": {
+                            "runAfter": {
+                                "TRR_DailyFileName": [
+                                    "Succeeded"
+                                ]
+                            },
+                            "type": "InitializeVariable",
+                            "inputs": {
+                                "variables": [
+                                    {
+                                        "name": "FileNameCheck",
+                                        "type": "string",
+                                        "value": "@base64ToString(triggerOutputs()['headers']['x-ms-file-name-encoded'])"
+                                    }
+                                ]
+                            }
+                        },
+                        "STL_Load": {
+                            "actions": {
+                                "STL_File_Load": {
+                                    "type": "ApiConnection",
+                                    "inputs": {
+                                        "host": {
+                                            "connection": {
+                                                "name": "@parameters('$connections')['azuredatafactory']['connectionId']"
+                                            }
+                                        },
+                                        "method": "post",
+                                        "body": {
+                                            "ReportName": "@variables('ReportParam')",
+                                            "SchemeName": "@variables('SchemeName')"
+                                        },
+                                        "path": "/subscriptions/@{encodeURIComponent('xxxxxxx')}/resourcegroups/@{encodeURIComponent('xxxxxx')}/providers/Microsoft.DataFactory/factories/@{encodeURIComponent('xxxxx')}/pipelines/@{encodeURIComponent('xxxxxx')}/CreateRun",
+                                        "queries": {
+                                            "x-ms-api-version": "2017-09-01-preview"
+                                        }
+                                    }
+                                }
+                            },
+                            "runAfter": {
+                                "ReportParam": [
+                                    "Succeeded"
+                                ]
+                            },
+                            "else": {
+                                "actions": {}
+                            },
+                            "expression": {
+                                "and": [
+                                    {
+                                        "contains": [
+                                            "@variables('FileNameCheck')",
+                                            "@variables('FILE_NAME')"
+                                        ]
+                                    }
+                                ]
+                            },
+                            "type": "If"
+                        },
+                        "TRR_DailyFileName": {
+                            "runAfter": {
+                                "STL_DailyFileName": [
+                                    "Succeeded"
+                                ]
+                            },
+                            "type": "InitializeVariable",
+                            "inputs": {
+                                "variables": [
+                                    {
+                                        "name": "TRR_DailyFileName",
+                                        "type": "string",
+                                        "value": "@ concat('TRR-', formatDateTime(addDays(convertTimeZone(utcNow(), 'UTC', 'AUS Eastern Standard Time'), -1), 'yyyyMMdd'))"
+                                    }
+                                ]
+                            }
+                        },
+                        "TRR_Load": {
+                            "actions": {
+                                "TRR_File_Load": {
+                                    "type": "ApiConnection",
+                                    "inputs": {
+                                        "host": {
+                                            "connection": {
+                                                "name": "@parameters('$connections')['azuredatafactory']['connectionId']"
+                                            }
+                                        },
+                                        "method": "post",
+                                        "body": {
+                                            "ReportName": "@variables('ReportParam')",
+                                            "SchemeName": "@variables('SchemeName')"
+                                        },
+                                        "path": "/subscriptions/@{encodeURIComponent('XXXXXX')}/resourcegroups/@{encodeURIComponent('XXXXX')}/providers/Microsoft.DataFactory/factories/@{encodeURIComponent('XXXXX')}/pipelines/@{encodeURIComponent('XXXXXXXXX')}/CreateRun",
+                                        "queries": {
+                                            "x-ms-api-version": "2017-09-01-preview"
+                                        }
+                                    }
+                                }
+                            },
+                            "runAfter": {
+                                "ReportParam": [
+                                    "Succeeded"
+                                ]
+                            },
+                            "else": {
+                                "actions": {}
+                            },
+                            "expression": {
+                                "and": [
+                                    {
+                                        "contains": [
+                                            "@variables('FileNameCheck')",
+                                            "@variables('FILE_NAME')"
+                                        ]
+                                    }
+                                ]
+                            },
+                            "type": "If"
+                        },
+                        "SchemeName": {
+                            "runAfter": {},
+                            "type": "InitializeVariable",
+                            "inputs": {
+                                "variables": [
+                                    {
+                                        "name": "Variable 1",
+                                        "type": "string",
+                                        "value": "-- Vale Here --"
+                                    }
+                                ]
+                            }
+                        },
+                        "ReportParam": {
+                            "runAfter": {
+                                "SFTP_FileNameCheck": [
+                                    "Succeeded"
+                                ]
+                            },
+                            "type": "InitializeVariable",
+                            "inputs": {
+                                "variables": [
+                                    {
+                                        "name": "ReportParam",
+                                        "type": "string",
+                                        "value": "@substring(variables('FileNameCheck'),0,3)"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "outputs": {}
+                },
+                "parameters": {
+                    "$connections": {
+                        "value": {
+                            "sftpwithssh": {
+                                "id": "/subscriptions/xxxxx/providers/Microsoft.Web/locations/australiaeast/managedApis/sftpwithssh",
+                                "connectionId": "[parameters('connections_sftpwithssh_4_externalid')]",
+                                "connectionName": "sftpwithssh-4"
+                            },
+                            "azuredatafactory": {
+                                "id": "/subscriptions/xxxxxx/providers/Microsoft.Web/locations/australiaeast/managedApis/azuredatafactory",
+                                "connectionId": "[parameters('connections_azuredatafactory_externalid')]",
+                                "connectionName": "azuredatafactory"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,8 @@
+
+--###SHOW ALL SYSTEM PROCESSES AND WHO IS RUNNING THEM###
+
+sp_who2
+
+--###KILL SPID (PROCESS) ###
+
+kill 8

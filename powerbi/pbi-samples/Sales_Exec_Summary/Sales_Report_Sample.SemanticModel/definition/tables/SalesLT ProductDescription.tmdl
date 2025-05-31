@@ -1,0 +1,53 @@
+table 'SalesLT ProductDescription'
+	lineageTag: ca80d0e4-84f0-4259-8539-b5e1135c55ac
+
+	column ProductDescriptionID
+		dataType: int64
+		formatString: 0
+		lineageTag: 53b172b5-95f2-4e66-9fee-043ffa4cb704
+		summarizeBy: none
+		sourceColumn: ProductDescriptionID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Description
+		dataType: string
+		lineageTag: 5e69c14c-73ba-42f7-bb75-d0b11502cf10
+		summarizeBy: none
+		sourceColumn: Description
+
+		annotation SummarizationSetBy = Automatic
+
+	column rowguid
+		dataType: string
+		lineageTag: d4ade54e-a1ea-472f-956d-3c761065c130
+		summarizeBy: none
+		sourceColumn: rowguid
+
+		annotation SummarizationSetBy = Automatic
+
+	column ModifiedDate
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 736ce1a9-ad68-49b2-a686-1876550fe1a5
+		summarizeBy: none
+		sourceColumn: ModifiedDate
+
+		variation Variation
+			isDefault
+			relationship: 543f389d-9594-4467-b012-c46e740575f9
+			defaultHierarchy: LocalDateTable_34211bb3-5318-49f8-b393-b335730bc0a0.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'SalesLT ProductDescription' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("demo-db-power-bi.database.windows.net", "adventure-works-sample"),
+				    SalesLT_ProductDescription = Source{[Schema="SalesLT",Item="ProductDescription"]}[Data]
+				in
+				    SalesLT_ProductDescription
+
+	annotation PBI_ResultType = Table
+

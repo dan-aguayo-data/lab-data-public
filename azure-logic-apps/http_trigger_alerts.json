@@ -1,0 +1,145 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "workflows_CES_DATA_DBT_EMAIL_ALERTS_name": {
+            "defaultValue": "DBT-EMAIL-ALERTS",
+            "type": "String"
+        },
+        "connections_office365_3_externalid": {
+            "defaultValue": "/subscriptions/XXXXXXX/resourceGroups/XXXXXX/providers/Microsoft.Web/connections/office365-3",
+            "type": "String"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "type": "Microsoft.Logic/workflows",
+            "apiVersion": "2017-07-01",
+            "name": "[parameters('DBT_EMAIL_ALERTS')]",
+            "location": "australiaeast",
+            "properties": {
+                "state": "Enabled",
+                "definition": {
+                    "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+                    "parameters": {
+                        "$connections": {
+                            "defaultValue": {},
+                            "type": "Object"
+                        }
+                    },
+                    "triggers": {
+                        "When_a_HTTP_request_is_received": {
+                            "type": "Request",
+                            "kind": "Http",
+                            "inputs": {
+                                "method": "POST"
+                            }
+                        }
+                    },
+                    "actions": {
+                        "Get_runstatus": {
+                            "runAfter": {},
+                            "type": "InitializeVariable",
+                            "inputs": {
+                                "variables": [
+                                    {
+                                        "name": "RunStatus",
+                                        "type": "string",
+                                        "value": "@triggerBody().data.runStatus"
+                                    }
+                                ]
+                            }
+                        },
+                        "Condition": {
+                            "actions": {
+                                "Send_an_email_(V2)_2": {
+                                    "type": "ApiConnection",
+                                    "inputs": {
+                                        "host": {
+                                            "connection": {
+                                                "name": "@parameters('$connections')['office365']['connectionId']"
+                                            }
+                                        },
+                                        "method": "post",
+                                        "body": {
+                                            "To": "-- EMAIL HERE --",
+                                            "Subject": "Logic App Notification - DBT Refresh Failure",
+                                            "Body": "<p class=\"editor-paragraph\">Hello,<br><br>this is an e-mail to inform that the dbt job @{variables('Get job name')} in @{variables('Get project')} had an error. Please assess dbt logs to establish root cause<br><br>Thanks,</p><br>",
+                                            "Importance": "Normal"
+                                        },
+                                        "path": "/v2/Mail"
+                                    }
+                                }
+                            },
+                            "runAfter": {
+                                "Get_project": [
+                                    "Succeeded"
+                                ]
+                            },
+                            "else": {
+                                "actions": {}
+                            },
+                            "expression": {
+                                "and": [
+                                    {
+                                        "equals": [
+                                            "@variables('RunStatus')",
+                                            "Errored"
+                                        ]
+                                    }
+                                ]
+                            },
+                            "type": "If"
+                        },
+                        "Get_job_name": {
+                            "runAfter": {
+                                "Get_runstatus": [
+                                    "Succeeded"
+                                ]
+                            },
+                            "type": "InitializeVariable",
+                            "inputs": {
+                                "variables": [
+                                    {
+                                        "name": "Get job name",
+                                        "type": "string",
+                                        "value": "@triggerBody().data.jobName"
+                                    }
+                                ]
+                            }
+                        },
+                        "Get_project": {
+                            "runAfter": {
+                                "Get_job_name": [
+                                    "Succeeded"
+                                ]
+                            },
+                            "type": "InitializeVariable",
+                            "inputs": {
+                                "variables": [
+                                    {
+                                        "name": "Get project",
+                                        "type": "string",
+                                        "value": "@triggerBody().data.projectName"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "parameters": {
+                    "$connections": {
+                        "value": {
+                            "office365": {
+                                "id": "/subscriptions/xxxxxx/providers/Microsoft.Web/locations/australiaeast/managedApis/office365",
+                                "connectionId": "[parameters('connections_office365_3_externalid')]",
+                                "connectionName": "office365-3"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

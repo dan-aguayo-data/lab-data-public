@@ -1,0 +1,80 @@
+table Customer
+	lineageTag: fae189db-4dc6-452a-9163-cfe838cd96b3
+
+	column CustomerID
+		dataType: string
+		lineageTag: 0716a9af-496b-41a1-88e5-80f3ca59892e
+		summarizeBy: none
+		sourceColumn: CustomerID
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column CustName
+		dataType: string
+		lineageTag: 5ac9af2a-cfe5-4082-858f-d186ae5c617e
+		summarizeBy: none
+		sourceColumn: CustName
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column CustType
+		dataType: string
+		lineageTag: 3017ded8-3a3d-47da-b7fe-e7e5f7b3609e
+		summarizeBy: none
+		sourceColumn: CustType
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column City
+		dataType: string
+		lineageTag: a75469ac-7cc9-4e6f-9df7-a40bbeb506a2
+		summarizeBy: none
+		sourceColumn: City
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column State/Province
+		dataType: string
+		lineageTag: aeb37eca-450d-4959-9898-3629221c3bb9
+		summarizeBy: none
+		sourceColumn: State/Province
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column Country
+		dataType: string
+		lineageTag: c8098a76-68c2-44a3-b858-1de99547e52a
+		summarizeBy: none
+		sourceColumn: Country
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	partition Customer-78e214fe-0495-461b-abe6-7d3f0fd471c4 = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\danie\OneDrive\Desktop\PBI_Udacity\Preparing and Modeling Data\Project\source-files\Source Files\Customer List (as of FY2021).txt"),[Delimiter="	", Columns=6, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Column1", type text}, {"Column2", type text}, {"Column3", type text}, {"Column4", type text}, {"Column5", type text}, {"Column6", type text}}),
+				    #"Promoted Headers" = Table.PromoteHeaders(#"Changed Type", [PromoteAllScalars=true]),
+				    #"Changed Type1" = Table.TransformColumnTypes(#"Promoted Headers",{{"PKCustomerID", type text}, {"Customer", type text}, {"CustType", type text}, {"City", type text}, {"State/Province", type text}, {"Country", type text}}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Changed Type1",{{"PKCustomerID", "CustomerID"}, {"Customer", "CustName"}}),
+				    #"Replaced Value" = Table.ReplaceValue(#"Renamed Columns","Barn","Bar",Replacer.ReplaceText,{"CustType"})
+				in
+				    #"Replaced Value"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

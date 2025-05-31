@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "Data Modelling Sample - SSBC Project"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "03ba7e91-46e7-4745-b0ca-23cbf129c053"
+  }
+}

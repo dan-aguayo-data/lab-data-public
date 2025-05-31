@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "Analytics - Market Analysis Project"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "914ab635-b723-4473-a3e6-54e49023f869"
+  }
+}

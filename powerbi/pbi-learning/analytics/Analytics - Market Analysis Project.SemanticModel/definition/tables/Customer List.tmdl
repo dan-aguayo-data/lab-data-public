@@ -1,0 +1,225 @@
+table 'Customer List'
+	lineageTag: cbe43c9a-3401-4e21-830f-feeab3f73508
+
+	measure nCustomers = COUNT('Customer List'[Predicted Income])
+		formatString: 0
+		lineageTag: be3dc11b-bf02-409c-84d3-b56529ab24d9
+
+	measure SQRTnCustomer = sqrt('Customer List'[nCustomers])
+		lineageTag: 5bf035be-eeed-476b-9d78-ad29c8198c16
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Min Income' = MIN('Customer List'[Predicted Income])
+		lineageTag: 34500063-d9f8-406c-b3c7-c0dc5eaa5de4
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Max Income' = MAX('Customer List'[Predicted Income])
+		lineageTag: b9fb1b35-ef9f-4240-9634-e25b7463571f
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'BIN N' = divide([Max Income]-[Min Income],31)
+		lineageTag: 4e527592-2024-4e59-a075-b09599ae2f1c
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Count of Predicted Income' = COUNT('Customer List'[Predicted Income])
+		formatString: 0
+		lineageTag: e90a53e8-aaaf-4ec7-b8a0-9934362a9491
+
+	measure 'Mean Predicted Income' = AVERAGE('Customer List'[Predicted Income])
+		lineageTag: 2f3bd82a-1c78-423c-a4c7-7083fed8198d
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'State Highest Customers' = ```
+			LOOKUPVALUE('Customer List'[State],'Customer List'[Predicted Income],MAX([Count of Predicted Income])) 
+			```
+		lineageTag: 0dc57521-c1c0-41bf-ab61-9c470841c974
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column 'Customer ID'
+		dataType: string
+		lineageTag: 74167d74-88af-41c4-9d4f-7f60b87ba29f
+		summarizeBy: none
+		sourceColumn: Customer ID
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column 'First Name'
+		dataType: string
+		lineageTag: ee36b0c5-c2c5-4944-b57d-57e4f741c3d6
+		summarizeBy: none
+		sourceColumn: First Name
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column 'Last Name'
+		dataType: string
+		lineageTag: 8bde4f7c-e77b-4f1d-ad7f-5ccc9c675ae4
+		summarizeBy: none
+		sourceColumn: Last Name
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column State
+		dataType: string
+		lineageTag: 2365a7b4-1871-4f0b-ac4b-2b130276a1eb
+		summarizeBy: none
+		sourceColumn: State
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column 'Date of Birth'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 78bca025-e2b8-4885-9ee7-72dfc89030ab
+		summarizeBy: none
+		sourceColumn: Date of Birth
+
+		variation Variation
+			isDefault
+			relationship: 99afc8c5-8543-4bcd-a643-133995505bcc
+			defaultHierarchy: LocalDateTable_2cbba613-0d79-444e-acb2-718f9da6decb.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Last 6 Months Purchases'
+		dataType: double
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: 561a57b0-c23e-474b-b05f-b10c162232e9
+		summarizeBy: sum
+		sourceColumn: Last 6 Months Purchases
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Predicted Income' = IF(DIVIDE(-716.68-'Customer List'[Last 6 Months Purchases],-.01)<0,0,DIVIDE(-722.14-'Customer List'[Last 6 Months Purchases],-.0107))
+		dataType: double
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: a075c7cc-7f7e-4d68-bc2f-4083e66c0d9d
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column BUCKET =
+			
+			IF('Customer List'[Predicted Income]<80000,"70K-80K",
+			IF('Customer List'[Predicted Income]>=80000 && 'Customer List'[Predicted Income]<90000,"80K-90K",
+			IF('Customer List'[Predicted Income]>=90000 && 'Customer List'[Predicted Income]<100000,"90K-100K",
+			IF('Customer List'[Predicted Income]>=100000 && 'Customer List'[Predicted Income]<110000,"100K-110K",
+			IF('Customer List'[Predicted Income]>=110000 && 'Customer List'[Predicted Income]<120000,"110K-120K",
+			IF('Customer List'[Predicted Income]>=120000 && 'Customer List'[Predicted Income]<130000,"120K-130K",
+			IF('Customer List'[Predicted Income]>=130000 && 'Customer List'[Predicted Income]<140000,"130K-140K",
+			IF('Customer List'[Predicted Income]>=140000 && 'Customer List'[Predicted Income]<150000,"140K-150K",
+			IF('Customer List'[Predicted Income]>=150000 && 'Customer List'[Predicted Income]<160000,"150K-160K",
+			IF('Customer List'[Predicted Income]>=160000 && 'Customer List'[Predicted Income]<170000,"160-170K",
+			IF('Customer List'[Predicted Income]>=170000 && 'Customer List'[Predicted Income]<180000,"170K-180",
+			IF('Customer List'[Predicted Income]>=180000 && 'Customer List'[Predicted Income]<190000,"180K-190K",
+			IF('Customer List'[Predicted Income]>=190000 && 'Customer List'[Predicted Income]<200000,"190K-200K",
+			IF('Customer List'[Predicted Income]>=200000 && 'Customer List'[Predicted Income]<210000,"200K-210K",
+			IF('Customer List'[Predicted Income]>=210000 && 'Customer List'[Predicted Income]<220000,"210K-220K",
+			IF('Customer List'[Predicted Income]>=220000 && 'Customer List'[Predicted Income]<230000,"220K-230K",
+			IF('Customer List'[Predicted Income]>=230000 && 'Customer List'[Predicted Income]<240000,"230K-240K",
+			IF('Customer List'[Predicted Income]>=240000 && 'Customer List'[Predicted Income]<250000,"240K-250K",
+			IF('Customer List'[Predicted Income]>=250000 && 'Customer List'[Predicted Income]<260000,"250K-260K",
+			IF('Customer List'[Predicted Income]>=260000 && 'Customer List'[Predicted Income]<270000,"260K-270K",
+			IF('Customer List'[Predicted Income]>=270000 && 'Customer List'[Predicted Income]<280000,"270K-280K",
+			IF('Customer List'[Predicted Income]>=280000 && 'Customer List'[Predicted Income]<290000,"280K-290K",
+			IF('Customer List'[Predicted Income]>=290000 && 'Customer List'[Predicted Income]<300000,"290K-300K",
+			IF('Customer List'[Predicted Income]>=300000,">300K",""
+			))))))))))))))))))))))))
+		lineageTag: dfd766cc-393c-4f5a-a4b4-d97a19ffaae0
+		summarizeBy: none
+		sortByColumn: 'BUCKET SORT'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column 'BUCKET SORT' =
+			
+			IF('Customer List'[Predicted Income]<80000,1,
+			IF('Customer List'[Predicted Income]>=80000 && 'Customer List'[Predicted Income]<90000,2,
+			IF('Customer List'[Predicted Income]>=90000 && 'Customer List'[Predicted Income]<100000,3,
+			IF('Customer List'[Predicted Income]>=100000 && 'Customer List'[Predicted Income]<110000,4,
+			IF('Customer List'[Predicted Income]>=110000 && 'Customer List'[Predicted Income]<120000,5,
+			IF('Customer List'[Predicted Income]>=120000 && 'Customer List'[Predicted Income]<130000,6,
+			IF('Customer List'[Predicted Income]>=130000 && 'Customer List'[Predicted Income]<140000,7,
+			IF('Customer List'[Predicted Income]>=140000 && 'Customer List'[Predicted Income]<150000,8,
+			IF('Customer List'[Predicted Income]>=150000 && 'Customer List'[Predicted Income]<160000,9,
+			IF('Customer List'[Predicted Income]>=160000 && 'Customer List'[Predicted Income]<170000,10,
+			IF('Customer List'[Predicted Income]>=170000 && 'Customer List'[Predicted Income]<180000,11,
+			IF('Customer List'[Predicted Income]>=180000 && 'Customer List'[Predicted Income]<190000,12,
+			IF('Customer List'[Predicted Income]>=190000 && 'Customer List'[Predicted Income]<200000,13,
+			IF('Customer List'[Predicted Income]>=200000 && 'Customer List'[Predicted Income]<210000,14,
+			IF('Customer List'[Predicted Income]>=210000 && 'Customer List'[Predicted Income]<220000,15,
+			IF('Customer List'[Predicted Income]>=220000 && 'Customer List'[Predicted Income]<230000,16,
+			IF('Customer List'[Predicted Income]>=230000 && 'Customer List'[Predicted Income]<240000,17,
+			IF('Customer List'[Predicted Income]>=240000 && 'Customer List'[Predicted Income]<250000,18,
+			IF('Customer List'[Predicted Income]>=250000 && 'Customer List'[Predicted Income]<260000,19,
+			IF('Customer List'[Predicted Income]>=260000 && 'Customer List'[Predicted Income]<270000,20,
+			IF('Customer List'[Predicted Income]>=270000 && 'Customer List'[Predicted Income]<280000,21,
+			IF('Customer List'[Predicted Income]>=280000 && 'Customer List'[Predicted Income]<290000,22,
+			IF('Customer List'[Predicted Income]>=290000 && 'Customer List'[Predicted Income]<300000,23,
+			IF('Customer List'[Predicted Income]>=300000,24,25
+			))))))))))))))))))))))))
+		formatString: 0
+		lineageTag: 1b3e2724-a65e-4e4a-9b74-90486da000e0
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column IncomeRange =
+			
+			IF('Customer List'[Predicted Income]<100000,"Low",
+			IF('Customer List'[Predicted Income]>=100000 && 'Customer List'[Predicted Income]<160000,"Medium",
+			IF('Customer List'[Predicted Income]>=160000,"High","")))
+		lineageTag: bcfe1e7c-acc3-4fd7-8f6e-d5ffe05db2b0
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column ProductName =
+			
+			IF('Customer List'[Predicted Income]<100000,"Spring T-Shirt",
+			IF('Customer List'[Predicted Income]>=100000 && 'Customer List'[Predicted Income]<160000,"Cotton Sweater",
+			IF('Customer List'[Predicted Income]>=160000,"Leather Bag","")))
+		lineageTag: a03b5c78-084c-4d35-a1e0-ecb678ccb277
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	partition 'Customer List-e51b45cd-7fc1-480a-a216-6002fb3883aa' = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\danie\OneDrive\Desktop\PBI_Udacity\Advanced Data Analytics\Project\customer-list.xlsx"), null, true),
+				    #"Customer List_Sheet" = Source{[Item="Customer List",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(#"Customer List_Sheet", [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Customer ID", type text}, {"First Name", type text}, {"Last Name", type text}, {"State", type text}, {"Date of Birth", type date}, {"Last 6 Months Purchases", Currency.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

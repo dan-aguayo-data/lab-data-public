@@ -1,0 +1,125 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 0,
+        "y": 243.3355768770241
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 770.22048128149925,
+            "y": 200.37003343231578
+          },
+          "nodeIndex": "SalesLT Calendar",
+          "nodeLineageTag": "13725d7f-b78b-45a1-baab-dc164226cce5",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 3
+        },
+        {
+          "location": {
+            "x": 1228.2091033696895,
+            "y": 249.23355390598215
+          },
+          "nodeIndex": "SalesLT Customer",
+          "nodeLineageTag": "19805ab5-f08d-476d-9612-480d2fa03490",
+          "size": {
+            "height": 491.19223897480481,
+            "width": 392.01011485521053
+          },
+          "zIndex": 4
+        },
+        {
+          "location": {
+            "x": 318.2364028390428,
+            "y": 572.73070508404669
+          },
+          "nodeIndex": "SalesLT Product",
+          "nodeLineageTag": "6fa738ec-1ae6-48d9-b308-1db6533829e0",
+          "size": {
+            "height": 453.26981140955422,
+            "width": 234
+          },
+          "zIndex": 7
+        },
+        {
+          "location": {
+            "x": 50,
+            "y": 216.05142978638793
+          },
+          "nodeIndex": "SalesLT ProductCategory",
+          "nodeLineageTag": "ed502f7d-a2c8-4b13-9e9f-ff21d9c859d7",
+          "size": {
+            "height": 267.94434938774054,
+            "width": 301.94434938774054
+          },
+          "zIndex": 5
+        },
+        {
+          "location": {
+            "x": 421.74536087326152,
+            "y": 0
+          },
+          "nodeIndex": "SalesLT ProductDescription",
+          "nodeLineageTag": "ca80d0e4-84f0-4259-8539-b5e1135c55ac",
+          "size": {
+            "height": 374,
+            "width": 227.23271730424847
+          },
+          "zIndex": 6
+        },
+        {
+          "location": {
+            "x": 1620.2192182249,
+            "y": 794.50345912873593
+          },
+          "nodeIndex": "1. Measures",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 68.704920361022118,
+            "y": 1230.3128933573985
+          },
+          "nodeIndex": "SalesLT FactSalesTable",
+          "nodeLineageTag": "4c8a0d33-f0c6-4eae-b841-eb096639b09c",
+          "size": {
+            "height": 372.82799073561637,
+            "width": 234
+          },
+          "zIndex": 2
+        },
+        {
+          "location": {
+            "x": 1854.2192182249,
+            "y": 725.57044204650742
+          },
+          "nodeIndex": "Metric",
+          "nodeLineageTag": "01fc3fcc-46ca-42bf-9fae-4ae37033419d",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "All tables",
+      "zoomValue": 63.2870877232341,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "All tables",
+  "defaultDiagram": "All tables"
+}

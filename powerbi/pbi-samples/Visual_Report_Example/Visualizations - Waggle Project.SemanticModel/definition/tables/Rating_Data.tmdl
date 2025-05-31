@@ -1,0 +1,95 @@
+table Rating_Data
+	lineageTag: ad85a4fe-36c1-4e2b-bc8b-de343429b9fb
+
+	column Tracker_ID
+		dataType: int64
+		isKey
+		formatString: #,0
+		lineageTag: 056a7057-4efd-4484-903d-bf8c3c874b68
+		summarizeBy: none
+		sourceColumn: Tracker_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Device_Type
+		dataType: string
+		lineageTag: 53bd91cd-dd2d-4550-a653-4f98bffacf41
+		summarizeBy: none
+		sourceColumn: Device_Type
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column Rating
+		dataType: int64
+		formatString: 0
+		lineageTag: dd7ef843-96be-4fa9-8990-f9b3edeadc7d
+		summarizeBy: sum
+		sourceColumn: Rating
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Would You Recommend this Product?'
+		dataType: string
+		lineageTag: e7c5dfee-9a25-4e34-b09f-d1964c39e57d
+		summarizeBy: none
+		sourceColumn: Would You Recommend this Product?
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column 'Where Did You Buy This Product?'
+		dataType: string
+		lineageTag: 96c4c11d-8b14-44d5-af10-5e129fb375fb
+		summarizeBy: none
+		sourceColumn: Where Did You Buy This Product?
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column Comments
+		dataType: string
+		lineageTag: 02bf102c-6a3f-4c56-9145-461529749356
+		summarizeBy: none
+		sourceColumn: Comments
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column Review_Date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: d13f436c-4783-4dd9-95b4-bf56bb78407f
+		summarizeBy: none
+		sourceColumn: Review_Date
+
+		variation Variation
+			isDefault
+			relationship: 82a93fce-094d-4c5a-8452-b5c8db2c4685
+			defaultHierarchy: LocalDateTable_dc5fcfa7-ebd6-44aa-a75f-75fc53a2bded.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	partition Rating_Data-ed4a5797-f737-452f-9808-d8001fa698b0 = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\seanc\OneDrive\Desktop\Udacity\Project\Sample_Datasets_for_PBI.xlsx"), null, true),
+				    Ratings_Data_Sheet = Source{[Item="Rating_Data",Kind="Sheet"]}[Data],
+				    #"Promoted Headers1" = Table.PromoteHeaders(Ratings_Data_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type1" = Table.TransformColumnTypes(#"Promoted Headers1",{{"Tracker_ID", Int64.Type}, {"Review_Date", type date}, {"Device_Type", type text}, {"Rating", Int64.Type}, {"Would You Recommend this Product?", type text}, {"Where Did You Buy This Product?", type text}, {"Comments", type text}}),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Changed Type1",{{"Tracker_ID", Int64.Type}, {"Review_Date", type date}, {"Device_Type", type text}, {"Rating", Int64.Type}, {"Would You Recommend this Product?", type text}, {"Where Did You Buy This Product?", type text}, {"Comments", type text}}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Changed Type",{{"Tracker_ID", "Tracker_ID"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

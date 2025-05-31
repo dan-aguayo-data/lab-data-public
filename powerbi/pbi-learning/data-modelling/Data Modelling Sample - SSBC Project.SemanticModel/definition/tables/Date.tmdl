@@ -1,0 +1,149 @@
+table Date
+	lineageTag: 698d78b0-84f2-4340-ab03-367ebb1d94d8
+	dataCategory: Time
+
+	column Date
+		dataType: dateTime
+		isKey
+		formatString: Long Date
+		lineageTag: 038be7d4-6c88-43d7-b1a7-770890b85789
+		summarizeBy: none
+		sourceColumn: Date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column CalendarMonth
+		dataType: int64
+		formatString: 0
+		lineageTag: 0db9578d-c440-4e70-a8e7-d7428d211065
+		summarizeBy: none
+		sourceColumn: CalendarMonth
+
+		annotation SummarizationSetBy = Automatic
+
+	column CalendarYear
+		dataType: int64
+		formatString: 0
+		lineageTag: e7011321-b163-4587-ae2a-6ad7e7196a31
+		summarizeBy: none
+		sourceColumn: CalendarYear
+
+		annotation SummarizationSetBy = Automatic
+
+	column CalendarMMM
+		dataType: string
+		lineageTag: 5d375355-0bfd-4305-ba36-6de50249bea9
+		summarizeBy: none
+		sourceColumn: CalendarMMM
+		sortByColumn: CalendarMonth
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column FYYear
+		dataType: int64
+		formatString: 0
+		lineageTag: 05c7745f-e67a-49e7-b629-6bdf2d58703f
+		summarizeBy: none
+		sourceColumn: FYYear
+
+		annotation SummarizationSetBy = Automatic
+
+	column FYMonth
+		dataType: int64
+		formatString: 0
+		lineageTag: e29fac67-0606-426c-84e4-18fb73a20ced
+		summarizeBy: none
+		sourceColumn: FYMonth
+
+		annotation SummarizationSetBy = Automatic
+
+	column FYMonthPad
+		dataType: string
+		lineageTag: 92f82c11-4a32-49d4-88cb-0c2b7605e6d9
+		summarizeBy: none
+		sourceColumn: FYMonthPad
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column FYDate
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 38a63731-327f-4e66-9af5-3a099534677d
+		summarizeBy: none
+		sourceColumn: FYDate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column FYMMM
+		dataType: string
+		lineageTag: 2728b426-fe92-42fd-bb0c-6e6539674caa
+		summarizeBy: none
+		sourceColumn: FYMMM
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column FYQRTR
+		dataType: int64
+		formatString: 0
+		lineageTag: 6dbdd8dd-ccdf-4dcb-bf6a-880eaccbadf4
+		summarizeBy: none
+		sourceColumn: FYQRTR
+
+		annotation SummarizationSetBy = Automatic
+
+	column FYQrtrYear
+		dataType: string
+		lineageTag: ea47371d-733b-4b67-ba1d-077b31a9d2d3
+		summarizeBy: none
+		sourceColumn: FYQrtrYear
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	partition Date-cf95a9c2-583c-411e-81a5-ebc202e7e2c2 = m
+		mode: import
+		source =
+				let
+				    Source = {Number.From(#"DateStart")..Number.From(#"DateEnd")},
+				    #"Converted to Table" = Table.FromList(Source, Splitter.SplitByNothing(), null, null, ExtraValues.Error),
+				    #"Renamed Columns" = Table.RenameColumns(#"Converted to Table",{{"Column1", "Date"}}),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Renamed Columns",{{"Date", type date}}),
+				    #"Inserted Month" = Table.AddColumn(#"Changed Type", "Month", each Date.Month([Date]), Int64.Type),
+				    #"Inserted Year" = Table.AddColumn(#"Inserted Month", "Year", each Date.Year([Date]), Int64.Type),
+				    #"Renamed Columns1" = Table.RenameColumns(#"Inserted Year",{{"Month", "CalendarMonth"}, {"Year", "CalendarYear"}}),
+				    #"Add Month NameFromDate" = Table.AddColumn(#"Renamed Columns1", "Custom", each Date.MonthName([Date])),
+				    #"Renamed Columns2" = Table.RenameColumns(#"Add Month NameFromDate",{{"Custom", "CalendarMMM"}}),
+				    #"Extracted First Characters" = Table.TransformColumns(#"Renamed Columns2", {{"CalendarMMM", each Text.Start(_, 3), type text}}),
+				    AddFYear = Table.AddColumn(#"Extracted First Characters", "FYYear", each if [CalendarMonth]< FYStart
+				then [CalendarYear]-1
+				else [CalendarYear]),
+				    AddFMonth = Table.AddColumn(AddFYear, "FYMonth", each if [CalendarMonth] >= FYStart
+				then [CalendarMonth] - (FYStart-1)
+				else [CalendarMonth] + (12-FYStart+1)),
+				    #"Add Pad Month" = Table.AddColumn(AddFMonth, "FYMonthPad", each Text.PadStart(Text.From([FYMonth]),2,"0")),
+				    #"Add FYDate" = Table.AddColumn(#"Add Pad Month", "FYDate", each Text.From([FYYear])&"/"&Text.From([FYMonthPad])&"/01"),
+				    #"Changed Type1" = Table.TransformColumnTypes(#"Add FYDate",{{"FYYear", Int64.Type}, {"FYMonth", Int64.Type}, {"FYDate", type date}}),
+				    #"Added Custom" = Table.AddColumn(#"Changed Type1", "FYMMM", each Date.MonthName([FYDate])),
+				    #"Extracted First Characters1" = Table.TransformColumns(#"Added Custom", {{"FYMMM", each Text.Start(_, 3), type text}}),
+				    #"Added Custom1" = Table.AddColumn(#"Extracted First Characters1", "FYQRTR", each Number.RoundUp([FYMonth]/3,0)),
+				    #"Changed Type2" = Table.TransformColumnTypes(#"Added Custom1",{{"FYQRTR", Int64.Type}}),
+				    #"Added Custom2" = Table.AddColumn(#"Changed Type2", "FYQrtrYear", each "Q"&Text.From([FYQRTR])&"-"&Text.From([FYYear])),
+				    #"Changed Type3" = Table.TransformColumnTypes(#"Added Custom2",{{"FYQrtrYear", type text}})
+				in
+				    #"Changed Type3"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

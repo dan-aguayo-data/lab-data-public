@@ -1,0 +1,25 @@
+relationship 9537902a-784b-400c-b19e-db541bd27b77
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Dates.Date
+	toColumn: LocalDateTable_07d2ecb9-ec85-4ddf-9b62-0c89a18884b8.Date
+
+relationship b1abf68d-9fe7-4b6b-8bb7-0510d15c9992
+	fromColumn: Sales.Game_ID
+	toColumn: Games.Game_ID
+
+relationship 793d12fc-291b-4fac-9803-9599bffd8435
+	fromColumn: Games.Publisher_ID
+	toColumn: Publisher.Publisher_ID
+
+relationship 6a5667e7-5d71-4f7c-aa16-fd8a6ec21d32
+	fromColumn: Sales.Geo_ID
+	toColumn: Geography.Geo_ID
+
+relationship a73373ab-2fe8-4e48-95e4-ab9e991aabec
+	fromColumn: Sales.Store_ID
+	toColumn: Stores.Store_ID
+
+relationship 27340188-7a07-4c48-b888-c28c43adbc54
+	fromColumn: Sales.Date
+	toColumn: Dates.Date
+

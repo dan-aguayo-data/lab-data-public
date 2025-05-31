@@ -1,0 +1,33 @@
+name: Check - Validate ADF Syntax to be merged into Dev
+
+on:
+  pull_request:
+    branches:
+      - dev
+
+jobs:
+  validate_adf:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+
+      - name: Install ADF Utilities
+        run: npm install
+        working-directory: ${{ github.workspace }}/build
+
+      - name: Validate ADF JSON
+        run: |
+          npm run build -- validate \
+            ${{ github.workspace }}/ \
+            /subscriptions/${{ secrets.AZURE_SUBSCRIPTION_ID }}/resourceGroups/${{ secrets.AZURE_RESOURCE_GROUP_DEV }}/providers/Microsoft.DataFactory/factories/${{ secrets.AZURE_ADF_DEV_NAME }}
+        working-directory: ${{ github.workspace }}/build

@@ -1,0 +1,213 @@
+table Games
+	lineageTag: 95656957-b7b6-4f03-a455-53dffead9b7b
+
+	column Game_ID
+		dataType: int64
+		formatString: 0
+		lineageTag: b1d89546-669d-4de9-b951-7fa5e6c9113f
+		summarizeBy: none
+		sourceColumn: Game_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Title
+		dataType: string
+		lineageTag: 3f5a66b4-15ce-4b97-a9df-c2acf28e9fbb
+		summarizeBy: none
+		sourceColumn: Title
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column Category
+		dataType: string
+		lineageTag: 4fb43f9c-49d8-4f7f-a4b5-efa2ccc3dbae
+		summarizeBy: none
+		sourceColumn: Category
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column Genre
+		dataType: string
+		lineageTag: 270a8413-fbca-479b-bc0e-2864e43a6935
+		summarizeBy: none
+		sourceColumn: Genre
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column Platform
+		dataType: string
+		lineageTag: b53b1208-45df-4a5c-9799-291f61258bd7
+		summarizeBy: none
+		sourceColumn: Platform
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column Developer
+		dataType: string
+		lineageTag: 9a0e05d2-a1d9-412c-87fb-a63609377454
+		summarizeBy: none
+		sourceColumn: Developer
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column Publisher_ID
+		dataType: int64
+		formatString: 0
+		lineageTag: 171d2da7-b3b0-4f56-a1e7-b327a09675b8
+		summarizeBy: none
+		sourceColumn: Publisher_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Rating
+		dataType: string
+		lineageTag: 4315c90f-a682-4dd7-b81d-f310c5020d8f
+		summarizeBy: none
+		sourceColumn: Rating
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column 'Retail Price'
+		dataType: double
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: 40289150-c635-491e-a365-5a328d2330d5
+		summarizeBy: sum
+		sourceColumn: Retail Price
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column ING_Score
+		dataType: double
+		lineageTag: 1a1963cf-63c8-45e0-bf48-36858e279d9a
+		summarizeBy: sum
+		sourceColumn: ING_Score
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Game_Spot_Score
+		dataType: double
+		lineageTag: e610f8d0-fac8-434d-8d5c-85b57e71c10d
+		summarizeBy: sum
+		sourceColumn: Game_Spot_Score
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Game_Advocate_Score
+		dataType: string
+		lineageTag: 292a9a37-1263-4d9c-b3e4-ea5daf0447e9
+		summarizeBy: none
+		sourceColumn: Game_Advocate_Score
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column Game_Advocate_Score_Order
+		dataType: int64
+		formatString: 0
+		lineageTag: 5381ce71-688e-43ee-8f58-4ab3115aea86
+		summarizeBy: sum
+		sourceColumn: Game_Advocate_Score_Order
+
+		annotation SummarizationSetBy = Automatic
+
+	column Gamer_Daily_Score
+		dataType: double
+		lineageTag: 2b011472-a78e-4f72-b1bf-3167e9691006
+		summarizeBy: sum
+		sourceColumn: Gamer_Daily_Score
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column GameWorld_Score
+		dataType: string
+		lineageTag: c3d15d36-0481-4f2f-a93a-f13f58385b63
+		summarizeBy: none
+		sourceColumn: GameWorld_Score
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column GameWorld_Score_Order
+		dataType: int64
+		formatString: 0
+		lineageTag: 8ae1b428-a51a-4e91-8889-172c03f5650d
+		summarizeBy: sum
+		sourceColumn: GameWorld_Score_Order
+
+		annotation SummarizationSetBy = Automatic
+
+	column Mobile_Play?
+		dataType: string
+		lineageTag: f7c505e5-5ffe-4325-b3ec-d4e14167452d
+		summarizeBy: none
+		sourceColumn: Mobile_Play?
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column Franchise?
+		dataType: string
+		lineageTag: 53fe2814-37a3-449e-a132-c5056a476d9b
+		summarizeBy: none
+		sourceColumn: Franchise?
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column In-Game_Purchases?
+		dataType: string
+		lineageTag: 87bae43f-76f8-471b-a309-c3b0b6a5fa34
+		summarizeBy: none
+		sourceColumn: In-Game_Purchases?
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column Development_Cost
+		dataType: int64
+		formatString: 0
+		lineageTag: 81fa46d0-c86a-4fa2-843b-21f4f20e9cd3
+		summarizeBy: sum
+		sourceColumn: Development_Cost
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Games-b7d578e4-9eca-453d-a9a7-fc69757d84a0 = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\seanc\OneDrive\Desktop\Udacity\Course\2020_12_09_Course_Datasets.xlsx"), null, true),
+				    Games_Sheet = Source{[Item="Games",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(Games_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Game_ID", Int64.Type}, {"Title", type text}, {"Category", type text}, {"Genre", type text}, {"Platform", type text}, {"Developer", type text}, {"Publisher_ID", Int64.Type}, {"Rating", type text}, {"Retail Price", type number}, {"ING_Score", type number}, {"Game_Spot_Score", type number}, {"Game_Advocate_Score", type text}, {"Game_Advocate_Score_Order", Int64.Type}, {"Gamer_Daily_Score", type number}, {"GameWorld_Score", type text}, {"GameWorld_Score_Order", Int64.Type}, {"Mobile_Play?", type text}, {"Franchise?", type text}, {"In-Game_Purchases?", type text}, {"Development_Cost", Int64.Type}}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Changed Type",{{"Category", "Category"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_ResultType = Table
+

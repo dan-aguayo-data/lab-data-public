@@ -1,0 +1,28 @@
+relationship 64846357-975f-4036-b43e-d28628fefa44
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Date_Table.Date
+	toColumn: LocalDateTable_54ac25b0-e9cf-4d8a-9ffb-1ad68417786c.Date
+
+relationship 50f2c79b-4850-4252-88bd-eeb83d76bc77
+	crossFilteringBehavior: bothDirections
+	fromColumn: Tracker_Data.Pet_ID
+	toColumn: Pet_Data.Pet_ID
+
+relationship eb9d2d6f-e8b1-4374-abec-ca5eb96b7e3f
+	fromColumn: Tracker_Data.Activity_Date
+	toColumn: Date_Table.Date
+
+relationship 38e8bd63-4a7d-4fa8-b886-4b3b078564f1
+	crossFilteringBehavior: bothDirections
+	fromColumn: Tracker_Data.Tracker_ID
+	toColumn: Rating_Data.Tracker_ID
+
+relationship 82a93fce-094d-4c5a-8452-b5c8db2c4685
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Rating_Data.Review_Date
+	toColumn: LocalDateTable_dc5fcfa7-ebd6-44aa-a75f-75fc53a2bded.Date
+
+relationship a109629e-01c3-4069-9e12-f963addd607d
+	fromColumn: Tracker_Data.Family_ID
+	toColumn: Family_Data.Family_ID
+

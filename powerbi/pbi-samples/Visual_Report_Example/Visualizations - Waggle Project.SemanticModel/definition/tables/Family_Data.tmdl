@@ -1,0 +1,156 @@
+table Family_Data
+	lineageTag: 2988d1f2-ff9a-45b7-8843-174caf9725f1
+
+	measure 'Annual Pet Expenses % of Household Income' =
+			
+			VAR Avg_Expenses= SUM(Family_Data[Annual_Pet_Expenses])
+			VAR Avg_H_Income = SUM(Family_Data[Household_Income])
+			RETURN
+			DIVIDE(Avg_Expenses,Avg_H_Income)
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 3161a9bd-0677-4ed1-979d-978961c9c778
+
+	column Family_ID
+		dataType: int64
+		formatString: 0
+		lineageTag: 74213803-4fac-4904-b019-ee4c647cc918
+		summarizeBy: none
+		sourceColumn: Family_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Family_Name
+		dataType: string
+		lineageTag: ba7c842b-3456-48c2-b686-08000934fe96
+		summarizeBy: none
+		sourceColumn: Family_Name
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column City
+		dataType: string
+		lineageTag: 71c2c7c4-aedc-4888-abf1-07de5a8b9f57
+		dataCategory: City
+		summarizeBy: none
+		sourceColumn: City
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column State
+		dataType: string
+		lineageTag: d8a05e73-c14f-4674-a583-256ddbce73bf
+		dataCategory: StateOrProvince
+		summarizeBy: none
+		sourceColumn: State
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column Zip
+		dataType: int64
+		formatString: 0
+		lineageTag: 4e6be6e7-3ae8-4a1f-a9d1-a444a45b9490
+		dataCategory: PostalCode
+		summarizeBy: none
+		sourceColumn: Zip
+
+		annotation SummarizationSetBy = Automatic
+
+	column Country
+		dataType: string
+		lineageTag: f8279ec9-0312-49ef-8a6b-5b057f6403fe
+		dataCategory: County
+		summarizeBy: none
+		sourceColumn: Country
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column Email
+		dataType: string
+		lineageTag: f934d906-8629-44f9-b2cb-4cefc3a120e2
+		summarizeBy: none
+		sourceColumn: Email
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column Household_Size
+		dataType: int64
+		formatString: 0
+		lineageTag: da1be31d-3f3e-42d0-b143-9330173d398f
+		summarizeBy: none
+		sourceColumn: Household_Size
+
+		annotation SummarizationSetBy = Automatic
+
+	column Household_Income
+		dataType: double
+		lineageTag: ecab1913-1ae2-4c8c-8348-febf2c118867
+		summarizeBy: none
+		sourceColumn: Household_Income
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Annual_Pet_Expenses
+		dataType: int64
+		formatString: 0
+		lineageTag: bdce8fbb-4d03-43bb-a6ea-1f41e8047406
+		summarizeBy: none
+		sourceColumn: Annual_Pet_Expenses
+
+		annotation SummarizationSetBy = Automatic
+
+	column Total_Pets
+		dataType: int64
+		formatString: 0
+		lineageTag: 5e3cdcb3-6d08-40cd-be5f-ff8566d6ed0c
+		summarizeBy: none
+		sourceColumn: Total_Pets
+
+		annotation SummarizationSetBy = Automatic
+
+	column Years_of_Pet_Ownership
+		dataType: int64
+		formatString: 0
+		lineageTag: f27301a0-f0aa-48b3-99b4-3f286db17506
+		summarizeBy: none
+		sourceColumn: Years_of_Pet_Ownership
+
+		annotation SummarizationSetBy = Automatic
+
+	hierarchy 'State Hierarchy'
+		lineageTag: bef00047-8fbf-4991-8742-19e4ea46e6de
+
+		level State
+			lineageTag: 339b5281-a3d3-4fe7-877a-8c6e4b133748
+			column: State
+
+		level Zip
+			lineageTag: f9b83421-6dfa-421f-81e3-629667ad6793
+			column: Zip
+
+	partition Family_Data-6c3f835a-a832-436e-a483-35e508115e50 = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\seanc\OneDrive\Desktop\Udacity\Project\Sample_Datasets_for_PBI.xlsx"), null, true),
+				    Family_Data_Sheet = Source{[Item="Family_Data",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(Family_Data_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Family_ID", Int64.Type}, {"Family_Name", type text}, {"City", type text}, {"State", type text}, {"Zip", Int64.Type}, {"Country", type text}, {"Email", type text}, {"Household_Size", Int64.Type}, {"Household_Income", type number}, {"Annual_Pet_Expenses", Int64.Type}, {"Total_Pets", Int64.Type}, {"Years_of_Pet_Ownership", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,8 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/1.4.0/schema.json",
+  "name": "ReportSection6a9f225904c6af30d3cf",
+  "displayName": "Cross-Filter Functionality",
+  "displayOption": "FitToPage",
+  "height": 720,
+  "width": 1280
+}

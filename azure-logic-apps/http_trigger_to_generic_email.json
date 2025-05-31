@@ -1,0 +1,133 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "workflows_GENERIC_SEND_EMAIL_name": {
+            "defaultValue": "GENERIC-SEND-EMAIL",
+            "type": "String"
+        },
+        "connections_office365_8_externalid": {
+            "defaultValue": "/subscriptions/XXXXXXXX/resourceGroups/XXXXX/providers/Microsoft.Web/connections/office365-8",
+            "type": "String"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "type": "Microsoft.Logic/workflows",
+            "apiVersion": "2017-07-01",
+            "name": "[parameters('GENERIC_SEND_EMAIL_name')]",
+            "location": "australiaeast",
+            "properties": {
+                "state": "Enabled",
+                "definition": {
+                    "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+                    "contentVersion": "1.0.0.0",
+                    "parameters": {
+                        "$connections": {
+                            "defaultValue": {},
+                            "type": "Object"
+                        }
+                    },
+                    "triggers": {
+                        "When_a_HTTP_request_is_received": {
+                            "type": "Request",
+                            "kind": "Http",
+                            "inputs": {
+                                "schema": {
+                                    "Body": "Test",
+                                    "Email": "-- E-MAIL HERE --",
+                                    "Subject": "Test"
+                                }
+                            }
+                        }
+                    },
+                    "actions": {
+                        "Get_Body": {
+                            "runAfter": {
+                                "Get_Subject": [
+                                    "Succeeded"
+                                ]
+                            },
+                            "type": "InitializeVariable",
+                            "inputs": {
+                                "variables": [
+                                    {
+                                        "name": "Body",
+                                        "type": "string",
+                                        "value": "@{triggerBody().Body}"
+                                    }
+                                ]
+                            }
+                        },
+                        "Get_Email": {
+                            "runAfter": {},
+                            "type": "InitializeVariable",
+                            "inputs": {
+                                "variables": [
+                                    {
+                                        "name": "Email",
+                                        "type": "string",
+                                        "value": "@{triggerBody().Email}"
+                                    }
+                                ]
+                            }
+                        },
+                        "Get_Subject": {
+                            "runAfter": {
+                                "Get_Email": [
+                                    "Succeeded"
+                                ]
+                            },
+                            "type": "InitializeVariable",
+                            "inputs": {
+                                "variables": [
+                                    {
+                                        "name": "Subject",
+                                        "type": "string",
+                                        "value": "@{triggerBody().Subject}"
+                                    }
+                                ]
+                            }
+                        },
+                        "Send_an_email_(V2)": {
+                            "runAfter": {
+                                "Get_Body": [
+                                    "Succeeded"
+                                ]
+                            },
+                            "type": "ApiConnection",
+                            "inputs": {
+                                "host": {
+                                    "connection": {
+                                        "name": "@parameters('$connections')['office365']['connectionId']"
+                                    }
+                                },
+                                "method": "post",
+                                "body": {
+                                    "To": "@variables('Email')",
+                                    "Subject": "@variables('Subject')",
+                                    "Body": "<p>@{variables('Body')}</p>",
+                                    "Importance": "Normal"
+                                },
+                                "path": "/v2/Mail"
+                            }
+                        }
+                    },
+                    "outputs": {}
+                },
+                "parameters": {
+                    "$connections": {
+                        "value": {
+                            "office365": {
+                                "id": "/subscriptions/xxxxx/providers/Microsoft.Web/locations/australiaeast/managedApis/office365",
+                                "connectionId": "[parameters('connections_office365_8_externalid')]",
+                                "connectionName": "office365-8"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

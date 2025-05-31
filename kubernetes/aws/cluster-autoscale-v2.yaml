@@ -1,0 +1,52 @@
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  name: EKS-test-cluster
+  region: ap-southeast-2
+
+nodeGroups:
+  - name: scale-southeast2c
+    instanceType: t2.small
+    desiredCapacity: 1
+    maxSize: 10
+    availabilityZones: ["ap-southeast-2c"]
+    iam:
+      withAddonPolicies:
+        autoScaler: true
+    labels:
+      nodegroup-type: stateful-southeast2c
+      instance-type: onDemand
+    ssh: cli-sandbox
+      publicKeyName: cli-admin-test
+  - name: scale-southeast2a
+    instanceType: t2.small
+    desiredCapacity: 1
+    maxSize: 10
+    availabilityZones: ["ap-southeast-2a"]
+    iam:
+      withAddonPolicies:
+        autoScaler: true
+    labels:
+      nodegroup-type: stateful-southeasta
+      instance-type: onDemand
+    ssh: cli-sandbox
+      publicKeyName: cli-admin-test
+  - name: scale-spot
+    desiredCapacity: 1
+    maxSize: 10
+    instancesDistribution:
+      instanceTypes: ["t2.small", "t3.small"]
+      onDemandBaseCapacity: 0
+      onDemandPercentageAboveBaseCapacity: 0
+    availabilityZones: ["ap-southeast-2c", "ap-southeast-2b"]
+    iam:
+      withAddonPolicies:
+        autoScaler: true
+    labels:
+      nodegroup-type: stateless-workload
+      instance-type: spot
+    ssh: 
+      publicKeyName: cli-sandbox
+
+availabilityZones: ["ap-southeast-2c", "ap-southeast-2b"]

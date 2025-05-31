@@ -1,0 +1,62 @@
+table 'SalesLT ProductCategory'
+	lineageTag: ed502f7d-a2c8-4b13-9e9f-ff21d9c859d7
+
+	column ProductCategoryID
+		dataType: int64
+		formatString: 0
+		lineageTag: 46660de1-7db9-4c2a-abaf-0bcfe67dd49c
+		summarizeBy: none
+		sourceColumn: ProductCategoryID
+
+		annotation SummarizationSetBy = Automatic
+
+	column ParentProductCategoryID
+		dataType: int64
+		formatString: 0
+		lineageTag: a6842ada-96f5-4096-9894-621851f4f0d2
+		summarizeBy: count
+		sourceColumn: ParentProductCategoryID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Name
+		dataType: string
+		lineageTag: 1240759e-d940-4f72-94eb-de6b5d38976e
+		summarizeBy: none
+		sourceColumn: Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column rowguid
+		dataType: string
+		lineageTag: f1231cc6-f992-4522-b94c-2835c1da8e8d
+		summarizeBy: none
+		sourceColumn: rowguid
+
+		annotation SummarizationSetBy = Automatic
+
+	column ModifiedDate
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: b1be2fde-c248-499c-84c4-3d2845e562b3
+		summarizeBy: none
+		sourceColumn: ModifiedDate
+
+		variation Variation
+			isDefault
+			relationship: de748df2-6345-480f-8afa-a27320b29890
+			defaultHierarchy: LocalDateTable_e1789ca4-b2c1-4730-b7bf-b0b386954e85.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'SalesLT ProductCategory' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("demo-db-power-bi.database.windows.net", "adventure-works-sample"),
+				    SalesLT_ProductCategory = Source{[Schema="SalesLT",Item="ProductCategory"]}[Data]
+				in
+				    SalesLT_ProductCategory
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,6222 @@
+cultureInfo en-US
+
+	linguisticMetadata =
+			{
+			  "Version": "2.0.0",
+			  "Language": "en-US",
+			  "Entities": {
+			    "date": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Dates"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "date": {
+			            "State": "Generated",
+			            "Weight": 0.87
+			          }
+			        },
+			        {
+			          "moment": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.736
+			          }
+			        },
+			        {
+			          "period": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.714
+			          }
+			        }
+			      ]
+			    },
+			    "date.date": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Dates",
+			          "ConceptualProperty": "Date"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "date": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "moment": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.736
+			          }
+			        },
+			        {
+			          "period": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.714
+			          }
+			        }
+			      ],
+			      "SemanticType": "Time"
+			    },
+			    "date.date.variation.date_hierarchy": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Dates",
+			          "VariationSource": "Date",
+			          "VariationSet": "Variation",
+			          "Hierarchy": "Date Hierarchy"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "date hierarchy": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        }
+			      ],
+			      "SemanticType": "Time"
+			    },
+			    "date.date.variation.date_hierarchy.year": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Dates",
+			          "VariationSource": "Date",
+			          "VariationSet": "Variation",
+			          "Hierarchy": "Date Hierarchy",
+			          "HierarchyLevel": "Year"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "year": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "date year": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "date yr": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.75
+			          }
+			        },
+			        {
+			          "yr": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.736
+			          }
+			        },
+			        {
+			          "moment year": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.6
+			          }
+			        },
+			        {
+			          "period year": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.582
+			          }
+			        }
+			      ],
+			      "SemanticType": "Time"
+			    },
+			    "date.date.variation.date_hierarchy.quarter": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Dates",
+			          "VariationSource": "Date",
+			          "VariationSet": "Variation",
+			          "Hierarchy": "Date Hierarchy",
+			          "HierarchyLevel": "Quarter"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "quarter": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "date quarter": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "date qtr": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.833
+			          }
+			        },
+			        {
+			          "qtr": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.818
+			          }
+			        },
+			        {
+			          "moment quarter": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.6
+			          }
+			        },
+			        {
+			          "period quarter": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.582
+			          }
+			        }
+			      ],
+			      "SemanticType": "Time"
+			    },
+			    "date.date.variation.date_hierarchy.month": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Dates",
+			          "VariationSource": "Date",
+			          "VariationSet": "Variation",
+			          "Hierarchy": "Date Hierarchy",
+			          "HierarchyLevel": "Month"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "month": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "date month": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "date mth": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.75
+			          }
+			        },
+			        {
+			          "mth": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.736
+			          }
+			        },
+			        {
+			          "moment month": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.6
+			          }
+			        },
+			        {
+			          "period month": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.582
+			          }
+			        }
+			      ],
+			      "SemanticType": "Time"
+			    },
+			    "date.date.variation.date_hierarchy.day": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Dates",
+			          "VariationSource": "Date",
+			          "VariationSet": "Variation",
+			          "Hierarchy": "Date Hierarchy",
+			          "HierarchyLevel": "Day"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "day": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "date day": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "moment day": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.6
+			          }
+			        },
+			        {
+			          "period day": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.582
+			          }
+			        }
+			      ],
+			      "SemanticType": "Time"
+			    },
+			    "date.year": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Dates",
+			          "ConceptualProperty": "Year"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "year": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "yr": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.736
+			          }
+			        }
+			      ],
+			      "SemanticType": "Time"
+			    },
+			    "date.month_num": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Dates",
+			          "ConceptualProperty": "Month_Num"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "month num": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "Month_Num": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        },
+			        {
+			          "month number": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.727
+			          }
+			        },
+			        {
+			          "mth num": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.6
+			          }
+			        }
+			      ]
+			    },
+			    "date.month": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Dates",
+			          "ConceptualProperty": "Month"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "month": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "mth": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.736
+			          }
+			        }
+			      ]
+			    },
+			    "date.month_short": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Dates",
+			          "ConceptualProperty": "Month_Short"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "month short": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "Month_Short": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        },
+			        {
+			          "short": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "mth short": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.6
+			          }
+			        },
+			        {
+			          "small": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "little": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "petite": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "squat": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "diminutive": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "brief": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.452
+			          }
+			        },
+			        {
+			          "quick": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.452
+			          }
+			        },
+			        {
+			          "rapid": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.452
+			          }
+			        },
+			        {
+			          "fleeting": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.452
+			          }
+			        }
+			      ]
+			    },
+			    "date.day": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Dates",
+			          "ConceptualProperty": "Day"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "day": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "date.weekday": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Dates",
+			          "ConceptualProperty": "Weekday"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "weekday": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "ordinary": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "standard": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "basic": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "routine": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.476
+			          }
+			        }
+			      ]
+			    },
+			    "date.day_of_week": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Dates",
+			          "ConceptualProperty": "Day_of_Week"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "day of week": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "Day_of_Week": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        }
+			      ]
+			    },
+			    "date.month_year": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Dates",
+			          "ConceptualProperty": "Month_Year"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "month year": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "Month_Year": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        },
+			        {
+			          "month yr": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.75
+			          }
+			        },
+			        {
+			          "mth year": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.6
+			          }
+			        }
+			      ]
+			    },
+			    "date.year_month": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Dates",
+			          "ConceptualProperty": "Year_Month"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "year month": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "Year_Month": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        },
+			        {
+			          "year mth": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.75
+			          }
+			        },
+			        {
+			          "yr month": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.6
+			          }
+			        }
+			      ]
+			    },
+			    "game": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Games"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "game": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "ready": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "brave": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.452
+			          }
+			        },
+			        {
+			          "tough": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.452
+			          }
+			        }
+			      ]
+			    },
+			    "game.game_ID": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Games",
+			          "ConceptualProperty": "Game_ID"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "game ID": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "Game_ID": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        },
+			        {
+			          "game identification": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.75
+			          }
+			        },
+			        {
+			          "game identity": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.75
+			          }
+			        },
+			        {
+			          "game identifier": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.75
+			          }
+			        },
+			        {
+			          "game credential": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.727
+			          }
+			        }
+			      ]
+			    },
+			    "game.title": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Games",
+			          "ConceptualProperty": "Title"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "title": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "Games": {
+			            "State": "Suggested",
+			            "Weight": 0.873
+			          }
+			        },
+			        {
+			          "Game": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.68094
+			          }
+			        },
+			        {
+			          "3 Games": {
+			            "State": "Suggested",
+			            "Weight": 0.873
+			          }
+			        },
+			        {
+			          "3 Game": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.68094
+			          }
+			        },
+			        {
+			          "designation": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.736
+			          }
+			        },
+			        {
+			          "award": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.714
+			          }
+			        },
+			        {
+			          "call": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.714
+			          }
+			        },
+			        {
+			          "heading": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.714
+			          }
+			        },
+			        {
+			          "label": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.714
+			          }
+			        },
+			        {
+			          "best 3 game": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.591
+			          }
+			        },
+			        {
+			          "first 3 game": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.591
+			          }
+			        },
+			        {
+			          "leading 3 game": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.591
+			          }
+			        },
+			        {
+			          "maximum 3 game": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.591
+			          }
+			        },
+			        {
+			          "peak 3 game": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.591
+			          }
+			        },
+			        {
+			          "Top 3 Games": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "game.category": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Games",
+			          "ConceptualProperty": "Category"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "category": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "classification": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.736
+			          }
+			        },
+			        {
+			          "class": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.714
+			          }
+			        },
+			        {
+			          "grouping": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.714
+			          }
+			        },
+			        {
+			          "kind": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.714
+			          }
+			        }
+			      ]
+			    },
+			    "game.genre": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Games",
+			          "ConceptualProperty": "Genre"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "genre": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "variety": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "genus": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "kind": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "field": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.476
+			          }
+			        }
+			      ]
+			    },
+			    "game.platform": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Games",
+			          "ConceptualProperty": "Platform"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "platform": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "podium": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "dais": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "stage": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "stand": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "policy": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.466
+			          }
+			        },
+			        {
+			          "proposal": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.466
+			          }
+			        },
+			        {
+			          "manifesto": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.452
+			          }
+			        },
+			        {
+			          "program": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.452
+			          }
+			        }
+			      ]
+			    },
+			    "game.developer": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Games",
+			          "ConceptualProperty": "Developer"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "developer": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "creator": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "inventor": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "maker": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "originator": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "designer": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "buyer": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.466
+			          }
+			        },
+			        {
+			          "contractor": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.466
+			          }
+			        },
+			        {
+			          "speculator": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.466
+			          }
+			        }
+			      ]
+			    },
+			    "game.publisher_ID": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Games",
+			          "ConceptualProperty": "Publisher_ID"
+			        }
+			      },
+			      "State": "Generated",
+			      "Hidden": true,
+			      "Terms": [
+			        {
+			          "publisher ID": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "Publisher_ID": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        },
+			        {
+			          "publisher identification": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.75
+			          }
+			        },
+			        {
+			          "publisher identity": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.75
+			          }
+			        },
+			        {
+			          "publisher identifier": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.75
+			          }
+			        },
+			        {
+			          "publisher credential": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.727
+			          }
+			        }
+			      ]
+			    },
+			    "game.rating": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Games",
+			          "ConceptualProperty": "Rating"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "rating": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "assessment": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "evaluation": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "grade": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "ranking": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "mark": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "sailor": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.466
+			          }
+			        },
+			        {
+			          "seaman": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.466
+			          }
+			        },
+			        {
+			          "hand": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.452
+			          }
+			        }
+			      ]
+			    },
+			    "game.retail_price": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Games",
+			          "ConceptualProperty": "Retail Price"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "retail price": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "price": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "retail value": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "retail worth": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "retail fee": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "retail charge": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "retail amount": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "retail bill": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "retail rate": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "retail expense": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "retail cost": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "retail outlay": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.485
+			          }
+			        }
+			      ]
+			    },
+			    "game.ING_score": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Games",
+			          "ConceptualProperty": "ING_Score"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "ING score": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "ING_Score": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        },
+			        {
+			          "score": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "ing notch": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "ing slash": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "ing groove": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "ing nick": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "ing cut": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "ing mark": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "notch": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "slash": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "groove": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "nick": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.476
+			          }
+			        }
+			      ]
+			    },
+			    "game.game_spot_score": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Games",
+			          "ConceptualProperty": "Game_Spot_Score"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "game spot score": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "Game_Spot_Score": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        },
+			        {
+			          "score": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "spot score": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "game spot notch": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.492
+			          }
+			        },
+			        {
+			          "game spot slash": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.492
+			          }
+			        },
+			        {
+			          "game spot groove": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.492
+			          }
+			        },
+			        {
+			          "game spot nick": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.492
+			          }
+			        },
+			        {
+			          "game spot cut": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.492
+			          }
+			        },
+			        {
+			          "game spot mark": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.492
+			          }
+			        },
+			        {
+			          "spot notch": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "spot slash": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "spot groove": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "spot nick": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.485
+			          }
+			        }
+			      ]
+			    },
+			    "game.game_advocate_score": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Games",
+			          "ConceptualProperty": "Game_Advocate_Score"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "game advocate score": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "Game_Advocate_Score": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        },
+			        {
+			          "score": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "advocate score": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "game advocate notch": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.492
+			          }
+			        },
+			        {
+			          "game advocate slash": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.492
+			          }
+			        },
+			        {
+			          "game advocate groove": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.492
+			          }
+			        },
+			        {
+			          "game advocate nick": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.492
+			          }
+			        },
+			        {
+			          "game advocate cut": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.492
+			          }
+			        },
+			        {
+			          "game advocate mark": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.492
+			          }
+			        },
+			        {
+			          "advocate notch": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "advocate slash": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "advocate groove": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "advocate nick": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.485
+			          }
+			        }
+			      ]
+			    },
+			    "game.game_advocate_score_order": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Games",
+			          "ConceptualProperty": "Game_Advocate_Score_Order"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "game advocate score order": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "Game_Advocate_Score_Order": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        },
+			        {
+			          "score order": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "advocate score order": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "game advocate score instruction": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.514
+			          }
+			        },
+			        {
+			          "game advocate score direction": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.514
+			          }
+			        },
+			        {
+			          "game advocate score edict": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.514
+			          }
+			        },
+			        {
+			          "advocate score instruction": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.508
+			          }
+			        },
+			        {
+			          "advocate score direction": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.508
+			          }
+			        },
+			        {
+			          "advocate score edict": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.508
+			          }
+			        },
+			        {
+			          "score instruction": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.5
+			          }
+			        },
+			        {
+			          "score direction": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.5
+			          }
+			        },
+			        {
+			          "score edict": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.5
+			          }
+			        },
+			        {
+			          "game advocate score command": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.499
+			          }
+			        }
+			      ]
+			    },
+			    "game.gamer_daily_score": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Games",
+			          "ConceptualProperty": "Gamer_Daily_Score"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "gamer daily score": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "Gamer_Daily_Score": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        },
+			        {
+			          "score": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "daily score": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "gamer daily notch": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.492
+			          }
+			        },
+			        {
+			          "gamer daily slash": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.492
+			          }
+			        },
+			        {
+			          "gamer daily groove": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.492
+			          }
+			        },
+			        {
+			          "gamer daily nick": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.492
+			          }
+			        },
+			        {
+			          "gamer daily cut": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.492
+			          }
+			        },
+			        {
+			          "gamer daily mark": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.492
+			          }
+			        },
+			        {
+			          "daily notch": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "daily slash": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "daily groove": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "daily nick": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.485
+			          }
+			        }
+			      ]
+			    },
+			    "game.game_world_score": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Games",
+			          "ConceptualProperty": "GameWorld_Score"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "game world score": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "GameWorld_Score": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        },
+			        {
+			          "score": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "world score": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "game world notch": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.492
+			          }
+			        },
+			        {
+			          "game world slash": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.492
+			          }
+			        },
+			        {
+			          "game world groove": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.492
+			          }
+			        },
+			        {
+			          "game world nick": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.492
+			          }
+			        },
+			        {
+			          "game world cut": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.492
+			          }
+			        },
+			        {
+			          "game world mark": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.492
+			          }
+			        },
+			        {
+			          "world notch": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "world slash": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "world groove": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "world nick": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.485
+			          }
+			        }
+			      ]
+			    },
+			    "game.game_world_score_order": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Games",
+			          "ConceptualProperty": "GameWorld_Score_Order"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "game world score order": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "GameWorld_Score_Order": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        },
+			        {
+			          "score order": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "world score order": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "game world score instruction": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.514
+			          }
+			        },
+			        {
+			          "game world score direction": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.514
+			          }
+			        },
+			        {
+			          "game world score edict": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.514
+			          }
+			        },
+			        {
+			          "world score instruction": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.508
+			          }
+			        },
+			        {
+			          "world score direction": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.508
+			          }
+			        },
+			        {
+			          "world score edict": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.508
+			          }
+			        },
+			        {
+			          "score instruction": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.5
+			          }
+			        },
+			        {
+			          "score direction": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.5
+			          }
+			        },
+			        {
+			          "score edict": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.5
+			          }
+			        },
+			        {
+			          "game world score command": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.499
+			          }
+			        }
+			      ]
+			    },
+			    "game.Mobile_Play": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Games",
+			          "ConceptualProperty": "Mobile_Play?"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Mobile_Play?": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "game.franchise": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Games",
+			          "ConceptualProperty": "Franchise?"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "franchise?": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "game.InGame_Purchases": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Games",
+			          "ConceptualProperty": "In-Game_Purchases?"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "In-Game_Purchases?": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "In-Game_Purchase?": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.78
+			          }
+			        }
+			      ]
+			    },
+			    "game.development_cost": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Games",
+			          "ConceptualProperty": "Development_Cost"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "development cost": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "Development_Cost": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        },
+			        {
+			          "cost": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "development price": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "development charge": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "development rate": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "development fee": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "development total": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "charge": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "rate": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "fee": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "development expenditure": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.475
+			          }
+			        },
+			        {
+			          "expenditure": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.466
+			          }
+			        }
+			      ]
+			    },
+			    "geography": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Geography"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "geography": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "topography": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "layout": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.491
+			          }
+			        }
+			      ]
+			    },
+			    "geography.geo_ID": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Geography",
+			          "ConceptualProperty": "Geo_ID"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "geo ID": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "Geo_ID": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        },
+			        {
+			          "geo": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "geo identification": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.75
+			          }
+			        },
+			        {
+			          "geo identity": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.75
+			          }
+			        },
+			        {
+			          "geo identifier": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.75
+			          }
+			        },
+			        {
+			          "geo credential": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.727
+			          }
+			        }
+			      ]
+			    },
+			    "geography.state": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Geography",
+			          "ConceptualProperty": "State"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {},
+			        {
+			          "location": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.736
+			          }
+			        },
+			        {
+			          "province": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.736
+			          }
+			        },
+			        {
+			          "territory": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.736
+			          }
+			        },
+			        {
+			          "nation": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.736
+			          }
+			        },
+			        {
+			          "condition": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.714
+			          }
+			        },
+			        {
+			          "country": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.714
+			          }
+			        }
+			      ]
+			    },
+			    "geography.city": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Geography",
+			          "ConceptualProperty": "City"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "city": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "location": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.736
+			          }
+			        },
+			        {
+			          "metropolis": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.736
+			          }
+			        },
+			        {
+			          "municipality": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.736
+			          }
+			        },
+			        {
+			          "town": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.714
+			          }
+			        },
+			        {
+			          "metropolitan": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.714
+			          }
+			        }
+			      ]
+			    },
+			    "geography.zip": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Geography",
+			          "ConceptualProperty": "Zip"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "zip": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "energy": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "vigor": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "vitality": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "dynamism": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "spunk": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "punch": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "go": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "pep": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "fastener": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.466
+			          }
+			        },
+			        {
+			          "zippo": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.466
+			          }
+			        }
+			      ]
+			    },
+			    "geography.latitude": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Geography",
+			          "ConceptualProperty": "Latitude"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "latitude": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "leeway": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "freedom": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "autonomy": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "liberty": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "opportunity": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "room": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "scope": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "space": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "rope": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "location": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.466
+			          }
+			        }
+			      ]
+			    },
+			    "geography.longitude": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Geography",
+			          "ConceptualProperty": "Longitude"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "longitude": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "publisher": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Publisher"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "publisher": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "producer": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "originator": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "commissioner": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "editor": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "issuer": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.491
+			          }
+			        }
+			      ]
+			    },
+			    "publisher.publisher_ID": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Publisher",
+			          "ConceptualProperty": "Publisher_ID"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "publisher ID": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "Publisher_ID": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        },
+			        {
+			          "publisher identification": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.75
+			          }
+			        },
+			        {
+			          "publisher identity": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.75
+			          }
+			        },
+			        {
+			          "publisher identifier": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.75
+			          }
+			        },
+			        {
+			          "publisher credential": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.727
+			          }
+			        }
+			      ]
+			    },
+			    "publisher.name": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Publisher",
+			          "ConceptualProperty": "Name"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "name": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "label": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.714
+			          }
+			        },
+			        {
+			          "tag": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.714
+			          }
+			        }
+			      ]
+			    },
+			    "publisher.ceo": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Publisher",
+			          "ConceptualProperty": "CEO"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "ceo": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "publisher.headquarters": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Publisher",
+			          "ConceptualProperty": "Headquarters"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "headquarters": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "HQ": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.491
+			          }
+			        }
+			      ]
+			    },
+			    "publisher.employee": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Publisher",
+			          "ConceptualProperty": "Employees"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "employee": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "worker": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "servant": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "member": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "underling": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "operative": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "hand": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.476
+			          }
+			        }
+			      ]
+			    },
+			    "publisher.year_founded": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Publisher",
+			          "ConceptualProperty": "Year_Founded"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "year founded": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "Year_Founded": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        },
+			        {
+			          "year": {
+			            "State": "Generated",
+			            "Weight": 0.7
+			          }
+			        },
+			        {
+			          "yr founded": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.75
+			          }
+			        }
+			      ],
+			      "SemanticType": "Time"
+			    },
+			    "sale": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Sales"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "sale": {
+			            "State": "Generated",
+			            "Weight": 0.87
+			          }
+			        },
+			        {
+			          "auction": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "transaction": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.466
+			          }
+			        },
+			        {
+			          "deal": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.452
+			          }
+			        },
+			        {
+			          "trade": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.452
+			          }
+			        },
+			        {
+			          "vending": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.452
+			          }
+			        },
+			        {
+			          "retailing": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.452
+			          }
+			        },
+			        {
+			          "selling": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.452
+			          }
+			        }
+			      ]
+			    },
+			    "sale.date": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Sales",
+			          "ConceptualProperty": "Date"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "date": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "sale moment": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.75
+			          }
+			        },
+			        {
+			          "moment": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.736
+			          }
+			        },
+			        {
+			          "sale period": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.727
+			          }
+			        },
+			        {
+			          "period": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.714
+			          }
+			        },
+			        {
+			          "sale date": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.582
+			          }
+			        },
+			        {
+			          "Sales Date": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ],
+			      "SemanticType": "Time"
+			    },
+			    "sale.geo_ID": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Sales",
+			          "ConceptualProperty": "Geo_ID"
+			        }
+			      },
+			      "State": "Generated",
+			      "Hidden": true,
+			      "Terms": [
+			        {
+			          "geo ID": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "Geo_ID": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        },
+			        {
+			          "geo": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "geo identification": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.75
+			          }
+			        },
+			        {
+			          "geo identity": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.75
+			          }
+			        },
+			        {
+			          "geo identifier": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.75
+			          }
+			        },
+			        {
+			          "geo credential": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.727
+			          }
+			        }
+			      ]
+			    },
+			    "sale.game_ID": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Sales",
+			          "ConceptualProperty": "Game_ID"
+			        }
+			      },
+			      "State": "Generated",
+			      "Hidden": true,
+			      "Terms": [
+			        {
+			          "game ID": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "Game_ID": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        },
+			        {
+			          "game identification": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.75
+			          }
+			        },
+			        {
+			          "game identity": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.75
+			          }
+			        },
+			        {
+			          "game identifier": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.75
+			          }
+			        },
+			        {
+			          "game credential": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.727
+			          }
+			        }
+			      ]
+			    },
+			    "sale.store_ID": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Sales",
+			          "ConceptualProperty": "Store_ID"
+			        }
+			      },
+			      "State": "Generated",
+			      "Hidden": true,
+			      "Terms": [
+			        {
+			          "store ID": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "Store_ID": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        },
+			        {
+			          "store identification": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.75
+			          }
+			        },
+			        {
+			          "store identity": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.75
+			          }
+			        },
+			        {
+			          "store identifier": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.75
+			          }
+			        },
+			        {
+			          "store credential": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.727
+			          }
+			        }
+			      ]
+			    },
+			    "sale.unit": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Sales",
+			          "ConceptualProperty": "Units"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "unit": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "module": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.736
+			          }
+			        },
+			        {
+			          "element": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.736
+			          }
+			        },
+			        {
+			          "entity": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.736
+			          }
+			        },
+			        {
+			          "component": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.714
+			          }
+			        },
+			        {
+			          "constituent": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.714
+			          }
+			        },
+			        {
+			          "item": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.714
+			          }
+			        },
+			        {
+			          "part": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.714
+			          }
+			        },
+			        {
+			          "section": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.714
+			          }
+			        }
+			      ]
+			    },
+			    "sale.sale": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Sales",
+			          "ConceptualProperty": "Sales"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "sale": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "auction": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "transaction": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.466
+			          }
+			        },
+			        {
+			          "deal": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.452
+			          }
+			        },
+			        {
+			          "trade": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.452
+			          }
+			        },
+			        {
+			          "vending": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.452
+			          }
+			        },
+			        {
+			          "retailing": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.452
+			          }
+			        },
+			        {
+			          "selling": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.452
+			          }
+			        }
+			      ]
+			    },
+			    "sale.community_score": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Sales",
+			          "ConceptualProperty": "Community_Score"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "community score": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "Community_Score": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        },
+			        {
+			          "score": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "community notch": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "community slash": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "community groove": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "community nick": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "community cut": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "community mark": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "notch": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "slash": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "groove": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "nick": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.476
+			          }
+			        }
+			      ]
+			    },
+			    "sale.community_gameplay_hour": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Sales",
+			          "ConceptualProperty": "Community_Gameplay_Hours"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "community gameplay hour": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "Community_Gameplay_Hours": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        },
+			        {
+			          "gameplay hour": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "community gameplay period": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.492
+			          }
+			        },
+			        {
+			          "gameplay period": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "community gameplay era": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.482
+			          }
+			        },
+			        {
+			          "community gameplay epoch": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.482
+			          }
+			        },
+			        {
+			          "gameplay era": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.475
+			          }
+			        },
+			        {
+			          "gameplay epoch": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.475
+			          }
+			        },
+			        {
+			          "community gameplay age": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.468
+			          }
+			        },
+			        {
+			          "gameplay age": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.461
+			          }
+			        }
+			      ]
+			    },
+			    "store": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Stores"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "store": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "accumulation": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "collection": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "stock": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "supply": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "stockpile": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "hoard": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "mass": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "pile": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "storehouse": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.466
+			          }
+			        },
+			        {
+			          "storeroom": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.466
+			          }
+			        }
+			      ]
+			    },
+			    "store.store_ID": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Stores",
+			          "ConceptualProperty": "Store_ID"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "store ID": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "Store_ID": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        },
+			        {
+			          "store identification": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.75
+			          }
+			        },
+			        {
+			          "store identity": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.75
+			          }
+			        },
+			        {
+			          "store identifier": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.75
+			          }
+			        },
+			        {
+			          "store credential": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.727
+			          }
+			        }
+			      ]
+			    },
+			    "store.store_name": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Stores",
+			          "ConceptualProperty": "Store_Name"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "store name": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "Store_Name": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        },
+			        {
+			          "store nickname": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.727
+			          }
+			        },
+			        {
+			          "store title": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.727
+			          }
+			        },
+			        {
+			          "store label": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.727
+			          }
+			        },
+			        {
+			          "store tag": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.727
+			          }
+			        }
+			      ]
+			    },
+			    "store.store_type": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Stores",
+			          "ConceptualProperty": "Store_Type"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "store type": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "Store_Type": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        },
+			        {
+			          "type": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "store category": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.75
+			          }
+			        },
+			        {
+			          "store genre": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.75
+			          }
+			        },
+			        {
+			          "store manner": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.75
+			          }
+			        },
+			        {
+			          "store variety": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.75
+			          }
+			        },
+			        {
+			          "manner": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.736
+			          }
+			        },
+			        {
+			          "variety": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.736
+			          }
+			        },
+			        {
+			          "store brand": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.727
+			          }
+			        },
+			        {
+			          "store class": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.727
+			          }
+			        },
+			        {
+			          "store kind": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.727
+			          }
+			        },
+			        {
+			          "store style": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.727
+			          }
+			        }
+			      ]
+			    },
+			    "store.store_description": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Stores",
+			          "ConceptualProperty": "Store_Description"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "store description": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "Store_Description": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        },
+			        {
+			          "description": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "store appearance": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.75
+			          }
+			        },
+			        {
+			          "store descriptor": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.75
+			          }
+			        },
+			        {
+			          "store explanation": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.75
+			          }
+			        },
+			        {
+			          "store specification": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.75
+			          }
+			        },
+			        {
+			          "appearance": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.736
+			          }
+			        },
+			        {
+			          "descriptor": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.736
+			          }
+			        },
+			        {
+			          "explanation": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.736
+			          }
+			        },
+			        {
+			          "specification": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.736
+			          }
+			        },
+			        {
+			          "store account": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.727
+			          }
+			        },
+			        {
+			          "store overview": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.727
+			          }
+			        }
+			      ]
+			    },
+			    "publisher.HQ_cat": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Publisher",
+			          "ConceptualProperty": "HQ_Cat"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "HQ cat": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "HQ_Cat": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        },
+			        {
+			          "cat": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "hq moggy": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.5
+			          }
+			        },
+			        {
+			          "hq mouser": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.5
+			          }
+			        },
+			        {
+			          "hq tom": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.5
+			          }
+			        },
+			        {
+			          "moggy": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "mouser": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "tom": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "hq feline": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "hq kitten": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "hq tabby": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "feline": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.476
+			          }
+			        }
+			      ]
+			    }
+			  },
+			  "Relationships": {
+			    "game_is_named_game_ID": {
+			      "Binding": {
+			        "ConceptualEntity": "Games"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "game": {
+			          "Target": {
+			            "Entity": "game"
+			          }
+			        },
+			        "game.game_ID": {
+			          "Target": {
+			            "Entity": "game.game_ID"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Name": {
+			            "Subject": {
+			              "Role": "game"
+			            },
+			            "Name": {
+			              "Role": "game.game_ID"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99
+			        },
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "game"
+			            },
+			            "Object": {
+			              "Role": "game.game_ID"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99
+			        }
+			      ]
+			    },
+			    "publisher_is_named_publisher_ID": {
+			      "Binding": {
+			        "ConceptualEntity": "Publisher"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "publisher": {
+			          "Target": {
+			            "Entity": "publisher"
+			          }
+			        },
+			        "publisher.publisher_ID": {
+			          "Target": {
+			            "Entity": "publisher.publisher_ID"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Name": {
+			            "Subject": {
+			              "Role": "publisher"
+			            },
+			            "Name": {
+			              "Role": "publisher.publisher_ID"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99
+			        },
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "publisher"
+			            },
+			            "Object": {
+			              "Role": "publisher.publisher_ID"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99
+			        }
+			      ]
+			    },
+			    "publisher_is_named_name": {
+			      "Binding": {
+			        "ConceptualEntity": "Publisher"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "publisher": {
+			          "Target": {
+			            "Entity": "publisher"
+			          }
+			        },
+			        "publisher.name": {
+			          "Target": {
+			            "Entity": "publisher.name"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Name": {
+			            "Subject": {
+			              "Role": "publisher"
+			            },
+			            "Name": {
+			              "Role": "publisher.name"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99
+			        },
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "publisher"
+			            },
+			            "Object": {
+			              "Role": "publisher.name"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99
+			        }
+			      ]
+			    },
+			    "store_is_named_store_ID": {
+			      "Binding": {
+			        "ConceptualEntity": "Stores"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "store": {
+			          "Target": {
+			            "Entity": "store"
+			          }
+			        },
+			        "store.store_ID": {
+			          "Target": {
+			            "Entity": "store.store_ID"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Name": {
+			            "Subject": {
+			              "Role": "store"
+			            },
+			            "Name": {
+			              "Role": "store.store_ID"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99
+			        },
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "store"
+			            },
+			            "Object": {
+			              "Role": "store.store_ID"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99
+			        }
+			      ]
+			    },
+			    "store_is_named_store_name": {
+			      "Binding": {
+			        "ConceptualEntity": "Stores"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "store": {
+			          "Target": {
+			            "Entity": "store"
+			          }
+			        },
+			        "store.store_name": {
+			          "Target": {
+			            "Entity": "store.store_name"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Name": {
+			            "Subject": {
+			              "Role": "store"
+			            },
+			            "Name": {
+			              "Role": "store.store_name"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99
+			        },
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "store"
+			            },
+			            "Object": {
+			              "Role": "store.store_name"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99
+			        }
+			      ]
+			    },
+			    "game_developer_develop_game": {
+			      "Binding": {
+			        "ConceptualEntity": "Games"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "game.developer": {
+			          "Target": {
+			            "Entity": "game.developer"
+			          }
+			        },
+			        "game": {
+			          "Target": {
+			            "Entity": "game"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Verb": {
+			            "Subject": {
+			              "Role": "game.developer"
+			            },
+			            "Verbs": [
+			              {
+			                "develop": {}
+			              }
+			            ],
+			            "Object": {
+			              "Role": "game"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.75
+			        },
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "game.developer"
+			            },
+			            "Object": {
+			              "Role": "game"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99
+			        },
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "game"
+			            },
+			            "Object": {
+			              "Role": "game.developer"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99
+			        }
+			      ]
+			    },
+			    "publisher_publish_game": {
+			      "Binding": {
+			        "ConceptualEntity": "Games"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "publisher": {
+			          "Target": {
+			            "Entity": "publisher"
+			          }
+			        },
+			        "game": {
+			          "Target": {
+			            "Entity": "game"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Verb": {
+			            "Subject": {
+			              "Role": "publisher"
+			            },
+			            "Verbs": [
+			              {
+			                "publish": {}
+			              }
+			            ],
+			            "Object": {
+			              "Role": "game"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.75
+			        },
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "game"
+			            },
+			            "Object": {
+			              "Role": "publisher"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99
+			        },
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "publisher"
+			            },
+			            "Object": {
+			              "Role": "game"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99
+			        }
+			      ]
+			    },
+			    "game_is_expensive": {
+			      "Binding": {
+			        "ConceptualEntity": "Games"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "game": {
+			          "Target": {
+			            "Entity": "game"
+			          }
+			        },
+			        "game.retail_price": {
+			          "Target": {
+			            "Entity": "game.retail_price"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Adjective": {
+			            "Subject": {
+			              "Role": "game"
+			            },
+			            "Adjectives": [
+			              {
+			                "expensive": {}
+			              }
+			            ],
+			            "Antonyms": [
+			              {
+			                "cheap": {}
+			              }
+			            ],
+			            "Measurement": {
+			              "Role": "game.retail_price"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99
+			        },
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "game"
+			            },
+			            "Object": {
+			              "Role": "game.retail_price"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99
+			        }
+			      ]
+			    },
+			    "game_is_expensive1": {
+			      "Binding": {
+			        "ConceptualEntity": "Games"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "game": {
+			          "Target": {
+			            "Entity": "game"
+			          }
+			        },
+			        "game.development_cost": {
+			          "Target": {
+			            "Entity": "game.development_cost"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Adjective": {
+			            "Subject": {
+			              "Role": "game"
+			            },
+			            "Adjectives": [
+			              {
+			                "expensive": {}
+			              }
+			            ],
+			            "Antonyms": [
+			              {
+			                "cheap": {}
+			              }
+			            ],
+			            "Measurement": {
+			              "Role": "game.development_cost"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99
+			        },
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "game"
+			            },
+			            "Object": {
+			              "Role": "game.development_cost"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99
+			        }
+			      ]
+			    },
+			    "sale_is_expensive": {
+			      "Binding": {
+			        "ConceptualEntity": "Sales"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "sale": {
+			          "Target": {
+			            "Entity": "sale"
+			          }
+			        },
+			        "sale.sale": {
+			          "Target": {
+			            "Entity": "sale.sale"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Adjective": {
+			            "Subject": {
+			              "Role": "sale"
+			            },
+			            "Adjectives": [
+			              {
+			                "expensive": {}
+			              }
+			            ],
+			            "Antonyms": [
+			              {
+			                "cheap": {}
+			              }
+			            ],
+			            "Measurement": {
+			              "Role": "sale.sale"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99
+			        },
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "sale"
+			            },
+			            "Object": {
+			              "Role": "sale.sale"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99
+			        }
+			      ]
+			    },
+			    "publisher_is_founded_in_year_founded": {
+			      "Binding": {
+			        "ConceptualEntity": "Publisher"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "publisher": {
+			          "Target": {
+			            "Entity": "publisher"
+			          }
+			        },
+			        "publisher.year_founded": {
+			          "Target": {
+			            "Entity": "publisher.year_founded"
+			          }
+			        }
+			      },
+			      "SemanticSlots": {
+			        "When": {
+			          "Role": "publisher.year_founded"
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Verb": {
+			            "Verbs": [
+			              {
+			                "found": {}
+			              }
+			            ],
+			            "Object": {
+			              "Role": "publisher"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.9
+			        }
+			      ]
+			    },
+			    "geography_in_state": {
+			      "Binding": {
+			        "ConceptualEntity": "Geography"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "geography": {
+			          "Target": {
+			            "Entity": "geography"
+			          }
+			        },
+			        "geography.state": {
+			          "Target": {
+			            "Entity": "geography.state"
+			          }
+			        }
+			      },
+			      "SemanticSlots": {
+			        "Where": {
+			          "Role": "geography.state"
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Preposition": {
+			            "Subject": {
+			              "Role": "geography"
+			            },
+			            "Prepositions": [
+			              {
+			                "in": {}
+			              }
+			            ],
+			            "Object": {
+			              "Role": "geography.state"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99
+			        }
+			      ]
+			    },
+			    "geography_in_city": {
+			      "Binding": {
+			        "ConceptualEntity": "Geography"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "geography": {
+			          "Target": {
+			            "Entity": "geography"
+			          }
+			        },
+			        "geography.city": {
+			          "Target": {
+			            "Entity": "geography.city"
+			          }
+			        }
+			      },
+			      "SemanticSlots": {
+			        "Where": {
+			          "Role": "geography.city"
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Preposition": {
+			            "Subject": {
+			              "Role": "geography"
+			            },
+			            "Prepositions": [
+			              {
+			                "in": {}
+			              }
+			            ],
+			            "Object": {
+			              "Role": "geography.city"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99
+			        }
+			      ]
+			    },
+			    "date_has_date": {
+			      "Binding": {
+			        "ConceptualEntity": "Dates"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "date": {
+			          "Target": {
+			            "Entity": "date"
+			          }
+			        },
+			        "date.date": {
+			          "Target": {
+			            "Entity": "date.date"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "date"
+			            },
+			            "Object": {
+			              "Role": "date.date"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99
+			        }
+			      ]
+			    },
+			    "date_has_year": {
+			      "Binding": {
+			        "ConceptualEntity": "Dates"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "date": {
+			          "Target": {
+			            "Entity": "date"
+			          }
+			        },
+			        "date.year": {
+			          "Target": {
+			            "Entity": "date.year"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "date"
+			            },
+			            "Object": {
+			              "Role": "date.year"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99
+			        }
+			      ]
+			    },
+			    "date_has_month_num": {
+			      "Binding": {
+			        "ConceptualEntity": "Dates"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "date": {
+			          "Target": {
+			            "Entity": "date"
+			          }
+			        },
+			        "date.month_num": {
+			          "Target": {
+			            "Entity": "date.month_num"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "date"
+			            },
+			            "Object": {
+			              "Role": "date.month_num"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99
+			        }
+			      ]
+			    },
+			    "date_has_month": {
+			      "Binding": {
+			        "ConceptualEntity": "Dates"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "date": {
+			          "Target": {
+			            "Entity": "date"
+			          }
+			        },
+			        "date.month": {
+			          "Target": {
+			            "Entity": "date.month"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "date"
+			            },
+			            "Object": {
+			              "Role": "date.month"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99
+			        }
+			      ]
+			    },
+			    "date_has_month_short": {
+			      "Binding": {
+			        "ConceptualEntity": "Dates"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "date": {
+			          "Target": {
+			            "Entity": "date"
+			          }
+			        },
+			        "date.month_short": {
+			          "Target": {
+			            "Entity": "date.month_short"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "date"
+			            },
+			            "Object": {
+			              "Role": "date.month_short"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99
+			        }
+			      ]
+			    },
+			    "date_has_day": {
+			      "Binding": {
+			        "ConceptualEntity": "Dates"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "date": {
+			          "Target": {
+			            "Entity": "date"
+			          }
+			        },
+			        "date.day": {
+			          "Target": {
+			            "Entity": "date.day"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "date"
+			            },
+			            "Object": {
+			              "Role": "date.day"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99
+			        }
+			      ]
+			    },
+			    "date_has_weekday": {
+			      "Binding": {
+			        "ConceptualEntity": "Dates"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "date": {
+			          "Target": {
+			            "Entity": "date"
+			          }
+			        },
+			        "date.weekday": {
+			          "Target": {
+			            "Entity": "date.weekday"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "date"
+			            },
+			            "Object": {
+			              "Role": "date.weekday"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99
+			        }
+			      ]
+			    },
+			    "date_has_day_of_week": {
+			      "Binding": {
+			        "ConceptualEntity": "Dates"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "date": {
+			          "Target": {
+			            "Entity": "date"
+			          }
+			        },
+			        "date.day_of_week": {
+			          "Target": {
+			            "Entity": "date.day_of_week"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "date"
+			            },
+			            "Object": {
+			              "Role": "date.day_of_week"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99
+			        }
+			      ]
+			    },
+			    "date_has_month_year": {
+			      "Binding": {
+			        "ConceptualEntity": "Dates"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "date": {
+			          "Target": {
+			            "Entity": "date"
+			          }
+			        },
+			        "date.month_year": {
+			          "Target": {
+			            "Entity": "date.month_year"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "date"
+			            },
+			            "Object": {
+			              "Role": "date.month_year"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99
+			        }
+			      ]
+			    },
+			    "date_has_year_month": {
+			      "Binding": {
+			        "ConceptualEntity": "Dates"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "date": {
+			          "Target": {
+			            "Entity": "date"
+			          }
+			        },
+			        "date.year_month": {
+			          "Target": {
+			            "Entity": "date.year_month"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "date"
+			            },
+			            "Object": {
+			              "Role": "date.year_month"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99
+			        }
+			      ]
+			    },
+			    "game_has_title": {
+			      "Binding": {
+			        "ConceptualEntity": "Games"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "game": {
+			          "Target": {
+			            "Entity": "game"
+			          }
+			        },
+			        "game.title": {
+			          "Target": {
+			            "Entity": "game.title"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "game"
+			            },
+			            "Object": {
+			              "Role": "game.title"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99
+			        }
+			      ]
+			    },
+			    "game_has_category": {
+			      "Binding": {
+			        "ConceptualEntity": "Games"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "game": {
+			          "Target": {
+			            "Entity": "game"
+			          }
+			        },
+			        "game.category": {
+			          "Target": {
+			            "Entity": "game.category"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "game"
+			            },
+			            "Object": {
+			              "Role": "game.category"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99
+			        }
+			      ]
+			    },
+			    "game_has_genre": {
+			      "Binding": {
+			        "ConceptualEntity": "Games"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "game": {
+			          "Target": {
+			            "Entity": "game"
+			          }
+			        },
+			        "game.genre": {
+			          "Target": {
+			            "Entity": "game.genre"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "game"
+			            },
+			            "Object": {
+			              "Role": "game.genre"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99
+			        }
+			      ]
+			    },
+			    "game_has_platform": {
+			      "Binding": {
+			        "ConceptualEntity": "Games"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "game": {
+			          "Target": {
+			            "Entity": "game"
+			          }
+			        },
+			        "game.platform": {
+			          "Target": {
+			            "Entity": "game.platform"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "game"
+			            },
+			            "Object": {
+			              "Role": "game.platform"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99
+			        }
+			      ]
+			    },
+			    "game_has_rating": {
+			      "Binding": {
+			        "ConceptualEntity": "Games"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "game": {
+			          "Target": {
+			            "Entity": "game"
+			          }
+			        },
+			        "game.rating": {
+			          "Target": {
+			            "Entity": "game.rating"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "game"
+			            },
+			            "Object": {
+			              "Role": "game.rating"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99
+			        }
+			      ]
+			    },
+			    "game_has_ING_score": {
+			      "Binding": {
+			        "ConceptualEntity": "Games"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "game": {
+			          "Target": {
+			            "Entity": "game"
+			          }
+			        },
+			        "game.ING_score": {
+			          "Target": {
+			            "Entity": "game.ING_score"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "game"
+			            },
+			            "Object": {
+			              "Role": "game.ING_score"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99
+			        }
+			      ]
+			    },
+			    "game_has_game_spot_score": {
+			      "Binding": {
+			        "ConceptualEntity": "Games"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "game": {
+			          "Target": {
+			            "Entity": "game"
+			          }
+			        },
+			        "game.game_spot_score": {
+			          "Target": {
+			            "Entity": "game.game_spot_score"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "game"
+			            },
+			            "Object": {
+			              "Role": "game.game_spot_score"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99
+			        }
+			      ]
+			    },
+			    "game_has_game_advocate_score": {
+			      "Binding": {
+			        "ConceptualEntity": "Games"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "game": {
+			          "Target": {
+			            "Entity": "game"
+			          }
+			        },
+			        "game.game_advocate_score": {
+			          "Target": {
+			            "Entity": "game.game_advocate_score"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "game"
+			            },
+			            "Object": {
+			              "Role": "game.game_advocate_score"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99
+			        }
+			      ]
+			    },
+			    "game_has_game_advocate_score_order": {
+			      "Binding": {
+			        "ConceptualEntity": "Games"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "game": {
+			          "Target": {
+			            "Entity": "game"
+			          }
+			        },
+			        "game.game_advocate_score_order": {
+			          "Target": {
+			            "Entity": "game.game_advocate_score_order"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "game"
+			            },
+			            "Object": {
+			              "Role": "game.game_advocate_score_order"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99
+			        }
+			      ]
+			    },
+			    "game_has_gamer_daily_score": {
+			      "Binding": {
+			        "ConceptualEntity": "Games"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "game": {
+			          "Target": {
+			            "Entity": "game"
+			          }
+			        },
+			        "game.gamer_daily_score": {
+			          "Target": {
+			            "Entity": "game.gamer_daily_score"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "game"
+			            },
+			            "Object": {
+			              "Role": "game.gamer_daily_score"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99
+			        }
+			      ]
+			    },
+			    "game_has_game_world_score": {
+			      "Binding": {
+			        "ConceptualEntity": "Games"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "game": {
+			          "Target": {
+			            "Entity": "game"
+			          }
+			        },
+			        "game.game_world_score": {
+			          "Target": {
+			            "Entity": "game.game_world_score"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "game"
+			            },
+			            "Object": {
+			              "Role": "game.game_world_score"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99
+			        }
+			      ]
+			    },
+			    "game_has_game_world_score_order": {
+			      "Binding": {
+			        "ConceptualEntity": "Games"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "game": {
+			          "Target": {
+			            "Entity": "game"
+			          }
+			        },
+			        "game.game_world_score_order": {
+			          "Target": {
+			            "Entity": "game.game_world_score_order"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "game"
+			            },
+			            "Object": {
+			              "Role": "game.game_world_score_order"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99
+			        }
+			      ]
+			    },
+			    "game_has_Mobile_Play": {
+			      "Binding": {
+			        "ConceptualEntity": "Games"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "game": {
+			          "Target": {
+			            "Entity": "game"
+			          }
+			        },
+			        "game.Mobile_Play": {
+			          "Target": {
+			            "Entity": "game.Mobile_Play"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "game"
+			            },
+			            "Object": {
+			              "Role": "game.Mobile_Play"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99
+			        }
+			      ]
+			    },
+			    "game_has_franchise": {
+			      "Binding": {
+			        "ConceptualEntity": "Games"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "game": {
+			          "Target": {
+			            "Entity": "game"
+			          }
+			        },
+			        "game.franchise": {
+			          "Target": {
+			            "Entity": "game.franchise"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "game"
+			            },
+			            "Object": {
+			              "Role": "game.franchise"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99
+			        }
+			      ]
+			    },
+			    "game_has_InGame_Purchases": {
+			      "Binding": {
+			        "ConceptualEntity": "Games"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "game": {
+			          "Target": {
+			            "Entity": "game"
+			          }
+			        },
+			        "game.InGame_Purchases": {
+			          "Target": {
+			            "Entity": "game.InGame_Purchases"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "game"
+			            },
+			            "Object": {
+			              "Role": "game.InGame_Purchases"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99
+			        }
+			      ]
+			    },
+			    "geography_has_geo_ID": {
+			      "Binding": {
+			        "ConceptualEntity": "Geography"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "geography": {
+			          "Target": {
+			            "Entity": "geography"
+			          }
+			        },
+			        "geography.geo_ID": {
+			          "Target": {
+			            "Entity": "geography.geo_ID"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "geography"
+			            },
+			            "Object": {
+			              "Role": "geography.geo_ID"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99
+			        }
+			      ]
+			    },
+			    "geography_has_state": {
+			      "Binding": {
+			        "ConceptualEntity": "Geography"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "geography": {
+			          "Target": {
+			            "Entity": "geography"
+			          }
+			        },
+			        "geography.state": {
+			          "Target": {
+			            "Entity": "geography.state"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "geography"
+			            },
+			            "Object": {
+			              "Role": "geography.state"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99
+			        }
+			      ]
+			    },
+			    "geography_has_city": {
+			      "Binding": {
+			        "ConceptualEntity": "Geography"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "geography": {
+			          "Target": {
+			            "Entity": "geography"
+			          }
+			        },
+			        "geography.city": {
+			          "Target": {
+			            "Entity": "geography.city"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "geography"
+			            },
+			            "Object": {
+			              "Role": "geography.city"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99
+			        }
+			      ]
+			    },
+			    "geography_has_zip": {
+			      "Binding": {
+			        "ConceptualEntity": "Geography"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "geography": {
+			          "Target": {
+			            "Entity": "geography"
+			          }
+			        },
+			        "geography.zip": {
+			          "Target": {
+			            "Entity": "geography.zip"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "geography"
+			            },
+			            "Object": {
+			              "Role": "geography.zip"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99
+			        }
+			      ]
+			    },
+			    "geography_has_latitude": {
+			      "Binding": {
+			        "ConceptualEntity": "Geography"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "geography": {
+			          "Target": {
+			            "Entity": "geography"
+			          }
+			        },
+			        "geography.latitude": {
+			          "Target": {
+			            "Entity": "geography.latitude"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "geography"
+			            },
+			            "Object": {
+			              "Role": "geography.latitude"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99
+			        }
+			      ]
+			    },
+			    "geography_has_longitude": {
+			      "Binding": {
+			        "ConceptualEntity": "Geography"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "geography": {
+			          "Target": {
+			            "Entity": "geography"
+			          }
+			        },
+			        "geography.longitude": {
+			          "Target": {
+			            "Entity": "geography.longitude"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "geography"
+			            },
+			            "Object": {
+			              "Role": "geography.longitude"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99
+			        }
+			      ]
+			    },
+			    "publisher_has_ceo": {
+			      "Binding": {
+			        "ConceptualEntity": "Publisher"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "publisher": {
+			          "Target": {
+			            "Entity": "publisher"
+			          }
+			        },
+			        "publisher.ceo": {
+			          "Target": {
+			            "Entity": "publisher.ceo"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "publisher"
+			            },
+			            "Object": {
+			              "Role": "publisher.ceo"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99
+			        }
+			      ]
+			    },
+			    "publisher_has_headquarters": {
+			      "Binding": {
+			        "ConceptualEntity": "Publisher"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "publisher": {
+			          "Target": {
+			            "Entity": "publisher"
+			          }
+			        },
+			        "publisher.headquarters": {
+			          "Target": {
+			            "Entity": "publisher.headquarters"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "publisher"
+			            },
+			            "Object": {
+			              "Role": "publisher.headquarters"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99
+			        }
+			      ]
+			    },
+			    "publisher_has_employee": {
+			      "Binding": {
+			        "ConceptualEntity": "Publisher"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "publisher": {
+			          "Target": {
+			            "Entity": "publisher"
+			          }
+			        },
+			        "publisher.employee": {
+			          "Target": {
+			            "Entity": "publisher.employee"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "publisher"
+			            },
+			            "Object": {
+			              "Role": "publisher.employee"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99
+			        }
+			      ]
+			    },
+			    "publisher_has_year_founded": {
+			      "Binding": {
+			        "ConceptualEntity": "Publisher"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "publisher": {
+			          "Target": {
+			            "Entity": "publisher"
+			          }
+			        },
+			        "publisher.year_founded": {
+			          "Target": {
+			            "Entity": "publisher.year_founded"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "publisher"
+			            },
+			            "Object": {
+			              "Role": "publisher.year_founded"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99
+			        }
+			      ]
+			    },
+			    "sale_has_date": {
+			      "Binding": {
+			        "ConceptualEntity": "Sales"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "sale": {
+			          "Target": {
+			            "Entity": "sale"
+			          }
+			        },
+			        "sale.date": {
+			          "Target": {
+			            "Entity": "sale.date"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "sale"
+			            },
+			            "Object": {
+			              "Role": "sale.date"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99
+			        }
+			      ]
+			    },
+			    "sale_has_unit": {
+			      "Binding": {
+			        "ConceptualEntity": "Sales"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "sale": {
+			          "Target": {
+			            "Entity": "sale"
+			          }
+			        },
+			        "sale.unit": {
+			          "Target": {
+			            "Entity": "sale.unit"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "sale"
+			            },
+			            "Object": {
+			              "Role": "sale.unit"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99
+			        }
+			      ]
+			    },
+			    "sale_has_community_score": {
+			      "Binding": {
+			        "ConceptualEntity": "Sales"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "sale": {
+			          "Target": {
+			            "Entity": "sale"
+			          }
+			        },
+			        "sale.community_score": {
+			          "Target": {
+			            "Entity": "sale.community_score"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "sale"
+			            },
+			            "Object": {
+			              "Role": "sale.community_score"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99
+			        }
+			      ]
+			    },
+			    "sale_has_community_gameplay_hour": {
+			      "Binding": {
+			        "ConceptualEntity": "Sales"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "sale": {
+			          "Target": {
+			            "Entity": "sale"
+			          }
+			        },
+			        "sale.community_gameplay_hour": {
+			          "Target": {
+			            "Entity": "sale.community_gameplay_hour"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "sale"
+			            },
+			            "Object": {
+			              "Role": "sale.community_gameplay_hour"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99
+			        }
+			      ]
+			    },
+			    "store_has_store_type": {
+			      "Binding": {
+			        "ConceptualEntity": "Stores"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "store": {
+			          "Target": {
+			            "Entity": "store"
+			          }
+			        },
+			        "store.store_type": {
+			          "Target": {
+			            "Entity": "store.store_type"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "store"
+			            },
+			            "Object": {
+			              "Role": "store.store_type"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99
+			        }
+			      ]
+			    },
+			    "store_has_store_description": {
+			      "Binding": {
+			        "ConceptualEntity": "Stores"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "store": {
+			          "Target": {
+			            "Entity": "store"
+			          }
+			        },
+			        "store.store_description": {
+			          "Target": {
+			            "Entity": "store.store_description"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "store"
+			            },
+			            "Object": {
+			              "Role": "store.store_description"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99
+			        }
+			      ]
+			    },
+			    "publisher_has_HQ_cat": {
+			      "Binding": {
+			        "ConceptualEntity": "Publisher"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "publisher": {
+			          "Target": {
+			            "Entity": "publisher"
+			          }
+			        },
+			        "publisher.HQ_cat": {
+			          "Target": {
+			            "Entity": "publisher.HQ_cat"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "publisher"
+			            },
+			            "Object": {
+			              "Role": "publisher.HQ_cat"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99
+			        }
+			      ]
+			    },
+			    "sale_has_game": {
+			      "Binding": {
+			        "ConceptualEntity": "Sales"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "sale": {
+			          "Target": {
+			            "Entity": "sale"
+			          }
+			        },
+			        "game": {
+			          "Target": {
+			            "Entity": "game"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "sale"
+			            },
+			            "Object": {
+			              "Role": "game"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99
+			        },
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "game"
+			            },
+			            "Object": {
+			              "Role": "sale"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99
+			        }
+			      ]
+			    },
+			    "sale_has_geography": {
+			      "Binding": {
+			        "ConceptualEntity": "Sales"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "sale": {
+			          "Target": {
+			            "Entity": "sale"
+			          }
+			        },
+			        "geography": {
+			          "Target": {
+			            "Entity": "geography"
+			          },
+			          "Nouns": [
+			            {
+			              "geo": {}
+			            }
+			          ]
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "sale"
+			            },
+			            "Object": {
+			              "Role": "geography"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99
+			        },
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "geography"
+			            },
+			            "Object": {
+			              "Role": "sale"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99
+			        }
+			      ]
+			    },
+			    "sale_has_store": {
+			      "Binding": {
+			        "ConceptualEntity": "Sales"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "sale": {
+			          "Target": {
+			            "Entity": "sale"
+			          }
+			        },
+			        "store": {
+			          "Target": {
+			            "Entity": "store"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "sale"
+			            },
+			            "Object": {
+			              "Role": "store"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99
+			        },
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "store"
+			            },
+			            "Object": {
+			              "Role": "sale"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99
+			        }
+			      ]
+			    },
+			    "sale_has_date1": {
+			      "Binding": {
+			        "ConceptualEntity": "Sales"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "sale": {
+			          "Target": {
+			            "Entity": "sale"
+			          }
+			        },
+			        "date": {
+			          "Target": {
+			            "Entity": "date"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "sale"
+			            },
+			            "Object": {
+			              "Role": "date"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99
+			        },
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "date"
+			            },
+			            "Object": {
+			              "Role": "sale"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99
+			        }
+			      ]
+			    },
+			    "date_date_has_variation_date_hierarchy": {
+			      "Binding": {
+			        "ConceptualEntity": "Dates"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "date.date": {
+			          "Target": {
+			            "Entity": "date.date"
+			          }
+			        },
+			        "date.date.variation.date_hierarchy": {
+			          "Target": {
+			            "Entity": "date.date.variation.date_hierarchy"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "date.date"
+			            },
+			            "Object": {
+			              "Role": "date.date.variation.date_hierarchy"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99
+			        }
+			      ]
+			    },
+			    "date_date_variation_date_hierarchy_has_year": {
+			      "Binding": {
+			        "ConceptualEntity": "Dates"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "date.date.variation.date_hierarchy": {
+			          "Target": {
+			            "Entity": "date.date.variation.date_hierarchy"
+			          }
+			        },
+			        "date.date.variation.date_hierarchy.year": {
+			          "Target": {
+			            "Entity": "date.date.variation.date_hierarchy.year"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "date.date.variation.date_hierarchy"
+			            },
+			            "Object": {
+			              "Role": "date.date.variation.date_hierarchy.year"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99
+			        }
+			      ]
+			    },
+			    "date_date_variation_date_hierarchy_has_quarter": {
+			      "Binding": {
+			        "ConceptualEntity": "Dates"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "date.date.variation.date_hierarchy": {
+			          "Target": {
+			            "Entity": "date.date.variation.date_hierarchy"
+			          }
+			        },
+			        "date.date.variation.date_hierarchy.quarter": {
+			          "Target": {
+			            "Entity": "date.date.variation.date_hierarchy.quarter"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "date.date.variation.date_hierarchy"
+			            },
+			            "Object": {
+			              "Role": "date.date.variation.date_hierarchy.quarter"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99
+			        }
+			      ]
+			    },
+			    "date_date_variation_date_hierarchy_has_month": {
+			      "Binding": {
+			        "ConceptualEntity": "Dates"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "date.date.variation.date_hierarchy": {
+			          "Target": {
+			            "Entity": "date.date.variation.date_hierarchy"
+			          }
+			        },
+			        "date.date.variation.date_hierarchy.month": {
+			          "Target": {
+			            "Entity": "date.date.variation.date_hierarchy.month"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "date.date.variation.date_hierarchy"
+			            },
+			            "Object": {
+			              "Role": "date.date.variation.date_hierarchy.month"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99
+			        }
+			      ]
+			    },
+			    "date_date_variation_date_hierarchy_has_day": {
+			      "Binding": {
+			        "ConceptualEntity": "Dates"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "date.date.variation.date_hierarchy": {
+			          "Target": {
+			            "Entity": "date.date.variation.date_hierarchy"
+			          }
+			        },
+			        "date.date.variation.date_hierarchy.day": {
+			          "Target": {
+			            "Entity": "date.date.variation.date_hierarchy.day"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "date.date.variation.date_hierarchy"
+			            },
+			            "Object": {
+			              "Role": "date.date.variation.date_hierarchy.day"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99
+			        }
+			      ]
+			    }
+			  }
+			}
+		contentType: json
+

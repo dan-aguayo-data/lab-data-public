@@ -1,0 +1,24 @@
+[
+  {
+  "PropertyGroupId": "kinesis.analytics.flink.run.options",
+  "PropertyMap": {
+    "python": "main.py",
+    "jarfile": "lib/pyflink-dependencies.jar"
+   }
+  },
+  {
+    "PropertyGroupId": "InputStream0",
+    "PropertyMap": {
+      "stream.name": "data-team-poc-kinesis",
+      "flink.stream.initpos": "LATEST",
+      "aws.region": "ap-southeast-2"
+    }
+  },
+  {
+    "PropertyGroupId": "OutputStream0",
+    "PropertyMap": {
+      "stream.name": "data-team-poc-kinesis-output",
+      "aws.region": "ap-southeast-2"
+    }
+  }
+]

@@ -1,0 +1,95 @@
+table Tracker_Data
+	lineageTag: 0651e504-c14b-496c-9a88-680559c5a602
+
+	measure 'Daily Steps' = ```
+			SUM(Tracker_Data[Daily_Steps]) 
+			```
+		formatString: 0
+		lineageTag: 8172aba2-ec95-4bff-8fd3-f8cc7bea474c
+
+	measure 'Avg Daily Steps Breed' = CALCULATE(AVERAGE(Tracker_Data[Daily_Steps]),FILTER(ALLSELECTED(Pet_Data),Pet_Data[Breed] = MAX(Pet_Data[Breed])))
+		formatString: 0
+		lineageTag: 042d9701-a846-43b0-aa55-883a132f7924
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	column Tracker_ID
+		dataType: int64
+		formatString: 0
+		lineageTag: bd7fa07a-a7ef-410b-b4c3-c43f168ecacf
+		summarizeBy: none
+		sourceColumn: Tracker_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Activity_Date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 757c4754-3b9a-4c51-92fa-4035d7e07cf1
+		summarizeBy: none
+		sourceColumn: Activity_Date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Family_ID
+		dataType: int64
+		formatString: 0
+		lineageTag: 1c6d9273-47a4-4b5d-b953-3e367addc333
+		summarizeBy: none
+		sourceColumn: Family_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Pet_ID
+		dataType: int64
+		formatString: 0
+		lineageTag: b8b5c73d-342e-4065-b4ed-7a38012c8878
+		summarizeBy: none
+		sourceColumn: Pet_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Daily_Steps
+		dataType: int64
+		formatString: #,0
+		lineageTag: a3a8d85e-4a50-4cc4-9c7a-3a4faf646633
+		summarizeBy: sum
+		sourceColumn: Daily_Steps
+
+		annotation SummarizationSetBy = Automatic
+
+	column Activity_Minutes
+		dataType: int64
+		formatString: 0
+		lineageTag: d7dd9c30-732b-4d05-b6ce-7eb955550c77
+		summarizeBy: sum
+		sourceColumn: Activity_Minutes
+
+		annotation SummarizationSetBy = Automatic
+
+	column Heartrate_BPM
+		dataType: int64
+		formatString: 0
+		lineageTag: f771351d-a9b8-4f9b-b718-3437101c478e
+		summarizeBy: sum
+		sourceColumn: Heartrate_BPM
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Tracker_Data-938bf540-f523-4b5f-8a4f-93c23c177faa = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\seanc\OneDrive\Desktop\Udacity\Project\Sample_Datasets_for_PBI.xlsx"), null, true),
+				    Tracker_Data_Sheet = Source{[Item="Tracker_Data",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(Tracker_Data_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Tracker_ID", Int64.Type}, {"Activity_Date", type date}, {"Family_ID", Int64.Type}, {"Pet_ID", Int64.Type}, {"Daily_Steps", Int64.Type}, {"Activity_Minutes", Int64.Type}, {"Heartrate_BPM", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

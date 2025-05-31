@@ -1,0 +1,8 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/1.4.0/schema.json",
+  "name": "ReportSection90aa3de61b0db0103187",
+  "displayName": "Line Chart Demo",
+  "displayOption": "FitToPage",
+  "height": 720,
+  "width": 1280
+}

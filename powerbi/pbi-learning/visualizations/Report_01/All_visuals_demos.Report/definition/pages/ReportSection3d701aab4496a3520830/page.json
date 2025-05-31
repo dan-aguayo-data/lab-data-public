@@ -1,0 +1,8 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/1.4.0/schema.json",
+  "name": "ReportSection3d701aab4496a3520830",
+  "displayName": "Ex 1.2",
+  "displayOption": "FitToPage",
+  "height": 720,
+  "width": 1280
+}

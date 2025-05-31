@@ -1,0 +1,87 @@
+table Pet_Data
+	lineageTag: 61bbe7ab-bc06-4063-a5b4-28044b15f22e
+
+	column Pet_ID
+		dataType: int64
+		isKey
+		formatString: 0
+		lineageTag: 3aefed70-a42a-4f64-a416-f4c5959f50ea
+		summarizeBy: none
+		sourceColumn: Pet_ID
+
+		annotation SummarizationSetBy = User
+
+	column Name
+		dataType: string
+		lineageTag: bdd9791b-17bf-418a-b740-151155a5aa50
+		summarizeBy: none
+		sourceColumn: Name
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column Dog/Cat
+		dataType: string
+		lineageTag: a2b9bc11-026d-41dd-8f2e-4170d905468a
+		summarizeBy: none
+		sourceColumn: Dog/Cat
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column Breed
+		dataType: string
+		lineageTag: 82794e38-4336-4e74-ba86-599055e10413
+		summarizeBy: none
+		sourceColumn: Breed
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column Age
+		dataType: int64
+		formatString: 0
+		lineageTag: 1c74db46-66af-44f1-81ca-eed15e061e60
+		summarizeBy: none
+		sourceColumn: Age
+
+		annotation SummarizationSetBy = Automatic
+
+	column Gender
+		dataType: string
+		lineageTag: 10b9dabe-6b83-4e4a-8189-d84a3563d02b
+		summarizeBy: none
+		sourceColumn: Gender
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column Weight
+		dataType: int64
+		formatString: 0
+		lineageTag: 77c5e034-05e6-40a8-a5ca-29b1d83efca7
+		summarizeBy: none
+		sourceColumn: Weight
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Pet_Data-30c475b1-ca50-468a-8905-fb230a544da6 = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\seanc\OneDrive\Desktop\Udacity\Project\Sample_Datasets_for_PBI.xlsx"), null, true),
+				    Pet_Data_Sheet = Source{[Item="Pet_Data",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(Pet_Data_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Pet_ID", Int64.Type}, {"Name", type text}, {"Dog/Cat", type text}, {"Breed", type text}, {"Age", Int64.Type}, {"Gender", type text}, {"Rescue?", type text}, {"Weight", Int64.Type}}),
+				    #"Removed Columns" = Table.RemoveColumns(#"Changed Type",{"Rescue?"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

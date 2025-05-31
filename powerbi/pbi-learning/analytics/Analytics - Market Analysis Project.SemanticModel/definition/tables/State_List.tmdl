@@ -1,0 +1,27 @@
+table State_List
+	lineageTag: 4a8cbfdc-e697-41a3-aa61-2044340996e5
+
+	column State
+		dataType: string
+		lineageTag: 099ac1ee-f326-4128-90a3-7f7467d244f1
+		summarizeBy: none
+		sourceColumn: State
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	partition State_List-e9527be2-02ca-4b60-976f-badc5d72ee02 = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\danie\OneDrive\Desktop\PBI_Udacity\Advanced Data Analytics\Project\state-list.xlsx"), null, true),
+				    State_List_Table = Source{[Item="State_List",Kind="Table"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(State_List_Table,{{"State", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

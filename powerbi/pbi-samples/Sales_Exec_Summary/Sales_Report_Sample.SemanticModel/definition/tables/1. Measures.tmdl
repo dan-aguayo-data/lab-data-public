@@ -1,0 +1,471 @@
+table '1. Measures'
+	lineageTag: 937265fa-33b2-4ca5-9373-a24130881daa
+
+	measure NSV = SUM('SalesLT FactSalesTable'[NSV])
+		formatString: \$#,0;-\$#,0;\$#,0
+		lineageTag: 35abd057-e263-4794-b438-d3f09e8429a8
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-AU"}
+
+	measure 'Sales Qty' = SUM('SalesLT FactSalesTable'[SalesQty])
+		formatString: #,0
+		lineageTag: fcfeda4c-1a71-41f1-8a19-0479f604c03e
+
+	measure 'Sales Day' =
+			
+			IF
+			(
+			TRUE
+			,
+			MAX('SalesLT Calendar'[DAY_NUMBER])
+			&
+			" of "
+			&
+			MAX('SalesLT Calendar'[DAYS_PER_MONTH])
+			&
+			" days"
+			,
+			1
+			)
+		lineageTag: 27173378-19ed-4c06-836d-90c485b305a0
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure '% of Workdays Passed' = DIVIDE(MAX('SalesLT Calendar'[DAY_NUMBER]), MAX('SalesLT Calendar'[DAYS_PER_MONTH]))
+		formatString: 0%;-0%;0%
+		lineageTag: 84c19e03-cd4c-45f2-8c0d-07217b56b452
+
+	measure 'NSV per Unit' = [NSV] / [Sales Qty]
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: 813e8cf2-f5c8-4215-8c96-0cebf0445e84
+
+	measure 'NSV LY' = ```
+			
+			    CALCULATE([NSV],
+			    SAMEPERIODLASTYEAR('SalesLT Calendar'[DATE]),
+			    REMOVEFILTERS('SalesLT Calendar'[Latest Month])
+			    )
+			```
+		formatString: \$#,0.###############;-\$#,0.###############;\$#,0.###############
+		lineageTag: a6e4dee3-c8cc-4296-89b8-ed08c534e69e
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-AU"}
+
+	measure 'NSV MTD' =
+			
+			CALCULATE(
+			    [NSV],
+			    FILTER(
+			        ALL('SalesLT Calendar'),
+			        'SalesLT Calendar'[YYYYMM] = MAX('SalesLT Calendar'[YYYYMM])
+			    )
+			)
+		formatString: \$#,0;-\$#,0;\$#,0
+		lineageTag: 4ee89d36-b81d-4cf2-a832-83448ac06458
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-AU"}
+
+	measure 'NSV MTD LY' =
+			
+			VAR _CurrentMaxDate = MAX('SalesLT Calendar'[DATE])
+			VAR _LY_MaxDate = EDATE(_CurrentMaxDate, -12)
+			VAR _LY_StartOfMonth = STARTOFMONTH(DATEADD('SalesLT Calendar'[DATE], -12, MONTH))
+			RETURN
+			CALCULATE(
+			    [NSV],
+			    FILTER(
+			        ALL('SalesLT Calendar'),
+			        'SalesLT Calendar'[DATE] >= _LY_StartOfMonth &&
+			        'SalesLT Calendar'[DATE] <= _LY_MaxDate
+			    )
+			)
+		formatString: \$#,0;-\$#,0;\$#,0
+		lineageTag: f53de7e9-5615-46ff-8706-2067166cee6c
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-AU"}
+
+	measure 'NSV MTD Cumulative Graph' =
+			
+			CALCULATE(
+			    [NSV],
+			    FILTER(
+			        ALLSELECTED('SalesLT Calendar'),
+			        'SalesLT Calendar'[DATE] <= MAX('SalesLT Calendar'[DATE]) &&
+			        'SalesLT Calendar'[Latest Month] = "Yes"
+			    )
+			)
+		formatString: \$#,0.###############;-\$#,0.###############;\$#,0.###############
+		lineageTag: c202f160-0e67-451e-8c5b-6acecfdeec73
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-AU"}
+
+	measure 'NSV MTD Growth' = DIVIDE( [NSV MTD], [NSV MTD LY] ) - 1
+		lineageTag: db3ac3f4-d68d-4c41-b1b8-314ccf3884f9
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'NSV MTD YoY %' = IF(ISBLANK([NSV MTD]), BLANK(), [NSV MTD Growth])
+		lineageTag: cf14555e-892f-4862-8d97-cce2c8b9a3c5
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'NSV YoY' = [NSV] - [NSV LY]
+		formatString: \$#,0.###############;-\$#,0.###############;\$#,0.###############
+		lineageTag: 0a1a3013-6796-4379-9c62-d7b1f27cc5e4
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-AU"}
+
+	measure 'NSV YoY %' = ```
+			if([NSV YoY]/[NSV LY] = 0, blank(), [NSV YoY]/[NSV LY]) 
+			```
+		formatString: 0%;-0%;0%
+		lineageTag: e0a666ed-27b6-43b6-8389-bed10119a0ee
+
+	measure 'Sales Qty LY' = ```
+			
+			    CALCULATE([Sales Qty],
+			    SAMEPERIODLASTYEAR('SalesLT Calendar'[DATE]),
+			    REMOVEFILTERS('SalesLT Calendar'[Latest Month])
+			    )
+			```
+		formatString: 0
+		lineageTag: e7bc384a-b815-4fa1-9bb6-612878b20daa
+
+	measure 'Sales Qty MTD YoY' = [Sales Qty] - [Sales Qty LY]
+		formatString: 0
+		lineageTag: d1c155de-ec86-47e0-b8dd-fb00b73653bc
+
+	measure 'Sales Qty YoY %' = ```
+			if([Sales Qty MTD YoY]/[Sales Qty LY] = 0, blank(), [Sales Qty MTD YoY]/[Sales Qty LY]) 
+			```
+		formatString: 0%;-0%;0%
+		lineageTag: 58beb4f8-273c-4e9c-9497-a03f3f338ab8
+
+	measure 'Metric Calculation' = ```
+			
+			VAR _Metric = SELECTEDVALUE('Metric'[Metric])
+			VAR _Calc = SELECTEDVALUE('Metric'[Calculation])
+			
+			RETURN
+			SWITCH(
+			    _Metric,
+			    
+			    "Sales Qty",
+			        SWITCH(_Calc,
+			            "Daily Last Trading Day", FORMAT([Sales Qty], "#,##0"),
+			            "MTD", FORMAT([Sales Qty MTD], "#,##0"),
+			            "MTD YoY Growth %", FORMAT([Sales Qty MTD YoY %], "#,##0.#0%"),
+			            "YTD", FORMAT([Sales Qty YTD], "#,##0"),
+			            "YTD YoY Growth %", FORMAT([Sales Qty YTD YoY %], "#,##0.#0%")
+			        ),
+			
+			    "NSV",
+			        SWITCH(_Calc,
+			            "Daily Last Trading Day", FORMAT([NSV], "$#,##0,,.00M"),
+			            "MTD", FORMAT([NSV MTD], "$#,##0,,.00M"),
+			            "MTD YoY Growth %", FORMAT([NSV MTD YoY %], "#,##0.#0%"),
+			            "YTD", FORMAT([NSV YTD], "$#,##0,,.00M"),
+			            "YTD YoY Growth %", FORMAT([NSV YTD YoY %], "#,##0.#0%")
+			        ),
+			
+			    "NSV per Unit",
+			        SWITCH(_Calc,
+			            "Daily Last Trading Day", FORMAT([NSV per Unit], "#,##0.00"),
+			            "MTD", FORMAT([NSV per Unit MTD], "#,##0.00"),
+			            "MTD YoY Growth %", FORMAT([NSV per Unit MTD YoY %], "#,##0.#0%"),
+			            "YTD", FORMAT([NSV per Unit YTD], "#,##0.00"),
+			            "YTD YoY Growth %", FORMAT([NSV per Unit YTD YoY %], "#,##0.#0%")
+			        )
+			)
+			
+			```
+		lineageTag: 3c76e87f-afc2-45cf-b5ab-65888f64acad
+
+	measure 'NSV YTD' = ```
+			
+			VAR _CurrentMaxDate = MAX('SalesLT Calendar'[DATE])
+			VAR _LY_MaxDate = EDATE(_CurrentMaxDate, -12)
+			RETURN
+			CALCULATE(
+			    [NSV],
+			    FILTER(
+			        ALL('SalesLT Calendar'),
+			        'SalesLT Calendar'[DATE] <= _LY_MaxDate &&
+			        YEAR('SalesLT Calendar'[DATE]) = YEAR(_LY_MaxDate)
+			    )
+			)
+			
+			```
+		formatString: \$#,0.###############;-\$#,0.###############;\$#,0.###############
+		lineageTag: 64a8bd38-0c6a-4aa7-89c2-ee20d621de3d
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-AU"}
+
+	measure 'NSV YTD LY' =
+			
+			VAR _CurrentMaxDate = MAX('SalesLT Calendar'[DATE])
+			VAR _LY_MaxDate = EDATE(_CurrentMaxDate, -12)
+			RETURN
+			CALCULATE(
+			    [NSV],
+			    FILTER(
+			        ALL('SalesLT Calendar'),
+			        'SalesLT Calendar'[DATE] <= _LY_MaxDate &&
+			        YEAR('SalesLT Calendar'[DATE]) = YEAR(_LY_MaxDate)
+			    )
+			)
+		formatString: \$#,0.###############;-\$#,0.###############;\$#,0.###############
+		lineageTag: f442bf1a-809a-497f-a5eb-59c28cd10725
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-AU"}
+
+	measure 'NSV YTD Growth' = DIVIDE( [NSV YTD], [NSV YTD LY] ) - 1
+		lineageTag: e304d358-34da-4780-a566-9eba21d656fe
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'NSV YTD YoY %' = IF(ISBLANK([NSV YTD]), BLANK(), [NSV YTD Growth])
+		lineageTag: 66644606-1501-4255-a8dc-9acb2cc8c5a3
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Sales Qty MTD' =
+			
+			CALCULATE(
+			    [Sales Qty],
+			    FILTER(
+			        ALL('SalesLT Calendar'),
+			        'SalesLT Calendar'[YYYYMM] = MAX('SalesLT Calendar'[YYYYMM])
+			    )
+			)
+		formatString: #,0
+		lineageTag: 9ca6688b-ddeb-4563-a703-1bbdd0868a5b
+
+	measure 'Sales Qty MTD LY' =
+			
+			
+			VAR _CurrentMaxDate = MAX('SalesLT Calendar'[DATE])
+			VAR _LY_MaxDate = EDATE(_CurrentMaxDate, -12)
+			VAR _LY_StartOfMonth = STARTOFMONTH(DATEADD('SalesLT Calendar'[DATE], -12, MONTH))
+			RETURN
+			CALCULATE(
+			    [Sales Qty],
+			    FILTER(
+			        ALL('SalesLT Calendar'),
+			        'SalesLT Calendar'[DATE] >= _LY_StartOfMonth &&
+			        'SalesLT Calendar'[DATE] <= _LY_MaxDate
+			    )
+			)
+		formatString: 0
+		lineageTag: ee4d9538-d90e-4158-9e7e-da84dfc24e88
+
+	measure 'Sales Qty MTD Growth' = DIVIDE( [Sales Qty MTD], [Sales Qty MTD LY] ) - 1
+		lineageTag: 79f4e2c8-a4c4-40c9-9b76-5cd6b6cc7598
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Sales Qty MTD YoY %' = IF(ISBLANK([Sales Qty MTD]), BLANK(), [Sales Qty MTD Growth])
+		lineageTag: 26af59e8-9169-446a-8f18-0673dfafbe8e
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Sales Qty YTD' = ```
+			
+			VAR _MaxDate = MAX('SalesLT Calendar'[DATE])
+			RETURN
+			CALCULATE(
+			    [Sales Qty],
+			    FILTER(
+			        ALL('SalesLT Calendar'),
+			        'SalesLT Calendar'[DATE] <= _MaxDate &&
+			        YEAR('SalesLT Calendar'[DATE]) = YEAR(_MaxDate)
+			    )
+			)
+			
+			```
+		formatString: 0
+		lineageTag: a0da789b-5447-4c6b-954f-c94c1e5d7b85
+
+	measure 'Sales Qty YTD LY' =
+			
+			VAR _CurrentMaxDate = MAX('SalesLT Calendar'[DATE])
+			VAR _LY_MaxDate = EDATE(_CurrentMaxDate, -12)
+			RETURN
+			CALCULATE(
+			    [Sales Qty],
+			    FILTER(
+			        ALL('SalesLT Calendar'),
+			        'SalesLT Calendar'[DATE] <= _LY_MaxDate &&
+			        YEAR('SalesLT Calendar'[DATE]) = YEAR(_LY_MaxDate)
+			    )
+			)
+		formatString: 0
+		lineageTag: e5b57500-8b9c-45ba-98cc-b85f5a767a25
+
+	measure 'Sales Qty YTD Growth' = DIVIDE( [Sales Qty YTD], [Sales Qty YTD LY] ) - 1
+		lineageTag: aa004117-37fb-4d58-890e-342c2026b24a
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Sales Qty YTD YoY %' = IF(ISBLANK([Sales Qty YTD]), BLANK(), [Sales Qty YTD Growth])
+		lineageTag: bb08ffec-5a5b-4bf5-b53a-d24ef527b2d0
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'NSV per Unit LY' = ```
+			
+			    CALCULATE([NSV per Unit],
+			    SAMEPERIODLASTYEAR('SalesLT Calendar'[DATE]),
+			    REMOVEFILTERS('SalesLT Calendar'[Latest Month])
+			    )
+			```
+		formatString: \$#,0.###############;-\$#,0.###############;\$#,0.###############
+		lineageTag: ded25a0d-30e4-4e7f-b8b1-f82e52b569a6
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-AU"}
+
+	measure 'NSV per Unit MTD' =
+			
+			
+			CALCULATE(
+			    [NSV per Unit],
+			    FILTER(
+			        ALL('SalesLT Calendar'),
+			        'SalesLT Calendar'[YYYYMM] = MAX('SalesLT Calendar'[YYYYMM])
+			    )
+			)
+		formatString: \$#,0;-\$#,0;\$#,0
+		lineageTag: d56a0a59-5a2a-411c-9101-075bc683fc35
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-AU"}
+
+	measure 'NSV per Unit MTD LY' =
+			
+			
+			VAR _CurrentMaxDate = MAX('SalesLT Calendar'[DATE])
+			VAR _LY_MaxDate = EDATE(_CurrentMaxDate, -12)
+			VAR _LY_StartOfMonth = STARTOFMONTH(DATEADD('SalesLT Calendar'[DATE], -12, MONTH))
+			RETURN
+			CALCULATE(
+			    [NSV per Unit],
+			    FILTER(
+			        ALL('SalesLT Calendar'),
+			        'SalesLT Calendar'[DATE] >= _LY_StartOfMonth &&
+			        'SalesLT Calendar'[DATE] <= _LY_MaxDate
+			    )
+			)
+		formatString: \$#,0.###############;-\$#,0.###############;\$#,0.###############
+		lineageTag: 47d33721-829c-45cc-8a8a-343d74efe8c2
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-AU"}
+
+	measure 'NSV per Unit MTD Growth' = DIVIDE( [NSV per Unit MTD], [NSV per Unit MTD LY] ) - 1
+		lineageTag: 2ae8f48e-26f4-4f49-a738-163d015b197a
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'NSV per Unit MTD YoY %' = IF(ISBLANK([NSV per Unit MTD]), BLANK(), [NSV per Unit MTD Growth])
+		lineageTag: 014fbc78-e56d-4bdc-a7c2-8cf7921acfaa
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'NSV per Unit YTD' = ```
+			
+			VAR _MaxDate = MAX('SalesLT Calendar'[DATE])
+			RETURN
+			CALCULATE(
+			    [NSV per Unit],
+			    FILTER(
+			        ALL('SalesLT Calendar'),
+			        'SalesLT Calendar'[DATE] <= _MaxDate &&
+			        YEAR('SalesLT Calendar'[DATE]) = YEAR(_MaxDate)
+			    )
+			)
+			
+			```
+		formatString: \$#,0.###############;-\$#,0.###############;\$#,0.###############
+		lineageTag: 9870e8a2-fb80-467e-83c9-15661d1dae27
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-AU"}
+
+	measure 'NSV per Unit YTD LY' =
+			
+			VAR _CurrentMaxDate = MAX('SalesLT Calendar'[DATE])
+			VAR _LY_MaxDate = EDATE(_CurrentMaxDate, -12)
+			RETURN
+			CALCULATE(
+			    [NSV per Unit],
+			    FILTER(
+			        ALL('SalesLT Calendar'),
+			        'SalesLT Calendar'[DATE] <= _LY_MaxDate &&
+			        YEAR('SalesLT Calendar'[DATE]) = YEAR(_LY_MaxDate)
+			    )
+			)
+		formatString: \$#,0.###############;-\$#,0.###############;\$#,0.###############
+		lineageTag: 92dcc319-fe84-4d15-8fe5-11f52bbac2e5
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-AU"}
+
+	measure 'NSV per Unit YTD Growth' = DIVIDE( [NSV per Unit YTD], [NSV per Unit YTD LY] ) - 1
+		lineageTag: 23f41864-033d-4ba2-8206-8b8432300874
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'NSV per Unit YTD YoY %' = IF(ISBLANK([NSV per Unit YTD]), BLANK(), [NSV per Unit YTD Growth])
+		lineageTag: c545ccee-ad0e-4734-abee-645a31653c6b
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'NSV MTD Cumulative Graph LY' =
+			
+			VAR _CurrentDate = MAX('SalesLT Calendar'[DATE])
+			VAR _LYDate = EDATE(_CurrentDate, -12)
+			VAR _LYMonthStart = DATE(YEAR(_LYDate), MONTH(_LYDate), 1)
+			
+			RETURN
+			CALCULATE(
+			    [NSV],
+			    FILTER(
+			        ALL('SalesLT Calendar'),
+			        'SalesLT Calendar'[DATE] >= _LYMonthStart &&
+			        'SalesLT Calendar'[DATE] <= _LYDate
+			    )
+			)
+		formatString: \$#,0.###############;-\$#,0.###############;\$#,0.###############
+		lineageTag: 2cdec1c5-e7a1-4bcc-888c-a8efc26497a5
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-AU"}
+
+	measure 'Metric Colour' =
+			
+			VAR Conversion = IFERROR(DIVIDE(VALUE(LEFT([Metric Calculation], LEN([Metric Calculation]) - 1)), 100), BLANK())
+			RETURN
+			IF(
+			    HASONEVALUE(Metric[Calculation]),
+			    IF(
+			        SELECTEDVALUE(Metric[Calculation]) IN { "MTD YoY Growth %", "YTD YoY Growth %", "MTD YoY Growth %"},
+			        IF(Conversion > 0, "#B7E2B7",
+			            IF(ISBLANK(Conversion), "#EDA7AA",
+			                IF(Conversion = 0, "#E9BDA0","#EDA7AA")
+			            )
+			        )
+			    )
+			)
+		lineageTag: f900d760-7cef-49e3-bf07-a33d81f8d754
+
+	column Dummy
+		isHidden
+		formatString: 0
+		lineageTag: 61892b5a-eabb-43ba-9daf-5bfc269d99f8
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Dummy]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition '1. Measures' = calculated
+		mode: import
+		source = SELECTCOLUMNS( {1}, "Dummy", 1 )
+
+	annotation PBI_Id = c84d59afa25d477bab2bc0308de8a188
+

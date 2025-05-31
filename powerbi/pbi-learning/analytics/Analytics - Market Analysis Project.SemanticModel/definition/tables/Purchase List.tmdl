@@ -1,0 +1,94 @@
+table 'Purchase List'
+	lineageTag: 336c721f-d995-496f-bb3c-bfa60a3c5ff8
+
+	column 'Customer ID'
+		dataType: string
+		lineageTag: 5b02350d-7936-4b7f-b931-e1486600598f
+		summarizeBy: none
+		sourceColumn: Customer ID
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column Date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 88b5bb24-a78a-4b8d-bdf1-6d8ac7fc43a0
+		summarizeBy: none
+		sourceColumn: Date
+
+		variation Variation
+			isDefault
+			relationship: 0f6f3b24-51b4-49ff-a050-99747ba28572
+			defaultHierarchy: LocalDateTable_01a86a23-309d-4dfd-a390-b225ee5aecdd.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Purchase Amount $'
+		dataType: decimal
+		lineageTag: 7b780ce9-6db6-48f0-8c20-216754020039
+		summarizeBy: sum
+		sourceColumn: Purchase Amount $
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'Purchase List-fe4e9e07-19f9-42c7-8d48-0f9ddad2b222' = m
+		mode: import
+		source = ```
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\danie\OneDrive\Desktop\PBI_Udacity\Advanced Data Analytics\Project\purchase-list.xlsx"), null, true),
+				    Sheet1_Sheet = Source{[Item="Sheet1",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(Sheet1_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Customer ID", type text}, {"1st September, 2020", type number}, {"2nd September, 2020", Int64.Type}, {"3rd September, 2020", Int64.Type}, {"4th September, 2020", type number}, {"5th September, 2020", Int64.Type}, {"6th September, 2020", Int64.Type}, {"7th September, 2020", Int64.Type}, {"8th September, 2020", type number}, {"9th September, 2020", Int64.Type}, {"10th September, 2020", Int64.Type}, {"11th September, 2020", Int64.Type}, {"12th September, 2020", Int64.Type}, {"13th September, 2020", Int64.Type}, {"14th September, 2020", Int64.Type}, {"15th September, 2020", Int64.Type}, {"16th September, 2020", Int64.Type}, {"17th September, 2020", Int64.Type}, {"18th September, 2020", Int64.Type}, {"19th September, 2020", Int64.Type}, {"20th September, 2020", Int64.Type}, {"21st September, 2020", Int64.Type}, {"22nd September, 2020", Int64.Type}, {"23rd September, 2020", Int64.Type}, {"24th September, 2020", Int64.Type}, {"25th September, 2020", Int64.Type}, {"26th September, 2020", Int64.Type}, {"27th September, 2020", Int64.Type}, {"28th September, 2020", Int64.Type}, {"29th September, 2020", Int64.Type}, {"30th September, 2020", Int64.Type}, {"1st October, 2020", Int64.Type}, {"2nd October, 2020", Int64.Type}, {"3rd October, 2020", Int64.Type}, {"4th October, 2020", Int64.Type}, {"5th October, 2020", Int64.Type}, {"6th October, 2020", Int64.Type}, {"7th October, 2020", Int64.Type}, {"8th October, 2020", Int64.Type}, {"9th October, 2020", Int64.Type}, {"10th October, 2020", Int64.Type}, {"11th October, 2020", Int64.Type}, {"12th October, 2020", Int64.Type}, {"13th October, 2020", Int64.Type}, {"14th October, 2020", Int64.Type}, {"15th October, 2020", Int64.Type}, {"16th October, 2020", Int64.Type}, {"17th October, 2020", Int64.Type}, {"18th October, 2020", Int64.Type}, {"19th October, 2020", Int64.Type}, {"20th October, 2020", Int64.Type}, {"21st October, 2020", Int64.Type}, {"22nd October, 2020", Int64.Type}, {"23rd October, 2020", Int64.Type}, {"24th October, 2020", Int64.Type}, {"25th October, 2020", Int64.Type}, {"26th October, 2020", Int64.Type}, {"27th October, 2020", Int64.Type}, {"28th October, 2020", Int64.Type}, {"29th October, 2020", Int64.Type}, {"30th October, 2020", Int64.Type}, {"31st October, 2020", Int64.Type}, {"1st November, 2020", Int64.Type}, {"2nd November, 2020", Int64.Type}, {"3rd November, 2020", Int64.Type}, {"4th November, 2020", Int64.Type}, {"5th November, 2020", Int64.Type}, {"6th November, 2020", Int64.Type}, {"7th November, 2020", type number}, {"8th November, 2020", Int64.Type}, {"9th November, 2020", Int64.Type}, {"10th November, 2020", Int64.Type}, {"11th November, 2020", Int64.Type}, {"12th November, 2020", Int64.Type}, {"13th November, 2020", Int64.Type}, {"14th November, 2020", Int64.Type}, {"15th November, 2020", Int64.Type}, {"16th November, 2020", Int64.Type}, {"17th November, 2020", Int64.Type}, {"18th November, 2020", Int64.Type}, {"19th November, 2020", Int64.Type}, {"20th November, 2020", Int64.Type}, {"21st November, 2020", type number}, {"22nd November, 2020", Int64.Type}, {"23rd November, 2020", Int64.Type}, {"24th November, 2020", Int64.Type}, {"25th November, 2020", Int64.Type}, {"26th November, 2020", Int64.Type}, {"27th November, 2020", type number}, {"28th November, 2020", type number}, {"29th November, 2020", Int64.Type}, {"30th November, 2020", type number}, {"1st December, 2020", type number}, {"2nd December, 2020", Int64.Type}, {"3rd December, 2020", Int64.Type}, {"4th December, 2020", Int64.Type}, {"5th December, 2020", Int64.Type}, {"6th December, 2020", Int64.Type}, {"7th December, 2020", type number}, {"8th December, 2020", Int64.Type}, {"9th December, 2020", Int64.Type}, {"10th December, 2020", Int64.Type}, {"11th December, 2020", type number}, {"12th December, 2020", Int64.Type}, {"13th December, 2020", Int64.Type}, {"14th December, 2020", Int64.Type}, {"15th December, 2020", Int64.Type}, {"16th December, 2020", Int64.Type}, {"17th December, 2020", Int64.Type}, {"18th December, 2020", Int64.Type}, {"19th December, 2020", type number}, {"20th December, 2020", type number}, {"21st December, 2020", Int64.Type}, {"22nd December, 2020", Int64.Type}, {"23rd December, 2020", Int64.Type}, {"24th December, 2020", Int64.Type}, {"25th December, 2020", Int64.Type}, {"26th December, 2020", Int64.Type}, {"27th December, 2020", Int64.Type}, {"28th December, 2020", Int64.Type}, {"29th December, 2020", Int64.Type}, {"30th December, 2020", Int64.Type}, {"31st December, 2020", Int64.Type}, {"1st January, 2021", Int64.Type}, {"2nd January, 2021", Int64.Type}, {"3rd January, 2021", Int64.Type}, {"4th January, 2021", Int64.Type}, {"5th January, 2021", Int64.Type}, {"6th January, 2021", Int64.Type}, {"7th January, 2021", Int64.Type}, {"8th January, 2021", Int64.Type}, {"9th January, 2021", Int64.Type}, {"10th January, 2021", Int64.Type}, {"11th January, 2021", Int64.Type}, {"12th January, 2021", Int64.Type}, {"13th January, 2021", Int64.Type}, {"14th January, 2021", Int64.Type}, {"15th January, 2021", Int64.Type}, {"16th January, 2021", Int64.Type}, {"17th January, 2021", Int64.Type}, {"18th January, 2021", Int64.Type}, {"19th January, 2021", Int64.Type}, {"20th January, 2021", Int64.Type}, {"21st January, 2021", Int64.Type}, {"22nd January, 2021", Int64.Type}, {"23rd January, 2021", Int64.Type}, {"24th January, 2021", Int64.Type}, {"25th January, 2021", Int64.Type}, {"26th January, 2021", Int64.Type}, {"27th January, 2021", Int64.Type}, {"28th January, 2021", Int64.Type}, {"29th January, 2021", Int64.Type}, {"30th January, 2021", Int64.Type}, {"31st January, 2021", Int64.Type}, {"1st February, 2021", Int64.Type}, {"2nd February, 2021", Int64.Type}, {"3rd February, 2021", Int64.Type}, {"4th February, 2021", Int64.Type}, {"5th February, 2021", Int64.Type}, {"6th February, 2021", Int64.Type}, {"7th February, 2021", Int64.Type}, {"8th February, 2021", Int64.Type}, {"9th February, 2021", Int64.Type}, {"10th February, 2021", Int64.Type}, {"11th February, 2021", Int64.Type}, {"12th February, 2021", Int64.Type}, {"13th February, 2021", Int64.Type}, {"14th February, 2021", Int64.Type}, {"15th February, 2021", Int64.Type}, {"16th February, 2021", Int64.Type}, {"17th February, 2021", Int64.Type}, {"18th February, 2021", Int64.Type}, {"19th February, 2021", Int64.Type}, {"20th February, 2021", Int64.Type}, {"21st February, 2021", Int64.Type}, {"22nd February, 2021", Int64.Type}, {"23rd February, 2021", Int64.Type}, {"24th February, 2021", Int64.Type}, {"25th February, 2021", Int64.Type}, {"26th February, 2021", Int64.Type}, {"27th February, 2021", Int64.Type}, {"28th February, 2021", Int64.Type}, {"1st March, 2021", Int64.Type}}),
+				    #"Unpivoted Columns" = Table.UnpivotOtherColumns(#"Changed Type", {"Customer ID"}, "Attribute", "Value"),
+				    #"Renamed Columns" = Table.RenameColumns(#"Unpivoted Columns",{{"Attribute", "Date"}, {"Value", "Purchase $"}}),
+				    #"Inserted Text Between Delimiters" = Table.AddColumn(#"Renamed Columns", "Text Between Delimiters", each Text.BetweenDelimiters([Date], " ", ","), type text),
+				    #"Inserted Text After Delimiter" = Table.AddColumn(#"Inserted Text Between Delimiters", "Text After Delimiter", each Text.AfterDelimiter([Date], ", "), type text),
+				    #"Split Column by Delimiter" = Table.SplitColumn(#"Inserted Text After Delimiter", "Date", Splitter.SplitTextByEachDelimiter({" "}, QuoteStyle.Csv, false), {"Date.1", "Date.2"}),
+				    #"Changed Type1" = Table.TransformColumnTypes(#"Split Column by Delimiter",{{"Date.1", type text}, {"Date.2", type date}}),
+				    #"Inserted Last Characters" = Table.AddColumn(#"Changed Type1", "Last Characters", each Text.End([Date.1], 2), type text),
+				    #"Removed Columns" = Table.RemoveColumns(#"Inserted Last Characters",{"Last Characters"}),
+				    #"Split Column by Position" = Table.SplitColumn(#"Removed Columns", "Date.1", Splitter.SplitTextByPositions({0, 2}, true), {"Date.1.1", "Date.1.2"}),
+				    #"Changed Type2" = Table.TransformColumnTypes(#"Split Column by Position",{{"Date.1.1", Int64.Type}, {"Date.1.2", type text}}),
+				    #"Renamed Columns1" = Table.RenameColumns(#"Changed Type2",{{"Date.1.1", "Day"}, {"Text Between Delimiters", "Month"}, {"Text After Delimiter", "Year"}}),
+				    #"Removed Columns1" = Table.RemoveColumns(#"Renamed Columns1",{"Date.1.2", "Date.2"}),
+				    #"Reordered Columns" = Table.ReorderColumns(#"Removed Columns1",{"Customer ID", "Day", "Month", "Year", "Purchase $"}),
+				    #"Changed Type3" = Table.TransformColumnTypes(#"Reordered Columns",{{"Year", Int64.Type}}),
+				    #"Added Custom" = Table.AddColumn(#"Changed Type3", "Date", each [Day]&" "&[Month]&" "&[Year]),
+				    #"Removed Columns2" = Table.RemoveColumns(#"Added Custom",{"Date"}),
+				    #"Added Custom2" = Table.AddColumn(#"Removed Columns2", "Month Number", each if [Month] = "January" then 1
+				else if [Month] = "February" then 2
+				else if [Month] =  "March" then 3
+				else if [Month] =  "April" then 4
+				else if [Month] =  "May" then 5
+				else if [Month] =  "June" then 6
+				else if [Month] =  "July" then 7
+				else if [Month] =  "August" then 8
+				else if [Month] =   "September" then 9
+				else if [Month] =   "October" then 10
+				else if [Month] =   "November" then 11
+				else if [Month] =   "December" then 12 
+				else ""),
+				    #"Changed Type4" = Table.TransformColumnTypes(#"Added Custom2",{{"Month Number", Int64.Type}}),
+				    #"Removed Columns3" = Table.RemoveColumns(#"Changed Type4",{"Month"}),
+				    #"Reordered Columns1" = Table.ReorderColumns(#"Removed Columns3",{"Customer ID", "Day", "Month Number", "Year", "Purchase $"}),
+				    #"Added Custom1" = Table.AddColumn(#"Reordered Columns1", "Custom", each #date([Year],[Month Number],[Day])),
+				    #"Changed Type5" = Table.TransformColumnTypes(#"Added Custom1",{{"Custom", type date}}),
+				    #"Renamed Columns2" = Table.RenameColumns(#"Changed Type5",{{"Day", "Day Number"}, {"Year", "Year Number"}, {"Custom", "Date"}}),
+				    #"Reordered Columns2" = Table.ReorderColumns(#"Renamed Columns2",{"Customer ID", "Date", "Day Number", "Month Number", "Year Number", "Purchase $"}),
+				    #"Changed Type6" = Table.TransformColumnTypes(#"Reordered Columns2",{{"Purchase $", Currency.Type}}),
+				    #"Removed Columns4" = Table.RemoveColumns(#"Changed Type6",{"Day Number", "Month Number", "Year Number"}),
+				    #"Renamed Columns3" = Table.RenameColumns(#"Removed Columns4",{{"Purchase $", "Purchase Amount $"}})
+				in
+				    #"Renamed Columns3"
+				```
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,57 @@
+table 'Incomes by State'
+	lineageTag: 4a5d3d6b-ac8f-480a-9c52-55faee2807d4
+
+	column Label
+		dataType: string
+		lineageTag: b69f220e-f8e0-4433-9fd4-8926839dff9f
+		summarizeBy: none
+		sourceColumn: Label
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column State
+		dataType: string
+		lineageTag: ee2a15c6-698e-46a6-8153-b7c69539535a
+		summarizeBy: none
+		sourceColumn: State
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column Percentage
+		dataType: double
+		lineageTag: 0fd754e4-9745-4897-8dd9-a91d902a15b1
+		summarizeBy: sum
+		sourceColumn: Percentage
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Estimated Income'
+		dataType: decimal
+		formatString: 0
+		lineageTag: 1d4d7850-95f7-4783-a79b-5e99af59bc1d
+		summarizeBy: sum
+		sourceColumn: Estimated Income
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Incomes by State-46c1fd16-c155-478c-a1d7-62534a1f74e6' = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\danie\OneDrive\Desktop\PBI_Udacity\Advanced Data Analytics\Project\census-data.xlsx"), null, true),
+				    #"Incomes by State_Sheet" = Source{[Item="Incomes by State",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(#"Incomes by State_Sheet", [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Label", type text}, {"State", type text}, {"Percentage", Percentage.Type}, {"Estimated Income", Currency.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

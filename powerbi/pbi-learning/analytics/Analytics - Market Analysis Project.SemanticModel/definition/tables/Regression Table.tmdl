@@ -1,0 +1,166 @@
+table 'Regression Table'
+	lineageTag: b8c4676f-4a2b-48a2-aef4-6ccc0774aac6
+
+	measure 'R^2 Income to Sales' =
+			
+			VAR __CORRELATION_TABLE = VALUES('Regression Table'[Y])
+			VAR __COUNT =
+				COUNTX(
+					KEEPFILTERS(__CORRELATION_TABLE),
+					CALCULATE(SUM('Regression Table'[X]) * SUM('Regression Table'[Y]))
+				)
+			VAR __SUM_X =
+				SUMX(
+					KEEPFILTERS(__CORRELATION_TABLE),
+					CALCULATE(SUM('Regression Table'[X]))
+				)
+			VAR __SUM_Y =
+				SUMX(
+					KEEPFILTERS(__CORRELATION_TABLE),
+					CALCULATE(SUM('Regression Table'[Y]))
+				)
+			VAR __SUM_XY =
+				SUMX(
+					KEEPFILTERS(__CORRELATION_TABLE),
+					CALCULATE(SUM('Regression Table'[X]) * SUM('Regression Table'[Y]) * 1.)
+				)
+			VAR __SUM_X2 =
+				SUMX(
+					KEEPFILTERS(__CORRELATION_TABLE),
+					CALCULATE(SUM('Regression Table'[X]) ^ 2)
+				)
+			VAR __SUM_Y2 =
+				SUMX(
+					KEEPFILTERS(__CORRELATION_TABLE),
+					CALCULATE(SUM('Regression Table'[Y]) ^ 2)
+				)
+			RETURN
+				DIVIDE(
+					__COUNT * __SUM_XY - __SUM_X * __SUM_Y * 1.,
+					SQRT(
+						(__COUNT * __SUM_X2 - __SUM_X ^ 2)
+							* (__COUNT * __SUM_Y2 - __SUM_Y ^ 2)
+					)
+				)^2
+		formatString: 0.00
+		lineageTag: d63ec9c1-9e22-49e5-b76e-ecdebc30a1d8
+
+		extendedProperty MeasureTemplate =
+				{
+				  "version": 0,
+				  "daxTemplateName": "CorrelationCoefficient"
+				}
+
+	measure n = COUNTROWS('Regression Table')
+		formatString: 0
+		lineageTag: 1ed9d09c-b25c-4258-a20d-d916b21ea3fe
+
+	measure Sum_X = ```
+			sum('Regression Table'[X]) 
+			```
+		lineageTag: a49e324e-3215-44dd-a59a-54866fa930ed
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Sum_Y = SUM('Regression Table'[Y])
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: 6e09c0ee-ec35-4c98-9c71-e49bbd6f7456
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure Sum_X^2 = sum('Regression Table'[X^2])
+		lineageTag: 950ddb0f-dd60-4ce2-b3c7-576635e7b1b1
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Sum_Y^2 = ```
+			sum('Regression Table'[Y^2]) 
+			```
+		lineageTag: f1cca5a3-db15-4565-8cb9-5f84dff25168
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Sum_XY = sum('Regression Table'[xy] )
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: cd43a277-e4db-48c4-b0b9-e6944f04907e
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure b = DIVIDE([Sum_Y]*[Sum_X^2]-[Sum_X]*[Sum_XY],[n]*[Sum_X^2]-[Sum_X]^2)
+		formatString: 0.000
+		lineageTag: 72e4206b-ef9c-4a0b-bead-606099943725
+
+	measure m = DIVIDE([n]*[Sum_XY]-[Sum_X]*[Sum_Y],[n]*[Sum_X^2]-[Sum_X]^2)
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: ce09c475-b46a-4ffd-b279-6314fa7913a8
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Y Formula' = "y = " & ROUND([m],2) & " X + " & ROUND([b],2)
+		lineageTag: fd30643a-d164-452b-931f-6c9a0d29bbce
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	measure 'X Formula' = "X= " & ROUND([b],2) & " -  Y / " & -ROUND([m],2)
+		lineageTag: a2e600f7-62c9-4d9a-a272-223bd9c579aa
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column State
+		lineageTag: 103394d5-0eb6-4f04-bc97-5b181855893d
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: Customer List[State]
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column Y
+		dataType: double
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: bf8ca911-298d-4573-9616-b807c7b926eb
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Y]
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column Y^2 = 'Regression Table'[Y]^2
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: bcac963e-b2c0-4f8e-938a-0774bc3f6b57
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column X = LOOKUPVALUE('Avg Income by State'[Average Income],'Avg Income by State'[State],'Regression Table'[State])
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: d2de8b69-3b4f-47d6-bd4a-3b33b12737c8
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column X^2 = 'Regression Table'[X]^2
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: cb490571-e9c9-4992-8515-2db7055b6aba
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column xy = 'Regression Table'[X]*'Regression Table'[Y]
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: 2c859662-2cb5-4361-8249-50152b01222a
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	partition 'Regression Table-b4a926a3-d80f-43ae-89cd-677c14860416' = calculated
+		mode: import
+		source = SUMMARIZE('Customer List','Customer List'[State],"Y",AVERAGE('Customer List'[Last 6 Months Purchases]))
+
+	annotation PBI_Id = bb967f6d2675400eb2495cc59fcd7eda
+

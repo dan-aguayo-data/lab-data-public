@@ -1,0 +1,47 @@
+table Industries
+	lineageTag: 30b6e5df-f442-4728-a7d9-e2ec332201cd
+
+	column Industry
+		dataType: string
+		lineageTag: e4d12a4f-c56b-4117-967f-990f2b0af475
+		summarizeBy: none
+		sourceColumn: Industry
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column State
+		dataType: string
+		lineageTag: 7deda969-edc2-4f75-bbaf-e1fa86865c81
+		summarizeBy: none
+		sourceColumn: State
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column Population
+		dataType: int64
+		formatString: 0
+		lineageTag: 1b72bb2c-cdcd-481a-b07c-19a93308c87b
+		summarizeBy: sum
+		sourceColumn: Population
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Industries-4db05e5e-9914-4af4-be0d-cde409e9adf2 = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\danie\OneDrive\Desktop\PBI_Udacity\Advanced Data Analytics\Project\census-data.xlsx"), null, true),
+				    Industries_Sheet = Source{[Item="Industries",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(Industries_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Industry", type text}, {"State", type text}, {"Population", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

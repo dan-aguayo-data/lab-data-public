@@ -1,0 +1,199 @@
+table 'Product Inventory'
+	lineageTag: ddb9d31c-adbb-444d-8d8a-3acaaf19ad54
+
+	measure 'Count of Customer Rating and Count of Return Rate correlation for Return Rate' =
+			
+			VAR __CORRELATION_TABLE = VALUES('Product Inventory'[Return Rate])
+			VAR __COUNT =
+				COUNTX(
+					KEEPFILTERS(__CORRELATION_TABLE),
+					CALCULATE(
+						COUNTA('Product Inventory'[Customer Rating])
+							* COUNTA('Product Inventory'[Return Rate])
+					)
+				)
+			VAR __SUM_X =
+				SUMX(
+					KEEPFILTERS(__CORRELATION_TABLE),
+					CALCULATE(COUNTA('Product Inventory'[Customer Rating]))
+				)
+			VAR __SUM_Y =
+				SUMX(
+					KEEPFILTERS(__CORRELATION_TABLE),
+					CALCULATE(COUNTA('Product Inventory'[Return Rate]))
+				)
+			VAR __SUM_XY =
+				SUMX(
+					KEEPFILTERS(__CORRELATION_TABLE),
+					CALCULATE(
+						COUNTA('Product Inventory'[Customer Rating])
+							* COUNTA('Product Inventory'[Return Rate]) * 1.
+					)
+				)
+			VAR __SUM_X2 =
+				SUMX(
+					KEEPFILTERS(__CORRELATION_TABLE),
+					CALCULATE(COUNTA('Product Inventory'[Customer Rating]) ^ 2)
+				)
+			VAR __SUM_Y2 =
+				SUMX(
+					KEEPFILTERS(__CORRELATION_TABLE),
+					CALCULATE(COUNTA('Product Inventory'[Return Rate]) ^ 2)
+				)
+			RETURN
+				DIVIDE(
+					__COUNT * __SUM_XY - __SUM_X * __SUM_Y * 1.,
+					SQRT(
+						(__COUNT * __SUM_X2 - __SUM_X ^ 2)
+							* (__COUNT * __SUM_Y2 - __SUM_Y ^ 2)
+					)
+				)^2
+		formatString: 0.000
+		lineageTag: 9de89424-0c45-415a-b991-f1aa822330c7
+
+		extendedProperty MeasureTemplate =
+				{
+				  "version": 0,
+				  "daxTemplateName": "CorrelationCoefficient"
+				}
+
+	measure 'Sum of Customer Rating and Sum of Return Rate correlation for Return Rate' =
+			
+			VAR __CORRELATION_TABLE = VALUES('Product Inventory'[Return Rate])
+			VAR __COUNT =
+				COUNTX(
+					KEEPFILTERS(__CORRELATION_TABLE),
+					CALCULATE(
+						SUM('Product Inventory'[Customer Rating])
+							* SUM('Product Inventory'[Return Rate])
+					)
+				)
+			VAR __SUM_X =
+				SUMX(
+					KEEPFILTERS(__CORRELATION_TABLE),
+					CALCULATE(SUM('Product Inventory'[Customer Rating]))
+				)
+			VAR __SUM_Y =
+				SUMX(
+					KEEPFILTERS(__CORRELATION_TABLE),
+					CALCULATE(SUM('Product Inventory'[Return Rate]))
+				)
+			VAR __SUM_XY =
+				SUMX(
+					KEEPFILTERS(__CORRELATION_TABLE),
+					CALCULATE(
+						SUM('Product Inventory'[Customer Rating])
+							* SUM('Product Inventory'[Return Rate]) * 1.
+					)
+				)
+			VAR __SUM_X2 =
+				SUMX(
+					KEEPFILTERS(__CORRELATION_TABLE),
+					CALCULATE(SUM('Product Inventory'[Customer Rating]) ^ 2)
+				)
+			VAR __SUM_Y2 =
+				SUMX(
+					KEEPFILTERS(__CORRELATION_TABLE),
+					CALCULATE(SUM('Product Inventory'[Return Rate]) ^ 2)
+				)
+			RETURN
+				DIVIDE(
+					__COUNT * __SUM_XY - __SUM_X * __SUM_Y * 1.,
+					SQRT(
+						(__COUNT * __SUM_X2 - __SUM_X ^ 2)
+							* (__COUNT * __SUM_Y2 - __SUM_Y ^ 2)
+					)
+				)^2
+		lineageTag: 9e82132a-c93e-4dee-9939-c229936aafb8
+
+		extendedProperty MeasureTemplate =
+				{
+				  "version": 0,
+				  "daxTemplateName": "CorrelationCoefficient"
+				}
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Product_ID
+		dataType: string
+		lineageTag: 6e224d33-771c-4f40-b13b-640f6587d6c4
+		summarizeBy: none
+		sourceColumn: Product_ID
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column 'Product Name'
+		dataType: string
+		lineageTag: 5346208d-c61c-4de2-93b7-abd66f2f6569
+		summarizeBy: none
+		sourceColumn: Product Name
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column 'Current Price'
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: fb3e7faa-e605-4632-922f-30e41f6e00ae
+		summarizeBy: none
+		sourceColumn: Current Price
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column 'Number in stock'
+		dataType: int64
+		formatString: 0
+		lineageTag: 1a295fc9-af7c-402d-b7c7-5bd489918f9d
+		summarizeBy: none
+		sourceColumn: Number in stock
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Customer Rating'
+		dataType: double
+		lineageTag: 453e385e-b5f4-49aa-9a95-dcb51cfdc59e
+		summarizeBy: none
+		sourceColumn: Customer Rating
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Return Rate'
+		dataType: double
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: d2520911-6e2f-4485-848b-5192e7d958d4
+		summarizeBy: none
+		sourceColumn: Return Rate
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Product Inventory-c5ebed4e-1f0d-487e-9c74-ea189d0dcf62' = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\danie\OneDrive\Desktop\PBI_Udacity\Advanced Data Analytics\Project\customer-list.xlsx"), null, true),
+				    #"Product Inventory_Sheet" = Source{[Item="Product Inventory",Kind="Sheet"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(#"Product Inventory_Sheet",{{"Column1", type text}}),
+				    #"Promoted Headers" = Table.PromoteHeaders(#"Changed Type", [PromoteAllScalars=true]),
+				    #"Changed Type1" = Table.TransformColumnTypes(#"Promoted Headers",{{"Product ID Product Name Current Price Number in Stock Customer Rating (stars) Return Rate", type text}}),
+				    #"Split Column by Delimiter" = Table.SplitColumn(#"Changed Type1", "Product ID Product Name Current Price Number in Stock Customer Rating (stars) Return Rate", Splitter.SplitTextByDelimiter(" ", QuoteStyle.Csv), {"Product ID Product Name Current Price Number in Stock Customer Rating (stars) Re", "Product ID Product Name Current Price Number in Stock Customer Rating (stars) .1", "Product ID Product Name Current Price Number in Stock Customer Rating (stars) .2", "Product ID Product Name Current Price Number in Stock Customer Rating (stars) .3", "Product ID Product Name Current Price Number in Stock Customer Rating (stars) .4", "Product ID Product Name Current Price Number in Stock Customer Rating (stars) .5", "Product ID Product Name Current Price Number in Stock Customer Rating (stars) .6"}),
+				    #"Changed Type2" = Table.TransformColumnTypes(#"Split Column by Delimiter",{{"Product ID Product Name Current Price Number in Stock Customer Rating (stars) Re", type text}, {"Product ID Product Name Current Price Number in Stock Customer Rating (stars) .1", type text}, {"Product ID Product Name Current Price Number in Stock Customer Rating (stars) .2", type text}, {"Product ID Product Name Current Price Number in Stock Customer Rating (stars) .3", Int64.Type}, {"Product ID Product Name Current Price Number in Stock Customer Rating (stars) .4", Int64.Type}, {"Product ID Product Name Current Price Number in Stock Customer Rating (stars) .5", type number}, {"Product ID Product Name Current Price Number in Stock Customer Rating (stars) .6", type number}}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Changed Type2",{{"Product ID Product Name Current Price Number in Stock Customer Rating (stars) Re", "Product_ID"}, {"Product ID Product Name Current Price Number in Stock Customer Rating (stars) .3", "Current Price"}, {"Product ID Product Name Current Price Number in Stock Customer Rating (stars) .4", "Number in stock"}, {"Product ID Product Name Current Price Number in Stock Customer Rating (stars) .5", "Customer Rating"}, {"Product ID Product Name Current Price Number in Stock Customer Rating (stars) .6", "Return Rate"}}),
+				    #"Added Custom" = Table.AddColumn(#"Renamed Columns", "Product Name", each [#"Product ID Product Name Current Price Number in Stock Customer Rating (stars) .1"]&" "&[#"Product ID Product Name Current Price Number in Stock Customer Rating (stars) .2"]),
+				    #"Reordered Columns" = Table.ReorderColumns(#"Added Custom",{"Product_ID", "Product Name", "Product ID Product Name Current Price Number in Stock Customer Rating (stars) .1", "Product ID Product Name Current Price Number in Stock Customer Rating (stars) .2", "Current Price", "Number in stock", "Customer Rating", "Return Rate"}),
+				    #"Removed Columns" = Table.RemoveColumns(#"Reordered Columns",{"Product ID Product Name Current Price Number in Stock Customer Rating (stars) .1", "Product ID Product Name Current Price Number in Stock Customer Rating (stars) .2"}),
+				    #"Changed Type3" = Table.TransformColumnTypes(#"Removed Columns",{{"Product Name", type text}, {"Current Price", Currency.Type}}),
+				    #"Trimmed Text" = Table.TransformColumns(#"Changed Type3",{{"Product_ID", Text.Trim, type text}, {"Product Name", Text.Trim, type text}})
+				in
+				    #"Trimmed Text"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

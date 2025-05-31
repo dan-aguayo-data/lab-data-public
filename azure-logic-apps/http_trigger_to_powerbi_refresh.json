@@ -1,0 +1,379 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "workflows_GENERIC_POWERBI_REFRESH_name": {
+            "defaultValue": "GENERIC-POWERBI-REFRESH",
+            "type": "String"
+        },
+        "connections_office365_6_externalid": {
+            "defaultValue": "/subscriptions/XXXXXXX/resourceGroups/XXXXXXXX/providers/Microsoft.Web/connections/office365-6",
+            "type": "String"
+        },
+        "connections_powerbi_3_externalid": {
+            "defaultValue": "/subscriptions/XXXXXXX/resourceGroups/XXXXXXX/providers/Microsoft.Web/connections/powerbi-3",
+            "type": "String"
+        },
+        "connections_office365_7_externalid": {
+            "defaultValue": "/subscriptions/XXXXXXX/resourceGroups/XXXXXX/providers/Microsoft.Web/connections/office365-7",
+            "type": "String"
+        },
+        "connections_keyvault_1_externalid": {
+            "defaultValue": "/subscriptions/XXXXXXX/resourceGroups/XXXXXX/providers/Microsoft.Web/connections/keyvault-1",
+            "type": "String"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "type": "Microsoft.Logic/workflows",
+            "apiVersion": "2017-07-01",
+            "name": "[parameters('workflows_GENERIC_POWERBI_REFRESH_name')]",
+            "location": "australiaeast",
+            "properties": {
+                "state": "Enabled",
+                "definition": {
+                    "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+                    "contentVersion": "1.0.0.0",
+                    "parameters": {
+                        "DatasetID": {
+                            "defaultValue": "XXXXXXXX",
+                            "type": "String"
+                        },
+                        "WorkspaceID": {
+                            "defaultValue": "XXXXXXXXX",
+                            "type": "String"
+                        },
+                        "$connections": {
+                            "defaultValue": {},
+                            "type": "Object"
+                        }
+                    },
+                    "triggers": {
+                        "When_a_HTTP_request_is_received": {
+                            "type": "Request",
+                            "kind": "Http",
+                            "inputs": {
+                                "schema": {
+                                    "DatasetId": "XXXXXXX",
+                                    "NameRef": "PowerBI_Name",
+                                    "PipelineRef": "Pipeline_X",
+                                    "WorkspaceId": "XXXXXXXX"
+                                }
+                            }
+                        }
+                    },
+                    "actions": {
+                        "Condition": {
+                            "actions": {
+                                "Send_an_email_if_Failed_refresh": {
+                                    "type": "ApiConnection",
+                                    "inputs": {
+                                        "host": {
+                                            "connection": {
+                                                "name": "@parameters('$connections')['office365-2']['connectionId']"
+                                            }
+                                        },
+                                        "method": "post",
+                                        "body": {
+                                            "To": "-- EMAIL HERE --",
+                                            "Subject": "Power BI Notification",
+                                            "Body": " -- MESSAGE HERE --",
+                                            "Importance": "Normal"
+                                        },
+                                        "path": "/v2/Mail"
+                                    }
+                                },
+                                "Slack_PBI_Fail": {
+                                    "runAfter": {
+                                        "Send_an_email_if_Failed_refresh": [
+                                            "Succeeded"
+                                        ]
+                                    },
+                                    "type": "Http",
+                                    "inputs": {
+                                        "uri": " --- slack webhook here --",
+                                        "method": "POST",
+                                        "body": "  -- SLACK MESSAGE HERE --"
+                                    },
+                                    "runtimeConfiguration": {
+                                        "contentTransfer": {
+                                            "transferMode": "Chunked"
+                                        }
+                                    }
+                                }
+                            },
+                            "runAfter": {
+                                "Until": [
+                                    "Succeeded"
+                                ]
+                            },
+                            "else": {
+                                "actions": {}
+                            },
+                            "expression": {
+                                "and": [
+                                    {
+                                        "equals": [
+                                            "@variables('RefreshStatus')",
+                                            "Failed"
+                                        ]
+                                    }
+                                ]
+                            },
+                            "type": "If"
+                        },
+                        "DatasetId": {
+                            "runAfter": {},
+                            "type": "InitializeVariable",
+                            "inputs": {
+                                "variables": [
+                                    {
+                                        "name": "Dataset_id",
+                                        "type": "string",
+                                        "value": "@{triggerBody().DatasetId}"
+                                    }
+                                ]
+                            }
+                        },
+                        "Initialize_RefreshStatus": {
+                            "runAfter": {
+                                "Pipeline_Name": [
+                                    "Succeeded"
+                                ]
+                            },
+                            "type": "InitializeVariable",
+                            "inputs": {
+                                "variables": [
+                                    {
+                                        "name": "RefreshStatus",
+                                        "type": "string"
+                                    }
+                                ]
+                            }
+                        },
+                        "Pipeline_Name": {
+                            "runAfter": {
+                                "PowerBI_Name": [
+                                    "Succeeded"
+                                ]
+                            },
+                            "type": "InitializeVariable",
+                            "inputs": {
+                                "variables": [
+                                    {
+                                        "name": "Pipeline_Name",
+                                        "type": "string",
+                                        "value": "@{triggerBody().PipelineRef}"
+                                    }
+                                ]
+                            }
+                        },
+                        "PowerBI_Name": {
+                            "runAfter": {
+                                "WorkspaceId": [
+                                    "Succeeded"
+                                ]
+                            },
+                            "type": "InitializeVariable",
+                            "inputs": {
+                                "variables": [
+                                    {
+                                        "name": "PowerBI_Name",
+                                        "type": "string",
+                                        "value": "@{triggerBody().NameRef}"
+                                    }
+                                ]
+                            }
+                        },
+                        "Refresh_a_dataset": {
+                            "runAfter": {
+                                "Get_secret": [
+                                    "Succeeded"
+                                ]
+                            },
+                            "type": "ApiConnection",
+                            "inputs": {
+                                "host": {
+                                    "connection": {
+                                        "name": "@parameters('$connections')['powerbi-1']['connectionId']"
+                                    }
+                                },
+                                "method": "post",
+                                "path": "/v1.0/myorg/groups/@{encodeURIComponent(variables('Workspace_id'))}/datasets/@{encodeURIComponent(variables('Dataset_id'))}/refreshes",
+                                "queries": {
+                                    "pbi_source": "powerAutomate"
+                                }
+                            }
+                        },
+                        "Send_an_email_if_bad_API_call": {
+                            "runAfter": {
+                                "Refresh_a_dataset": [
+                                    "Failed",
+                                    "TimedOut",
+                                    "Skipped"
+                                ]
+                            },
+                            "type": "ApiConnection",
+                            "inputs": {
+                                "host": {
+                                    "connection": {
+                                        "name": "@parameters('$connections')['office365-1']['connectionId']"
+                                    }
+                                },
+                                "method": "post",
+                                "body": {
+                                    "To": "-- E-MAIL HERE --",
+                                    "Subject": "Power BI Notificaion",
+                                    "Body": " -- MESSAGE HERE --",
+                                    "Importance": "Normal"
+                                },
+                                "path": "/v2/Mail"
+                            }
+                        },
+                        "Until": {
+                            "actions": {
+                                "Delay": {
+                                    "type": "Wait",
+                                    "inputs": {
+                                        "interval": {
+                                            "count": 30,
+                                            "unit": "Second"
+                                        }
+                                    }
+                                },
+                                "HTTP": {
+                                    "runAfter": {
+                                        "Delay": [
+                                            "Succeeded"
+                                        ]
+                                    },
+                                    "type": "Http",
+                                    "inputs": {
+                                        "uri": "https://api.powerbi.com/v1.0/myorg/groups/08212b56-9593-4d96-a735-a0eb9577192e/datasets/@{variables('Dataset_id')}/refreshes?$top=1",
+                                        "method": "GET",
+                                        "authentication": {
+                                            "type": "ActiveDirectoryOAuth",
+                                            "authority": "",
+                                            "tenant": "abf0de66-3ab3-4ea3-b35e-502502be1261",
+                                            "audience": "https://analysis.windows.net/powerbi/api",
+                                            "clientId": "108c255c-fcf1-431e-9e59-ea9ccc54fe03",
+                                            "secret": "@{body('Get_secret')?['value']}"
+                                        }
+                                    },
+                                    "runtimeConfiguration": {
+                                        "contentTransfer": {
+                                            "transferMode": "Chunked"
+                                        }
+                                    }
+                                },
+                                "Set_RefreshStatus": {
+                                    "runAfter": {
+                                        "HTTP": [
+                                            "Succeeded"
+                                        ]
+                                    },
+                                    "type": "SetVariable",
+                                    "inputs": {
+                                        "name": "RefreshStatus",
+                                        "value": "@{body('HTTP')?['value'][0]?['status']}"
+                                    }
+                                }
+                            },
+                            "runAfter": {
+                                "Refresh_a_dataset": [
+                                    "Succeeded"
+                                ]
+                            },
+                            "expression": "@or(equals(variables('RefreshStatus'),'Completed'),equals(variables('RefreshStatus'),'Failed'))",
+                            "limit": {
+                                "count": 150,
+                                "timeout": "PT2H"
+                            },
+                            "type": "Until"
+                        },
+                        "WorkspaceId": {
+                            "runAfter": {
+                                "DatasetId": [
+                                    "Succeeded"
+                                ]
+                            },
+                            "type": "InitializeVariable",
+                            "inputs": {
+                                "variables": [
+                                    {
+                                        "name": "Workspace_id",
+                                        "type": "string",
+                                        "value": "@{triggerBody().WorkspaceId}"
+                                    }
+                                ]
+                            }
+                        },
+                        "Get_secret": {
+                            "runAfter": {
+                                "Initialize_RefreshStatus": [
+                                    "Succeeded"
+                                ]
+                            },
+                            "type": "ApiConnection",
+                            "inputs": {
+                                "host": {
+                                    "connection": {
+                                        "name": "@parameters('$connections')['keyvault-1']['connectionId']"
+                                    }
+                                },
+                                "method": "get",
+                                "path": "/secrets/@{encodeURIComponent('KADA-PowerBI-API-Integration')}/value"
+                            }
+                        },
+                        "Slack_Bad_API_Call": {
+                            "runAfter": {
+                                "Send_an_email_if_bad_API_call": [
+                                    "Succeeded"
+                                ]
+                            },
+                            "type": "Http",
+                            "inputs": {
+                                "uri": " -- SLACK WEBHOOK HERE --",
+                                "method": "POST",
+                                "body": " -- MESSAGE HERE -- "
+                            },
+                            "runtimeConfiguration": {
+                                "contentTransfer": {
+                                    "transferMode": "Chunked"
+                                }
+                            }
+                        }
+                    },
+                    "outputs": {}
+                },
+                "parameters": {
+                    "$connections": {
+                        "value": {
+                            "office365-2": {
+                                "id": "/subscriptions/37f0b729-bc5d-43f8-9c4a-670717e00b46/providers/Microsoft.Web/locations/australiaeast/managedApis/office365",
+                                "connectionId": "[parameters('connections_office365_6_externalid')]",
+                                "connectionName": "office365-6"
+                            },
+                            "powerbi-1": {
+                                "id": "/subscriptions/37f0b729-bc5d-43f8-9c4a-670717e00b46/providers/Microsoft.Web/locations/australiaeast/managedApis/powerbi",
+                                "connectionId": "[parameters('connections_powerbi_3_externalid')]",
+                                "connectionName": "powerbi-3"
+                            },
+                            "office365-1": {
+                                "id": "/subscriptions/37f0b729-bc5d-43f8-9c4a-670717e00b46/providers/Microsoft.Web/locations/australiaeast/managedApis/office365",
+                                "connectionId": "[parameters('connections_office365_7_externalid')]",
+                                "connectionName": "office365-7"
+                            },
+                            "keyvault-1": {
+                                "id": "/subscriptions/37f0b729-bc5d-43f8-9c4a-670717e00b46/providers/Microsoft.Web/locations/australiaeast/managedApis/keyvault",
+                                "connectionId": "[parameters('connections_keyvault_1_externalid')]",
+                                "connectionName": "keyvault-1"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}
