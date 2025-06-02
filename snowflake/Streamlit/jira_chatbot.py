@@ -123,7 +123,7 @@ def build_prompt(question):
  with context_cte as
           (select issue_id, issue_information as issue_chunk, vector_cosine_similarity(jira_embedding,
                 snowflake.cortex.embed_text_1024('snowflake-arctic-embed-l-v2.0', ?)) as v_sim
-          from LAB_CES.AI_APP_TEST.JIRA_DATA_SINGLE_STRING_VECTORS
+          from LAB_DB.AI_APP_TEST.JIRA_DATA_SINGLE_STRING_VECTORS
           having v_sim > 0
           order by v_sim desc
           limit ?)
@@ -140,7 +140,7 @@ def build_prompt(question):
         rag_context = rag_context.replace("'", "''")
         # Construct the prompt.
         new_prompt = f"""
-          Your name is Avalon. Act as a JIRA Issue expert for data engineers and developers working at CES (Circular Economy Systems), JIRA context is only for the company CES (Circular Economy Systems), each issue id belongs to a unique JIRA that is recorded. 
+          Your name is Avalon. Act as a JIRA Issue expert for data engineers and developers working at THE COMPANY, JIRA context is only for THE COMPANY, each issue id belongs to a unique JIRA that is recorded. 
           Do not go outside the context provided.  
           Context: {rag_context}
           Question: {question} 
@@ -149,7 +149,7 @@ def build_prompt(question):
     else:
         # Construct the generic version of the prompt without RAG to only go against what the LLM was trained.
         new_prompt = f"""
-          Your name is Avalon. Act as a JIRA Issue expert for data engineers and developers working at CES (Circular Economy Systems), provide only the most accurate information against CES (Circular Economy Systems) jira issues. 
+          Your name is Avalon. Act as a JIRA Issue expert for data engineers and developers working at THE COMPANY, provide only the most accurate information against THE COMPANY jira issues. 
           Do not go outside the context provided.  
           Question: {question} 
           Answer: 

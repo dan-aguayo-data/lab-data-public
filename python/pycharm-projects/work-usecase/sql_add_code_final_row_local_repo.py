@@ -1,7 +1,7 @@
 import os
 
 
-directory = r'C:\Users\DanielAguayo\dbt_raw\dataplatforms-raw\dataplatforms-raw\models\raw\CES_MSCM_ORACLE'  # Update this!
+directory = r"C:\Users\DanielAguayo\path\"  # Update this!
 
 
 if not os.path.exists(directory):
@@ -14,14 +14,6 @@ SELECT
     s.*
 FROM
     source s
-WHERE (1=1)    
-{% if is_incremental() %}
-    AND NVL(METADATA_TIMESTAMP, current_date) >= (SELECT dateadd(hour, {{ var('inc_offset') }}, max(METADATA_TIMESTAMP)) FROM {{ this }} )
-{% endif %}
-{% if target.name.upper() == "PROD" %} 
-    AND NOT (upper(LAST_MODIFIED_BY) LIKE ANY ('%@YOPMAIL.COM', '%COEXSERVICES.INFO', '%TESTINATOR.COM'))
-{% endif %}  
-
 '''
 
 # String to replace with (for the replacement part)
@@ -32,9 +24,6 @@ string_to_replace = '''), SOURCE_QUALIFY AS (
     FROM
         source s
     WHERE (1=1)    
-    {% if is_incremental() %}
-        AND NVL(METADATA_TIMESTAMP, current_date) >= (SELECT dateadd(hour, {{ var('inc_offset') }}, max(METADATA_TIMESTAMP)) FROM {{ this }} )
-    {% endif %} 
 
 '''
 
@@ -43,9 +32,7 @@ string_to_append = '''
 )
 select * from SOURCE_QUALIFY
 WHERE (1=1) 
-{% if target.name.upper() == "PROD" %} 
-    AND NOT (upper(LAST_MODIFIED_BY) LIKE ANY ('%@YOPMAIL.COM', '%COEXSERVICES.INFO', '%TESTINATOR.COM'))
-{% endif %}
+
 '''
 
 

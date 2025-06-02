@@ -1,0 +1,213 @@
+
+USE ROLE SYSADMIN;
+USE DATABASE SNOWFLAKE ;
+
+;
+SELECT COUNT(*) FROM SNOWFLAKE.ACCOUNT_USAGE.QUERY_HISTORY
+;
+
+ALTER WAREHOUSE ANALYTICS_COMPANY_NAME SET WAREHOUSE_SIZE = 'XSMALL';
+
+/* DATATABSE LAST USED DATE */
+WITH database_usage AS (
+    SELECT 
+        DATABASE_NAME, 
+        MAX(START_TIME) AS LAST_USED
+    FROM 
+       SNOWFLAKE.ACCOUNT_USAGE.QUERY_HISTORY  -- 100 million rows view/table
+    WHERE
+        START_TIME >= DATEADD(month,-6,CURRENT_DATE)
+    GROUP BY 
+        DATABASE_NAME
+), storage_last_month AS (
+SELECT
+DATABASE_NAME,
+ROUND(AVG(AVERAGE_DATABASE_BYTES) / (1024 * 1024 * 1024)) AS STORAGE_GB,
+ROUND((AVG(AVERAGE_DATABASE_BYTES) / (1024 * 1024 * 1024))/1000) *25 as STORAGE_MONTHLY_COST,
+ROUND( AVG(AVERAGE_FAILSAFE_BYTES) / (1024 * 1024 * 1024)) AS STORAGE_FS_GB,
+ROUND( (AVG(AVERAGE_FAILSAFE_BYTES) / (1024 * 1024 * 1024))/1000) *25  FS_MONTHLY_COST
+FROM
+SNOWFLAKE.ACCOUNT_USAGE.DATABASE_STORAGE_USAGE_HISTORY 
+WHERE CONVERT_TIMEZONE('UTC', 'Australia/Sydney',USAGE_DATE) BETWEEN DATE_TRUNC('MONTH', CONVERT_TIMEZONE('UTC', 'Australia/Sydney', DATEADD(MONTH, -1, CURRENT_DATE))) AND  LAST_DAY(DATE_TRUNC('MONTH', CONVERT_TIMEZONE('UTC', 'Australia/Sydney', DATEADD(MONTH, -1, CURRENT_DATE))))
+GROUP BY
+DATABASE_NAME
+), storage_current_month AS (
+SELECT
+DATABASE_NAME,
+ROUND(AVG(AVERAGE_DATABASE_BYTES) / (1024 * 1024 * 1024)) AS STORAGE_GB,
+ROUND((AVG(AVERAGE_DATABASE_BYTES) / (1024 * 1024 * 1024))/1000) *25 as STORAGE_MONTHLY_COST,
+ROUND( AVG(AVERAGE_FAILSAFE_BYTES) / (1024 * 1024 * 1024)) AS STORAGE_FS_GB,
+ROUND( (AVG(AVERAGE_FAILSAFE_BYTES) / (1024 * 1024 * 1024))/1000) *25  FS_MONTHLY_COST
+FROM
+SNOWFLAKE.ACCOUNT_USAGE.DATABASE_STORAGE_USAGE_HISTORY 
+WHERE CONVERT_TIMEZONE('UTC', 'Australia/Sydney',USAGE_DATE) > LAST_DAY(DATE_TRUNC('MONTH', CONVERT_TIMEZONE('UTC', 'Australia/Sydney', DATEADD(MONTH, -1, CURRENT_DATE))))
+GROUP BY
+DATABASE_NAME
+)
+SELECT 
+db.DATABASE_NAME,
+db.last_altered,
+db.comment,
+db.is_transient,
+db.database_owner,
+usage.LAST_USED  AS LAST_QUERIED, 
+CASE 
+    WHEN datediff(day, usage.LAST_USED, current_date) is null THEN 180 
+    ELSE ROUND(datediff(day, usage.LAST_USED, current_date)) 
+END AS days_since_last_queried,
+slm.storage_gb avg_daily_storage_lm,
+scm.storage_gb avg_daily_storage_cm,
+slm.storage_monthly_cost monthly_storage_cost_lm,
+scm.storage_monthly_cost monthly_storage_cost_cm,
+slm.storage_fs_gb avg_daily_fs_storage_lm,
+scm.storage_fs_gb avg_daily_fs_storage_cm,
+slm.fs_monthly_cost monthly_fs_storage_cost_lm,
+scm.fs_monthly_cost monthly_fs_storage_cost_cm
+FROM INFORMATION_SCHEMA.DATABASES db
+LEFT JOIN database_usage usage
+ON db.DATABASE_NAME = usage.DATABASE_NAME
+LEFT JOIN storage_last_month slm
+ON slm.database_name = db.database_name
+LEFT JOIN storage_current_month scm
+ON scm.database_name = db.database_name
+ORDER BY 
+LAST_USED DESC, 
+db.DATABASE_NAME
+
+
+;
+select current_Date
+
+;
+SELECT 
+    LAST_DAY(DATE_TRUNC('MONTH', CONVERT_TIMEZONE('UTC', 'Australia/Sydney', DATEADD(MONTH, -1, CURRENT_DATE)))) AS last_day_of_last_month
+
+;
+
+SELECT
+DATABASE_NAME,
+ROUND(AVG(AVERAGE_DATABASE_BYTES) / (1024 * 1024 * 1024)) AS STORAGE_GB,
+ROUND((AVG(AVERAGE_DATABASE_BYTES) / (1024 * 1024 * 1024))/1000) *25 as STORAGE_MONTHLY_COST,
+ROUND( AVG(AVERAGE_FAILSAFE_BYTES) / (1024 * 1024 * 1024)) AS STORAGE_FS_GB,
+ROUND( (AVG(AVERAGE_FAILSAFE_BYTES) / (1024 * 1024 * 1024))/1000) *25  FS_MONTHLY_COST
+FROM
+SNOWFLAKE.ACCOUNT_USAGE.DATABASE_STORAGE_USAGE_HISTORY WHERE USAGE_DATE >= '2024-04-01'
+GROUP BY
+DATABASE_NAME
+ORDER BY
+STORAGE_GB DESC
+    ;
+
+ SELECT TOP 10 * FROM SNOWFLAKE.ACCOUNT_USAGE.STORAGE_USAGE
+
+    ;
+SELECT TOP 10 * FROM  SNOWFLAKE.ACCOUNT_USAGE.DATABASE_STORAGE_USAGE_HISTORY
+    ;
+-- select top 10 * from   SNOWFLAKE.ACCOUNT_USAGE.QUERY_HISTORY
+
+-- ;
+-- select top 10 * from QUERY_HISTORY.DIRECT_OBJECTS_ACCESSED
+-- ;
+-- SELECT 
+--         database_name,
+--         schema_name,
+--         table_name,
+--         MAX(end_time) AS last_used
+--     FROM 
+--         SNOWFLAKE.ACCOUNT_USAGE.QUERY_HISTORY
+--     JOIN 
+--         LATERAL FLATTEN(input => QUERY_HISTORY.DIRECT_OBJECTS_ACCESSED) AS obj
+--     WHERE 
+--         obj.value:"objectType"::string = 'Table'
+--     GROUP BY 
+--         table_catalog, table_schema, table_name
+
+;
+
+
+-- SELECT 
+--     db.TABLE_CATALOG AS DATABASE_NAME,
+--     db.TABLE_SCHEMA,
+--     db.TABLE_NAME,
+--     max(db.last_ddl)
+-- FROM  INFORMATION_SCHEMA.TABLES db
+-- group by
+--     db.TABLE_CATALOG ,
+--     db.TABLE_SCHEMA,
+--     db.TABLE_NAME
+-- -- ORDER BY 
+-- --     db.TABLE_CATALOG ,
+-- --     db.TABLE_SCHEMA,
+-- --     db.TABLE_NAME
+    
+
+
+    
+    ;
+
+-- -- Retrieve databases
+-- SELECT
+--     'DATABASE' AS OBJECT_TYPE,
+--     DATABASE_NAME AS OBJECT_NAME,
+--     NULL AS SCHEMA_NAME,
+--     NULL AS TABLE_NAME,
+--     NULL AS OBJECT_SPECIFIC_NAME
+-- FROM
+--     INFORMATION_SCHEMA.DATABASES
+-- UNION ALL
+-- -- Retrieve schemas
+-- SELECT
+--     'SCHEMA' AS OBJECT_TYPE,
+--     s.SCHEMA_NAME AS OBJECT_NAME,
+--     s.DATABASE_NAME,
+--     NULL AS TABLE_NAME,
+--     NULL AS OBJECT_SPECIFIC_NAME
+-- FROM
+--     INFORMATION_SCHEMA.SCHEMATA s
+-- UNION ALL
+-- -- Retrieve tables
+-- SELECT
+--     'TABLE' AS OBJECT_TYPE,
+--     t.TABLE_NAME AS OBJECT_NAME,
+--     t.TABLE_CATALOG AS DATABASE_NAME,
+--     t.TABLE_SCHEMA AS SCHEMA_NAME,
+--     NULL AS OBJECT_SPECIFIC_NAME
+-- FROM
+--     INFORMATION_SCHEMA.TABLES t
+-- UNION ALL
+-- -- Retrieve views
+-- SELECT
+--     'VIEW' AS OBJECT_TYPE,
+--     v.TABLE_NAME AS OBJECT_NAME,
+--     v.TABLE_CATALOG AS DATABASE_NAME,
+--     v.TABLE_SCHEMA AS SCHEMA_NAME,
+--     NULL AS OBJECT_SPECIFIC_NAME
+-- FROM
+--     INFORMATION_SCHEMA.VIEWS v
+-- UNION ALL
+-- -- Retrieve stages
+-- SELECT
+--     'STAGE' AS OBJECT_TYPE,
+--     s.STAGE_NAME AS OBJECT_NAME,
+--     s.STAGE_CATALOG AS DATABASE_NAME,
+--     s.STAGE_SCHEMA AS SCHEMA_NAME,
+--     NULL AS OBJECT_SPECIFIC_NAME
+-- FROM
+--     INFORMATION_SCHEMA.STAGES s
+-- UNION ALL
+-- -- Retrieve procedures
+-- SELECT
+--     'PROCEDURE' AS OBJECT_TYPE,
+--     p.PROCEDURE_NAME AS OBJECT_NAME,
+--     p.PROCEDURE_CATALOG AS DATABASE_NAME,
+--     p.PROCEDURE_SCHEMA AS SCHEMA_NAME,
+--     p.SPECIFIC_NAME AS OBJECT_SPECIFIC_NAME
+-- FROM
+--     INFORMATION_SCHEMA.PROCEDURES p
+-- ORDER BY
+--     DATABASE_NAME,
+--     SCHEMA_NAME,
+--     OBJECT_TYPE,
+--     OBJECT_NAME;
+
+

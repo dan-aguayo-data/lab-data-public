@@ -4,7 +4,7 @@ import requests
 logging.basicConfig(level=logging.DEBUG)
 
 try:
-    response = requests.get("https://superset-sit.coexservices.com.au/")
+    response = requests.get("https://superset-sit.XXXXX.com.au/")
     print(f"Response Code: {response.status_code}")
     print(f"Response Text: {response.text}")
 except requests.exceptions.SSLError as ssl_error:

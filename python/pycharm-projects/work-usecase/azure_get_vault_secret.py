@@ -25,6 +25,6 @@ def get_password(keyvaulturl,secretname):
     return superset_password
 
 
-superset_password = get_password("https://ces-snowflake-keys.vault.azure.net/","superset-dev")
+superset_password = get_password("https://xxxxxxxx.vault.azure.net/","superset-dev")
 
 print(f"Function test: {superset_password}")

@@ -3,7 +3,7 @@ import re
 import csv
 
 # Define the folder path
-folder_path = r"C:\Users\DanielAguayo\dbt_common\dataplatforms-common-1\dataplatforms-common\models\DWH_MARTS\MARTS_HOURLY"
+folder_path = r"C:\Users\DanielAguayo\PATH"
 
 # Define the output CSV file in the same folder as the .sql files
 output_csv = os.path.join(folder_path, "model_source_tables.csv")

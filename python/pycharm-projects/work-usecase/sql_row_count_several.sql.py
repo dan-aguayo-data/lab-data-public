@@ -1,7 +1,7 @@
 import os
 import re
 
-directory = r'C:\Users\DanielAguayo\dbt_raw\dataplatforms-raw\dataplatforms-raw\models\raw\CES_MSCM_ORACLE'
+directory = r'C:\Users\DanielAguayo\path'
 
 for filename in os.listdir(directory):
     if filename.endswith(".sql"):  # Process only SQL files

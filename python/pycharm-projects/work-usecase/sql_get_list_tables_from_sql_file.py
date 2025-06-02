@@ -3,8 +3,8 @@ import csv
 
 
 def extract_tables_from_sql(sql_file):
-    # Regular expression to match any table name that starts with "CES_ERP"
-    table_regex = re.compile(r'CES_ERP\S*', re.IGNORECASE)
+    # Regular expression to match any table name that starts with "DB_ERP"
+    table_regex = re.compile(r'DB_ERP\S*', re.IGNORECASE)
 
     tables = set()
 
@@ -12,7 +12,7 @@ def extract_tables_from_sql(sql_file):
         for line in file:
             matches = table_regex.findall(line)
             for match in matches:
-                tables.add(match)  # Add the full match, including "CES_ERP"
+                tables.add(match)  # Add the full match, including "DB_ERP"
         print(tables)
     return sorted(tables)
 
@@ -28,7 +28,7 @@ def write_tables_to_csv(tables, output_csv):
 
 def main():
     # Full path to the SQL file
-    sql_file = r'/SQLs/ERP_STAGE_AP_BALANCES.sql'  # Replace with your file path
+    sql_file = r'/SQLs/Model.sql'  # Replace with your file path
     output_csv = r'C:\Users\DanielAguayo\PycharmProjects\FunProjects\SQLs\tables.csv'  # Replace with desired output CSV path
 
     tables = extract_tables_from_sql(sql_file)

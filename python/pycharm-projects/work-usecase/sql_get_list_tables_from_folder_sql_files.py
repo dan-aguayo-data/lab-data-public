@@ -3,8 +3,8 @@ import csv
 import os
 
 def extract_tables_from_sql(sql_file):
-    # Regular expression to match any table name that starts with "CES_ERP"
-    table_regex = re.compile(r'CES_ERP\S*', re.IGNORECASE)
+    # Regular expression to match any table name that starts with "DB_ERP"
+    table_regex = re.compile(r'DB_ERP\S*', re.IGNORECASE)
     tables = set()
 
     with open(sql_file, 'r') as file:
